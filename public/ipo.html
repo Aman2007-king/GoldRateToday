@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India IPO Guide 2026 | Open, Upcoming & Listed IPOs</title>
+    <style>
+        :root { --primary: #2c3e50; --accent: #27ae60; --gold: #f1c40f; --light: #f8f9fa; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; margin: 0; background: var(--light); color: #333; }
+        
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 30px; }
+        .main-content { flex: 3; }
+        .sidebar { flex: 1; position: sticky; top: 80px; height: fit-content; }
+
+        /* Search Bar */
+        .search-section { background: var(--primary); padding: 40px 20px; text-align: center; color: white; border-radius: 0 0 20px 20px; }
+        #ipoSearch { width: 80%; max-width: 600px; padding: 15px; border-radius: 30px; border: none; font-size: 18px; outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        /* IPO Tables */
+        .ipo-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 30px; shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--primary); }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #eee; text-align: left; padding: 12px; font-size: 14px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .status-open { color: white; background: var(--accent); padding: 3px 8px; border-radius: 4px; font-size: 12px; }
+        .status-upcoming { color: #555; background: #ddd; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
+
+        /* SEO Content */
+        .seo-text { background: white; padding: 30px; border-radius: 12px; margin-top: 40px; font-size: 15px; }
+        .seo-text h3 { color: var(--primary); margin-top: 25px; }
+
+        /* Sidebar Ads */
+        .ad-slot { background: #e9ecef; border: 2px dashed #bbb; height: 400px; display: flex; align-items: center; justify-content: center; color: #888; margin-bottom: 20px; }
+
+        @media (max-width: 900px) { .container { flex-direction: column; } .sidebar { position: static; } }
+    </style>
+</head>
+<body>
+
+<section class="search-section">
+    <h1>India IPO Tracker 2026</h1>
+    <p>Real-time updates on Mainboard and SME IPOs</p>
+    <input type="text" id="ipoSearch" placeholder="Search by Company Name (e.g. Jio, Zepto)..." onkeyup="filterIPOs()">
+</section>
+
+<div class="container">
+    <div class="main-content">
+        
+        <div class="ipo-card">
+            <h2>Current Open IPOs (Jan 2026)</h2>
+            <table id="openIpoTable">
+                <thead>
+                    <tr><th>Company</th><th>Date</th><th>Price Band</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="ipo-row"><td>Accretion Nutraveda (SME)</td><td>Jan 27 - Jan 30</td><td>₹122 - ₹129</td><td><span class="status-open">Apply Now</span></td></tr>
+                    <tr class="ipo-row"><td>Msafe Equipments (SME)</td><td>Jan 28 - Jan 30</td><td>₹116 - ₹123</td><td><span class="status-open">Apply Now</span></td></tr>
+                    <tr class="ipo-row"><td>Kanishk Aluminium</td><td>Jan 28 - Jan 30</td><td>₹73</td><td><span class="status-open">Apply Now</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ipo-card">
+            <h2>Upcoming IPOs (2026 Pipeline)</h2>
+            <table id="upcomingIpoTable">
+                <thead>
+                    <tr><th>Company</th><th>Expected Date</th><th>Issue Size</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="ipo-row"><td>Reliance Jio Platforms</td><td>H1 2026</td><td>₹50,000 Cr+</td><td><span class="status-upcoming">Draft Filed</span></td></tr>
+                    <tr class="ipo-row"><td>Zepto (Quick Commerce)</td><td>March 2026</td><td>₹4,500 Cr</td><td><span class="status-upcoming">Preparing</span></td></tr>
+                    <tr class="ipo-row"><td>Ather Energy</td><td>Early 2026</td><td>₹3,100 Cr</td><td><span class="status-upcoming">SEBI Approved</span></td></tr>
+                    <tr class="ipo-row"><td>NSE (National Stock Exchange)</td><td>Q2 2026</td><td>TBA</td><td><span class="status-upcoming">Awaited</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ipo-card">
+            <h2>Recently Listed / Closed</h2>
+            <table id="closedIpoTable">
+                <thead>
+                    <tr><th>Company</th><th>Listing Date</th><th>Listing Price</th><th>Gains</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="ipo-row"><td>Bharat Coking Coal (BCCL)</td><td>Jan 19, 2026</td><td>₹45.00</td><td style="color:green">+76%</td></tr>
+                    <tr class="ipo-row"><td>Shadowfax Technologies</td><td>Jan 28, 2026</td><td>₹112.60</td><td style="color:red">-9%</td></tr>
+                    <tr class="ipo-row"><td>Amagi Media Labs</td><td>Jan 21, 2026</td><td>₹318.00</td><td style="color:red">-3%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="seo-text">
+            <h2>The Comprehensive Guide to IPOs in India 2026</h2>
+            <p>The Indian Initial Public Offering (IPO) market is entering a historic phase in 2026. With major tech unicorns and legacy state-owned enterprises moving toward listing, understanding the mechanics of the primary market is essential for every retail investor.</p>
+            
+            <h3>What is an IPO?</h3>
+            <p>An Initial Public Offering (IPO) is the process by which a privately held company raises capital by offering its shares to the general public for the first time. This transition from private to public allows the company to tap into a vast pool of funds from institutional and retail investors. In India, this process is strictly regulated by the <strong>Securities and Exchange Board of India (SEBI)</strong>.</p>
+            
+            
+
+            <h3>Why 2026 is a "Benchmark Year" for Indian Markets</h3>
+            <p>Market analysts expect 2026 to see over 190 companies going public, with total fundraising potentially crossing ₹2.5 lakh crore. The spotlight is on "Big Tech" and "Digital Ecosystems." Names like <strong>Reliance Jio</strong> and <strong>PhonePe</strong> are expected to redefine valuation benchmarks. Unlike the speculative bubble of 2021, the 2026 cycle is focused on <em>profitability</em> and <em>sustainable cash flows</em>.</p>
+
+            <h3>Key Terms Every Investor Should Know</h3>
+            <ul>
+                <li><strong>DRHP (Draft Red Herring Prospectus):</strong> The preliminary registration document filed with SEBI that contains financial data and risk factors.</li>
+                <li><strong>Price Band:</strong> The price range (Floor and Cap) within which investors can bid for shares.</li>
+                <li><strong>Lot Size:</strong> The minimum number of shares an investor must apply for. In 2026, most retail lots are priced around ₹14,000 to ₹15,000.</li>
+                <li><strong>GMP (Grey Market Premium):</strong> An unofficial estimate of the listing gain based on demand in the grey market.</li>
+            </ul>
+
+            <h3>How to Evaluate an IPO Before Applying</h3>
+            <p>Don't just follow the hype. Follow these four pillars of research:
+                <br>1. <strong>Financial Health:</strong> Check for consistent revenue growth and decreasing debt levels over the last 3 years.
+                <br>2. <strong>Promoter Track Record:</strong> Who is running the company? Look for experienced leadership with high integrity.
+                <br>3. <strong>Valuation (P/E Ratio):</strong> Compare the company's Price-to-Earnings ratio with its listed peers. If it's too high, the stock might be overvalued.
+                <br>4. <strong>Object of the Issue:</strong> Is the money being used for expansion (Good) or just to pay off old debts (Caution)?
+            </p>
+
+            <h3>The Mandatory Checklist for 2026 IPOs</h3>
+            <p>To participate, ensure you have an active <strong>Demat Account</strong> and a UPI ID for the <strong>ASBA (Applications Supported by Blocked Amount)</strong> process. This ensures your money stays in your bank account and is only debited if you are allotted shares. Always check the <em>Allotment Status</em> on the registrar's website (like Link Intime or KFintech) 3-4 days after the issue closes.</p>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="ad-slot">GOOGLE AD UNIT 1</div>
+        <div class="ad-slot" style="height: 600px;">STICKY VERTICAL AD<br>(300 x 600)</div>
+    </aside>
+</div>
+
+<script>
+    function filterIPOs() {
+        let input = document.getElementById('ipoSearch').value.toUpperCase();
+        let rows = document.querySelectorAll('.ipo-row');
+        
+        rows.forEach(row => {
+            let text = row.innerText.toUpperCase();
+            row.style.display = text.includes(input) ? "" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>
