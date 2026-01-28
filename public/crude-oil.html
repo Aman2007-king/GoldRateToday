@@ -1,73 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Nifty 50 Live Chart & Levels</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Crude Oil Price India - MCX Crude Oil Chart</title>
     <style>
-        body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
-        nav { background: #2c3e50; padding: 15px; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 20px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f0f2f5; color: #333; }
+        
+        /* Navbar Styling */
+        .pro-nav { background: #1e222d; padding: 15px; display: flex; justify-content: center; border-bottom: 3px solid #f1c40f; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: #f1c40f; }
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 3fr 1fr; gap: 20px; }
+        
+        .main-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .sidebar { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); height: fit-content; }
+        
+        h1 { font-size: 24px; color: #1e222d; margin-top: 0; }
+        h3 { border-bottom: 2px solid #f1c40f; padding-bottom: 8px; margin-top: 0; }
+        .feature-link { display: block; padding: 10px 0; color: #1e222d; text-decoration: none; border-bottom: 1px solid #eee; font-weight: 500; }
+        .feature-link:hover { color: #f1c40f; padding-left: 5px; transition: 0.2s; }
+
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="tradingview-widget-container">
+
+<div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
   {
   "symbols": [
-    { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
-    { "proName": "FOREXCOM:XAGUSD", "title": "Silver" },
+    { "proName": "MCX:CRUDEOIL1!", "title": "Crude Oil" },
     { "proName": "BSE:SENSEX", "title": "SENSEX" },
     { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
-    { "proName": "FX_IDC:USDINR", "title": "USD to INR" },
-    { "proName": "MCX:CRUDEOIL1!", "title": "Crude Oil" }
+    { "proName": "FX_IDC:USDINR", "title": "USD to INR" }
   ],
-  "showSymbolLogo": true,
-  "colorTheme": "light",
-  "isTransparent": false,
-  "displayMode": "adaptive",
-  "locale": "in"
-}
+  "colorTheme": "light", "isTransparent": false, "displayMode": "adaptive", "locale": "in"
+  }
   </script>
 </div>
-<style>
-    /* Ensures the ticker doesn't hide behind your navbar */
-    .tradingview-widget-container {
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        margin-bottom: 0px;
-    }
-</style>
-    <nav>
+
+<nav class="pro-nav">
+    <div class="nav-links">
         <a href="/">Gold</a>
         <a href="/silver">Silver</a>
-        <a href="/nifty" style="color: #f1c40f;">NIFTY 50</a>
-        <a href="/crude-oil">Crude Oil</a>
-    </nav>
+        <a href="/sensex">Sensex</a>
+        <a href="/nifty">Nifty</a>
+        <a href="/fuel">Fuel</a>
+        <a href="/currency">Currency</a>
+        <a href="/crude-oil" style="color:#f1c40f">Crude Oil</a>
+    </div>
+</nav>
 
-    <div class="container">
-        <h1>Nifty 50 Live Market</h1>
-        <div class="tradingview-widget-container">
-            <div id="tradingview_nifty"></div>
+<div class="container">
+    <main class="main-card">
+        <h1>Crude Oil (MCX) Live Chart</h1>
+        <p>Real-time price movement for Crude Oil in India.</p>
+        
+        <div style="height: 500px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+            <div id="tradingview_crude" style="height: 100%;"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
             <script type="text/javascript">
             new TradingView.widget({
-                "width": "100%",
-                "height": 500,
+                "autosize": true,
                 "symbol": "MCX:CRUDEOIL1!",
                 "interval": "D",
                 "timezone": "Asia/Kolkata",
                 "theme": "light",
-                "style": "1",
+                "style": "2",
                 "locale": "in",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "allow_symbol_change": true,
-                "container_id": "tradingview_nifty"
+                "container_id": "tradingview_crude"
             });
             </script>
         </div>
-    </div>
+    </main>
+
+    <aside class="sidebar">
+        <h3>More Features</h3>
+        <a href="/fuel" class="feature-link">⛽ Petrol & Diesel Prices</a>
+        <a href="/currency" class="feature-link">💵 Currency Converter</a>
+        <a href="/sensex" class="feature-link">📈 Sensex Live</a>
+        <a href="/silver" class="feature-link">⚪ Silver Rates Today</a>
+        <a href="/" class="feature-link">🟡 Gold Rates Today</a>
+    </aside>
+</div>
+
 </body>
 </html>
