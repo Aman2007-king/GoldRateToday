@@ -3,157 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Gold & Silver Rates India</title>
+    <title>Gold Rate India - Live 24K, 22K & Silver Prices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --gold: #D4AF37; --silver: #C0C0C0; --dark: #333; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f0f2f5; color: var(--dark); }
-        header { background: #fff; padding: 1rem; border-bottom: 3px solid var(--gold); text-align: center; }
-        .wrapper { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        :root { --gold-primary: #f1c40f; --gold-dark: #b8860b; --bg: #f8f9fa; --text: #2c3e50; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); margin: 0; color: var(--text); }
         
-        /* Grid Layout */
-        .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        header { background: #fff; border-bottom: 4px solid var(--gold-primary); padding: 15px 0; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 2.5fr 1fr; gap: 20px; }
 
-        /* Price Cards */
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .val { font-size: 1.5rem; font-weight: bold; color: #2c3e50; }
-        .up { color: green; font-size: 0.9rem; }
+        /* Price Section */
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .price-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--gold-primary); }
+        .price-card.silver { border-top-color: #bdc3c7; }
+        .price-card h3 { margin: 0; font-size: 0.9rem; color: #7f8c8d; text-transform: uppercase; }
+        .price-card .price { font-size: 1.8rem; font-weight: 800; margin: 10px 0; display: block; }
+        .change { font-size: 0.85rem; font-weight: bold; }
+        .up { color: #27ae60; } .down { color: #e74c3c; }
 
-        /* Table Style */
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
-        th { background: #f8f9fa; padding: 15px; text-align: left; }
-        td { padding: 15px; border-top: 1px solid #eee; }
+        /* Tables */
+        .section-title { font-size: 1.2rem; border-left: 5px solid var(--gold-dark); padding-left: 10px; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        th { background: #f1f1f1; padding: 12px; text-align: left; font-size: 0.9rem; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
 
-        /* Calculator */
-        .calc-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .calc-btn { width: 100%; padding: 12px; background: var(--gold); border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; }
-        .result-box { margin-top: 15px; padding: 15px; background: #fff9e6; border-left: 5px solid var(--gold); display: none; }
+        /* Calculator Sidebar */
+        .sidebar-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 20px; }
+        .calc-input-group { margin-bottom: 15px; }
+        .calc-input-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.85rem; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn-calc { background: var(--gold-dark); color: white; border: none; width: 100%; padding: 12px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-calc:hover { background: #966d09; }
+
+        #calc-result { margin-top: 15px; padding: 15px; background: #fff9e6; border: 1px dashed var(--gold-dark); display: none; }
+
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>GoldRatePro <span style="font-weight: 300;">India</span></h1>
-    <p id="update-time">Loading rates...</p>
+    <h1>GoldRate<span style="color:var(--gold-dark)">India</span></h1>
+    <p style="margin:0; font-size:0.8rem; color:#888" id="live-clock">Loading live time...</p>
 </header>
 
-<div class="wrapper">
-    <div class="grid">
-        <div>
-            <div class="card">
-                <h2>Today's Gold Price (Per 1 Gram)</h2>
-                <div class="price-row">
-                    <span>24K Gold</span>
-                    <span class="val">₹<span id="g24">--</span></span>
-                </div>
-                <div class="price-row">
-                    <span>22K Gold</span>
-                    <span class="val">₹<span id="g22">--</span></span>
-                </div>
-                <div class="price-row">
-                    <span>Silver (Per KG)</span>
-                    <span class="val">₹<span id="s1kg">--</span></span>
-                </div>
+<div class="container">
+    <main>
+        <div class="price-grid">
+            <div class="price-card">
+                <h3>24K Gold (10g)</h3>
+                <span class="price" id="g24">--</span>
+                <span class="change up" id="g24-chg">+₹0</span>
             </div>
-
-            <div class="card">
-                <h2>City-wise Gold Rates</h2>
-                <table id="city-table">
-                    <thead>
-                        <tr><th>City</th><th>24K</th><th>22K</th></tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="price-card">
+                <h3>22K Gold (10g)</h3>
+                <span class="price" id="g22">--</span>
+                <span class="change up" id="g22-chg">+₹0</span>
+            </div>
+            <div class="price-card silver">
+                <h3>Silver (1kg)</h3>
+                <span class="price" id="s1kg">--</span>
+                <span class="change down" id="s1-chg">-₹0</span>
             </div>
         </div>
 
-        <div>
-            <div class="card">
-                <h3>Gold Jewelry Calculator</h3>
-                <label>Weight (Grams)</label>
-                <input type="number" id="weight" class="calc-input" placeholder="e.g. 10">
-                
-                <label>Carat</label>
-                <select id="carat" class="calc-input">
-                    <option value="24">24K Gold</option>
-                    <option value="22" selected>22K Gold (Jewelry)</option>
+        <h2 class="section-title">City Wise Gold Rates Today</h2>
+        <table id="city-table">
+            <thead>
+                <tr><th>City</th><th>22K (10g)</th><th>24K (10g)</th></tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+
+        <h2 class="section-title">10 Days Gold Rate Trend</h2>
+        <table id="trend-table">
+            <thead>
+                <tr><th>Date</th><th>22K (1g)</th><th>24K (1g)</th></tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </main>
+
+    <aside>
+        <div class="sidebar-card">
+            <h3><i class="fas fa-calculator"></i> Gold Price Calculator</h3>
+            <div class="calc-input-group">
+                <label>Weight</label>
+                <div style="display:flex; gap:5px;">
+                    <input type="number" id="weight" placeholder="Value">
+                    <select id="unit" style="width:100px;">
+                        <option value="1">Gram</option>
+                        <option value="11.66">Tola</option>
+                        <option value="8">Pavan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="calc-input-group">
+                <label>Purity</label>
+                <select id="purity">
+                    <option value="24">24 Karat</option>
+                    <option value="22" selected>22 Karat</option>
+                    <option value="18">18 Karat</option>
                 </select>
-
+            </div>
+            <div class="calc-input-group">
                 <label>Making Charges (%)</label>
-                <input type="number" id="making" class="calc-input" value="10">
+                <input type="number" id="making" value="10">
+            </div>
+            <button class="btn-calc" onclick="runCalc()">Calculate Total</button>
 
-                <button class="calc-btn" onclick="calculatePrice()">Calculate Total Price</button>
-
-                <div id="result" class="result-box">
-                    <strong>Total Estimate:</strong>
-                    <div id="total-val" style="font-size: 1.4rem; color: #d35400;"></div>
-                    <small>*Includes 3% GST</small>
-                </div>
+            <div id="calc-result">
+                <small>Total Estimated Price:</small>
+                <div id="res-val" style="font-size:1.5rem; font-weight:bold; color:#d35400;">₹0.00</div>
+                <small style="color:#777">* Includes 3% GST</small>
             </div>
         </div>
-    </div>
+    </aside>
 </div>
 
 <script>
-    let currentRates = {};
+    let globalData = null;
 
-    async function loadData() {
-        const res = await fetch('/api/market-data');
-        const data = await res.json();
-        currentRates = data;
+    async function init() {
+        try {
+            const res = await fetch('/api/market-data');
+            globalData = await res.json();
+            updateUI();
+        } catch (e) { console.error("Data error"); }
+    }
 
-        document.getElementById('update-time').innerText = "Last Updated: " + data.update_time;
-        document.getElementById('g24').innerText = data.gold.k24;
-        document.getElementById('g22').innerText = data.gold.k22;
-        document.getElementById('s1kg').innerText = data.silver.per_kg;
+    function updateUI() {
+        document.getElementById('live-clock').innerText = "Last Updated: " + globalData.update_time;
+        
+        // Update main cards
+        const g24_10g = globalData.gold.k24 * 10;
+        const g22_10g = globalData.gold.k22 * 10;
+        document.getElementById('g24').innerText = "₹" + g24_10g.toLocaleString('en-IN');
+        document.getElementById('g22').innerText = "₹" + g22_10g.toLocaleString('en-IN');
+        document.getElementById('s1kg').innerText = "₹" + parseFloat(globalData.silver.per_kg).toLocaleString('en-IN');
 
-        const tbody = document.querySelector('#city-table tbody');
-        data.cities.forEach(city => {
-            tbody.innerHTML += `<tr><td>${city.name}</td><td>₹${city.p24}</td><td>₹${city.p22}</td></tr>`;
+        // City Table
+        const cityBody = document.querySelector('#city-table tbody');
+        globalData.cities.forEach(c => {
+            cityBody.innerHTML += `<tr><td>${c.name}</td><td>₹${(c.p22*10).toLocaleString('en-IN')}</td><td>₹${(c.p24*10).toLocaleString('en-IN')}</td></tr>`;
         });
+
+        // Trend Table (Simulated 10 days for design)
+        const trendBody = document.querySelector('#trend-table tbody');
+        for(let i=0; i<7; i++) {
+            let d = new Date(); d.setDate(d.getDate() - i);
+            trendBody.innerHTML += `<tr><td>${d.toLocaleDateString()}</td><td>₹${globalData.gold.k22}</td><td>₹${globalData.gold.k24}</td></tr>`;
+        }
     }
 
-   function calculatePrice() {
-    // 1. Get the weight from the input box
-    const weightInput = document.getElementById('weight');
-    const grams = parseFloat(weightInput.value);
-    
-    // 2. Get the Carat and Making charges
-    const carat = document.getElementById('carat').value;
-    const makingPercent = parseFloat(document.getElementById('making').value) / 100;
-    
-    // 3. SAFEGUARD: Check if the API data has arrived yet
-    if (!currentRates || !currentRates.gold) {
-        alert("Still loading live rates... please wait 2 seconds.");
-        return;
+    function runCalc() {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const unitMult = parseFloat(document.getElementById('unit').value);
+        const purity = document.getElementById('purity').value;
+        const making = parseFloat(document.getElementById('making').value) / 100;
+
+        if(!weight || !globalData) return alert("Please enter weight");
+
+        let rate = (purity == "24") ? globalData.gold.k24 : (purity == "22" ? globalData.gold.k22 : globalData.gold.k18);
+        const cost = (weight * unitMult) * rate;
+        const total = (cost + (cost * making)) * 1.03; // GST 3%
+
+        document.getElementById('calc-result').style.display = 'block';
+        document.getElementById('res-val').innerText = "₹" + total.toLocaleString('en-IN', {maximumFractionDigits: 2});
     }
 
-    // 4. SAFEGUARD: Check if the user actually typed a number
-    if (!grams || grams <= 0) {
-        document.getElementById('result').style.display = 'none';
-        return; 
-    }
-
-    // 5. DO THE MATH
-    const baseRate = (carat == "24") ? parseFloat(currentRates.gold.k24) : parseFloat(currentRates.gold.k22);
-    const metalCost = grams * baseRate;
-    const makingCost = metalCost * makingPercent;
-    const totalBeforeTax = metalCost + makingCost;
-    const finalPrice = totalBeforeTax * 1.03; // Adding 3% GST
-
-    // 6. SHOW THE RESULT
-    const resultBox = document.getElementById('result');
-    const totalDisplay = document.getElementById('total-val');
-    
-    resultBox.style.display = 'block';
-    totalDisplay.innerText = "₹" + finalPrice.toLocaleString('en-IN', {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2
-    });
-}
-    loadData();
+    init();
 </script>
-
 </body>
 </html>
