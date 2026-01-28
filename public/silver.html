@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Rate India - Live Price per Gram & KG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --silver-primary: #bdc3c7; --silver-dark: #7f8c8d; --bg: #f4f7f6; --text: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: var(--text); }
+        
+        /* Navbar matching Goodreturns style */
+        nav { background: #2c3e50; padding: 10px 0; text-align: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        nav a:hover { color: var(--silver-primary); }
+
+        header { background: #fff; border-bottom: 4px solid var(--silver-primary); padding: 20px 0; text-align: center; }
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+
+        /* Main Price Card */
+        .price-hero { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; margin-bottom: 20px; }
+        .price-hero h2 { color: var(--silver-dark); margin: 0; font-size: 1rem; text-transform: uppercase; }
+        .price-hero .price-large { font-size: 3rem; font-weight: 800; display: block; margin: 10px 0; }
+
+        /* Silver Calculator */
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn-calc { background: #34495e; color: white; border: none; width: 100%; padding: 15px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        
+        #res-box { margin-top: 15px; padding: 15px; background: #ebf2f7; border-left: 5px solid #34495e; display: none; }
+        
+        @media (max-width: 800px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/">GOLD</a>
+    <a href="/silver" style="border-bottom: 2px solid white;">SILVER</a>
+    <a href="/nifty">NIFTY</a>
+    <a href="/crude-oil">CRUDE OIL</a>
+</nav>
+
+<header>
+    <h1>Silver Rate <span style="color:var(--silver-dark)">India</span></h1>
+    <p id="update-time">Fetching latest silver prices...</p>
+</header>
+
+<div class="container">
+    <main>
+        <div class="price-hero">
+            <h2>Current Silver Price (1 KG)</h2>
+            <span class="price-large" id="s1kg">₹ --,---</span>
+            <p id="s1g">Price per gram: ₹--</p>
+        </div>
+
+        <div class="card">
+            <h3>Major Cities Silver Rates</h3>
+            <table style="width:100%; border-collapse: collapse;">
+                <tr style="background:#eee;"><th style="padding:10px; text-align:left;">City</th><th style="text-align:right; padding:10px;">Price per KG</th></tr>
+                <tr><td style="padding:10px;">Mumbai</td><td id="city-mumbai" style="text-align:right;">--</td></tr>
+                <tr><td style="padding:10px;">Delhi</td><td id="city-delhi" style="text-align:right;">--</td></tr>
+                <tr><td style="padding:10px;">Chennai</td><td id="city-chennai" style="text-align:right;">--</td></tr>
+            </table>
+        </div>
+    </main>
+
+    <aside>
+        <div class="card">
+            <h3><i class="fas fa-calculator"></i> Silver Calculator</h3>
+            <div class="input-group">
+                <label>Weight</label>
+                <input type="number" id="s-weight" placeholder="Enter weight">
+            </div>
+            <div class="input-group">
+                <label>Unit</label>
+                <select id="s-unit">
+                    <option value="1">Grams</option>
+                    <option value="1000">Kilograms (KG)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Making Charges (₹ per gram)</label>
+                <input type="number" id="s-making" value="5">
+            </div>
+            <button class="btn-calc" onclick="calculateSilver()">Calculate Price</button>
+
+            <div id="res-box">
+                <small>Total Price (incl. 3% GST):</small>
+                <div id="res-val" style="font-size:1.5rem; font-weight:bold;">₹0.00</div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<script>
+    let silverPricePerGram = 0;
+
+    async function getRates() {
+        const response = await fetch('/api/market-data');
+        const data = await response.json();
+        
+        silverPricePerGram = parseFloat(data.silver) / 1000;
+        const perKg = parseFloat(data.silver).toLocaleString('en-IN');
+        
+        document.getElementById('s1kg').innerText = "₹" + perKg;
+        document.getElementById('s1g').innerText = "Price per gram: ₹" + silverPricePerGram.toFixed(2);
+        document.getElementById('update-time').innerText = "Last Updated: " + data.update_time;
+        
+        // City data
+        document.getElementById('city-mumbai').innerText = "₹" + perKg;
+        document.getElementById('city-delhi').innerText = "₹" + (parseFloat(data.silver) + 200).toLocaleString('en-IN');
+        document.getElementById('city-chennai').innerText = "₹" + (parseFloat(data.silver) + 500).toLocaleString('en-IN');
+    }
+
+    function calculateSilver() {
+        const weight = parseFloat(document.getElementById('s-weight').value);
+        const unit = parseFloat(document.getElementById('s-unit').value);
+        const making = parseFloat(document.getElementById('s-making').value);
+
+        if(!weight) return;
+
+        const totalGrams = weight * unit;
+        const baseCost = totalGrams * silverPricePerGram;
+        const makingCost = totalGrams * making;
+        const totalWithGst = (baseCost + makingCost) * 1.03;
+
+        document.getElementById('res-box').style.display = 'block';
+        document.getElementById('res-val').innerText = "₹" + totalWithGst.toLocaleString('en-IN', {maximumFractionDigits: 2});
+    }
+
+    getRates();
+</script>
+</body>
+</html>
