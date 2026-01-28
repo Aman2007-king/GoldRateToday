@@ -1,31 +1,160 @@
-<div class="card">
-    <h2>Currency Converter</h2>
-    <input type="number" id="amount" value="1" oninput="convert()">
-    <select id="from" onchange="convert()">
-        <option value="USD">USD - US Dollar</option>
-        <option value="INR" selected>INR - Indian Rupee</option>
-    </select>
-    <span> to </span>
-    <select id="to" onchange="convert()">
-        <option value="INR">INR - Indian Rupee</option>
-        <option value="USD" selected>USD - US Dollar</option>
-    </select>
-    <h3 id="result">Calculating...</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter - Live Exchange Rates India</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f0f2f5; color: #333; }
+        
+        /* Navbar */
+        .pro-nav { background: #1e222d; padding: 15px; display: flex; justify-content: center; border-bottom: 3px solid #f1c40f; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+        .nav-links a:hover { color: #f1c40f; }
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        
+        /* Converter UI */
+        .converter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .input-group { display: flex; flex-direction: column; }
+        label { font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #666; }
+        input, select { padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
+        
+        .result-display { background: #fff9e6; border: 2px dashed #f1c40f; padding: 20px; text-align: center; margin-top: 20px; border-radius: 8px; }
+        #res-text { font-size: 24px; font-weight: bold; color: #1e222d; }
+
+        h1 { font-size: 24px; color: #1e222d; margin-top: 0; }
+        h3 { border-bottom: 2px solid #f1c40f; padding-bottom: 8px; }
+        .feature-link { display: block; padding: 10px 0; color: #1e222d; text-decoration: none; border-bottom: 1px solid #eee; }
+
+        @media (max-width: 800px) { .container { grid-template-columns: 1fr; } .converter-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    { "description": "USD/INR", "proName": "FX_IDC:USDINR" },
+    { "description": "EUR/INR", "proName": "FX_IDC:EURINR" },
+    { "description": "GBP/INR", "proName": "FX_IDC:GBPINR" }
+  ],
+  "colorTheme": "light", "displayMode": "adaptive", "locale": "in"
+  }
+  </script>
+</div>
+
+<nav class="pro-nav">
+    <div class="nav-links">
+        <a href="/">Gold</a>
+        <a href="/silver">Silver</a>
+        <a href="/sensex">Sensex</a>
+        <a href="/nifty">Nifty</a>
+        <a href="/fuel">Fuel</a>
+        <a href="/currency" style="color:#f1c40f">Currency</a>
+        <a href="/crude-oil">Crude Oil</a>
+    </div>
+</nav>
+
+<div class="container">
+    <main>
+        <div class="card">
+            <h1>Global Currency Converter</h1>
+            <p>Convert INR to any global currency with live market rates.</p>
+            
+            <div class="input-group">
+                <label>Amount</label>
+                <input type="number" id="amount" value="1" oninput="doConvert()">
+            </div>
+
+            <div class="converter-grid">
+                <div class="input-group">
+                    <label>From</label>
+                    <select id="fromCurrency" onchange="doConvert()"></select>
+                </div>
+                <div class="input-group">
+                    <label>To</label>
+                    <select id="toCurrency" onchange="doConvert()"></select>
+                </div>
+            </div>
+
+            <div class="result-display">
+                <div id="res-text">Please wait...</div>
+                <div id="rate-date" style="font-size: 12px; color: #888; margin-top: 5px;"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Live Exchange Rates (Forex)</h3>
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-rates.js" async>
+                {
+                  "width": "100%", "height": 400, "currencies": ["EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "INR"],
+                  "isTransparent": false, "colorTheme": "light", "locale": "in"
+                }
+                </script>
+            </div>
+        </div>
+    </main>
+
+    <aside class="sidebar card">
+        <h3>Top Currencies</h3>
+        <a href="/currency" class="feature-link">🇺🇸 USD to INR</a>
+        <a href="/currency" class="feature-link">🇪🇺 EUR to INR</a>
+        <a href="/currency" class="feature-link">🇬🇧 GBP to INR</a>
+        <a href="/fuel" class="feature-link">⛽ Fuel Prices</a>
+        <a href="/sensex" class="feature-link">📈 Market Live</a>
+    </aside>
 </div>
 
 <script>
-    async function convert() {
-        const amount = document.getElementById('amount').value;
-        const from = document.getElementById('from').value;
-        const to = document.getElementById('to').value;
-        
-        // Using a free exchange rate API
-        const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+    // Fetch all currencies for the dropdowns
+    const fromSelect = document.getElementById('fromCurrency');
+    const toSelect = document.getElementById('toCurrency');
+
+    async function loadCurrencies() {
+        const res = await fetch('https://api.exchangerate-api.com/v4/latest/INR');
         const data = await res.json();
-        const rate = data.rates[to];
-        const final = (amount * rate).toFixed(2);
+        const currencies = Object.keys(data.rates);
         
-        document.getElementById('result').innerText = `${amount} ${from} = ${final} ${to}`;
+        currencies.forEach(currency => {
+            let option1 = new Option(currency, currency);
+            let option2 = new Option(currency, currency);
+            fromSelect.add(option1);
+            toSelect.add(option2);
+        });
+
+        fromSelect.value = "USD";
+        toSelect.value = "INR";
+        doConvert();
     }
-    convert();
+
+    async function doConvert() {
+        const amount = document.getElementById('amount').value;
+        const from = fromSelect.value;
+        const to = toSelect.value;
+        
+        if (amount <= 0) return;
+
+        try {
+            const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+            const data = await res.json();
+            const rate = data.rates[to];
+            const result = (amount * rate).toLocaleString('en-IN', {maximumFractionDigits: 2});
+            
+            document.getElementById('res-text').innerText = `${amount} ${from} = ${result} ${to}`;
+            document.getElementById('rate-date').innerText = "Last Updated: " + new Date().toLocaleString();
+        } catch (e) {
+            document.getElementById('res-text').innerText = "Rate Fetch Error";
+        }
+    }
+
+    loadCurrencies();
 </script>
+</body>
+</html>
