@@ -10,6 +10,35 @@
     </style>
 </head>
 <body>
+    <div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
+    { "proName": "FOREXCOM:XAGUSD", "title": "Silver" },
+    { "proName": "BSE:SENSEX", "title": "SENSEX" },
+    { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
+    { "proName": "FX_IDC:USDINR", "title": "USD to INR" },
+    { "proName": "MCX:CRUDEOIL1!", "title": "Crude Oil" }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "light",
+  "isTransparent": false,
+  "displayMode": "adaptive",
+  "locale": "in"
+}
+  </script>
+</div>
+<style>
+    /* Ensures the ticker doesn't hide behind your navbar */
+    .tradingview-widget-container {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        margin-bottom: 0px;
+    }
+</style>
     <nav>
         <a href="/">Gold</a>
         <a href="/silver">Silver</a>
