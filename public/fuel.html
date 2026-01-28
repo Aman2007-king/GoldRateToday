@@ -1,10 +1,33 @@
 <div class="card">
-    <h2>Petrol & Diesel Prices Today</h2>
-    <table>
-        <tr><th>City</th><th>Petrol</th><th>Diesel</th></tr>
+    <h2>Petrol & Diesel Prices in Major Cities</h2>
+    <input type="text" id="fuelSearch" placeholder="Search your city..." onkeyup="searchFuel()" style="margin-bottom:15px; padding:10px; width:100%;">
+    <table id="fuelTable">
+        <tr style="background:#2c3e50; color:white;">
+            <th>City</th>
+            <th>Petrol (1L)</th>
+            <th>Diesel (1L)</th>
+        </tr>
         <tr><td>Mumbai</td><td>₹106.31</td><td>₹94.27</td></tr>
         <tr><td>Delhi</td><td>₹96.72</td><td>₹89.62</td></tr>
+        <tr><td>Bangalore</td><td>₹101.94</td><td>₹87.89</td></tr>
         <tr><td>Chennai</td><td>₹102.63</td><td>₹94.24</td></tr>
+        <tr><td>Hyderabad</td><td>₹109.66</td><td>₹97.82</td></tr>
     </table>
-    <p><small>*Prices may vary slightly by station.</small></p>
 </div>
+
+<script>
+function searchFuel() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("fuelSearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("fuelTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            tr[i].style.display = (txtValue.toUpperCase().indexOf(filter) > -1) ? "" : "none";
+        }
+    }
+}
+</script>
