@@ -39,6 +39,55 @@
         .apply-btn:hover { background: var(--accent); }
 
         @media (max-width: 768px) { .table-wrapper { overflow-x: auto; } }
+
+        /* Referral Banner Styles */
+        .bottom-referral-banner {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,114,255,0.3);
+        }
+        .bottom-referral-banner h2 { color: white !important; margin-bottom: 15px; }
+        .btn-white {
+            background: white;
+            color: #0072ff;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        
+        /* Mobile Sticky Bar Styles */
+        .sticky-mobile-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #0072ff;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+        }
+        .sticky-mobile-bar a {
+            color: #f1c40f;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+        @media (max-width: 768px) {
+            .sticky-mobile-bar { display: block; }
+            body { padding-bottom: 60px; }
+        }
     </style>
 </head>
 <body>
@@ -79,16 +128,16 @@
                     <tr><th>Company</th><th>Type</th><th>Close Date</th><th>Price Band</th><th>Lot Size</th><th>Action</th></tr>
                 </thead>
                 <tbody id="openTable">
-                    <tr class="ipo-row"><td>Accretion Nutraveda</td><td>SME</td><td>Jan 30, 2026</td><td>₹122 - ₹129</td><td>1000</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Kanishk Aluminium</td><td>SME</td><td>Jan 30, 2026</td><td>₹73 (Fixed)</td><td>1600</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Msafe Equipments</td><td>SME</td><td>Jan 30, 2026</td><td>₹116 - ₹123</td><td>1000</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Kasturi Metal Composite</td><td>SME</td><td>Jan 29, 2026</td><td>₹61 - ₹64</td><td>2000</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>CKK Retail Mart</td><td>SME</td><td>Feb 03, 2026</td><td>₹155 - ₹163</td><td>800</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>NFP Sampoorna Foods</td><td>SME</td><td>Feb 06, 2026</td><td>₹52 - ₹55</td><td>2000</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Biopol Chemicals</td><td>SME</td><td>Feb 10, 2026</td><td>₹102 - ₹108</td><td>1200</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Power Finance Corp (NCD)</td><td>Debt</td><td>Jan 30, 2026</td><td>₹1000</td><td>10</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Modern Diagnostic</td><td>SME</td><td>Feb 02, 2026</td><td>₹85 - ₹90</td><td>1600</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Veegaland Developers</td><td>Main</td><td>Feb 12, 2026</td><td>TBA</td><td>TBA</td><td><a href="#" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Accretion Nutraveda</td><td>SME</td><td>Jan 30, 2026</td><td>₹122 - ₹129</td><td>1000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Kanishk Aluminium</td><td>SME</td><td>Jan 30, 2026</td><td>₹73 (Fixed)</td><td>1600</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Msafe Equipments</td><td>SME</td><td>Jan 30, 2026</td><td>₹116 - ₹123</td><td>1000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Kasturi Metal Composite</td><td>SME</td><td>Jan 29, 2026</td><td>₹61 - ₹64</td><td>2000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>CKK Retail Mart</td><td>SME</td><td>Feb 03, 2026</td><td>₹155 - ₹163</td><td>800</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>NFP Sampoorna Foods</td><td>SME</td><td>Feb 06, 2026</td><td>₹52 - ₹55</td><td>2000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Biopol Chemicals</td><td>SME</td><td>Feb 10, 2026</td><td>₹102 - ₹108</td><td>1200</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Power Finance Corp (NCD)</td><td>Debt</td><td>Jan 30, 2026</td><td>₹1000</td><td>10</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Modern Diagnostic</td><td>SME</td><td>Feb 02, 2026</td><td>₹85 - ₹90</td><td>1600</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
+                    <tr class="ipo-row"><td>Veegaland Developers</td><td>Main</td><td>Feb 12, 2026</td><td>TBA</td><td>TBA</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" class="apply-btn">Apply</a></td></tr>
                 </tbody>
             </table>
         </div>
@@ -162,6 +211,16 @@
             </table>
         </div>
     </div>
+
+    <div class="bottom-referral-banner">
+        <h2>Don't have a Demat Account?</h2>
+        <p>Open a <b>FREE</b> Angel One account in 5 minutes to apply for 2026 IPOs.</p>
+        <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" class="btn-white">🚀 Open FREE Account Now</a>
+    </div>
+</div>
+
+<div class="sticky-mobile-bar">
+    Apply for 2026 IPOs! <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank">Open Free Angel One Account</a>
 </div>
 
 <script>
