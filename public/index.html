@@ -114,23 +114,44 @@
         });
     }
 
-    function calculatePrice() {
-        const grams = parseFloat(document.getElementById('weight').value);
-        const carat = document.getElementById('carat').value;
-        const makingPercent = parseFloat(document.getElementById('making').value) / 100;
-        
-        if(!grams) return alert("Enter weight");
-
-        const baseRate = (carat == "24") ? currentRates.gold.k24 : currentRates.gold.k22;
-        const metalCost = grams * baseRate;
-        const makingCost = metalCost * makingPercent;
-        const totalBeforeTax = metalCost + makingCost;
-        const finalPrice = totalBeforeTax * 1.03; // Adding 3% GST
-
-        document.getElementById('result').style.display = 'block';
-        document.getElementById('total-val').innerText = "₹" + finalPrice.toLocaleString('en-IN', {maximumFractionDigits: 2});
+   function calculatePrice() {
+    // 1. Get the weight from the input box
+    const weightInput = document.getElementById('weight');
+    const grams = parseFloat(weightInput.value);
+    
+    // 2. Get the Carat and Making charges
+    const carat = document.getElementById('carat').value;
+    const makingPercent = parseFloat(document.getElementById('making').value) / 100;
+    
+    // 3. SAFEGUARD: Check if the API data has arrived yet
+    if (!currentRates || !currentRates.gold) {
+        alert("Still loading live rates... please wait 2 seconds.");
+        return;
     }
 
+    // 4. SAFEGUARD: Check if the user actually typed a number
+    if (!grams || grams <= 0) {
+        document.getElementById('result').style.display = 'none';
+        return; 
+    }
+
+    // 5. DO THE MATH
+    const baseRate = (carat == "24") ? parseFloat(currentRates.gold.k24) : parseFloat(currentRates.gold.k22);
+    const metalCost = grams * baseRate;
+    const makingCost = metalCost * makingPercent;
+    const totalBeforeTax = metalCost + makingCost;
+    const finalPrice = totalBeforeTax * 1.03; // Adding 3% GST
+
+    // 6. SHOW THE RESULT
+    const resultBox = document.getElementById('result');
+    const totalDisplay = document.getElementById('total-val');
+    
+    resultBox.style.display = 'block';
+    totalDisplay.innerText = "₹" + finalPrice.toLocaleString('en-IN', {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2
+    });
+}
     loadData();
 </script>
 
