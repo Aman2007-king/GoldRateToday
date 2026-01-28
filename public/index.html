@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Gold & Silver Rates India</title>
+    <style>
+        :root { --gold: #D4AF37; --silver: #C0C0C0; --dark: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f0f2f5; color: var(--dark); }
+        header { background: #fff; padding: 1rem; border-bottom: 3px solid var(--gold); text-align: center; }
+        .wrapper { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        
+        /* Grid Layout */
+        .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+        /* Price Cards */
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .val { font-size: 1.5rem; font-weight: bold; color: #2c3e50; }
+        .up { color: green; font-size: 0.9rem; }
+
+        /* Table Style */
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+        th { background: #f8f9fa; padding: 15px; text-align: left; }
+        td { padding: 15px; border-top: 1px solid #eee; }
+
+        /* Calculator */
+        .calc-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .calc-btn { width: 100%; padding: 12px; background: var(--gold); border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        .result-box { margin-top: 15px; padding: 15px; background: #fff9e6; border-left: 5px solid var(--gold); display: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>GoldRatePro <span style="font-weight: 300;">India</span></h1>
+    <p id="update-time">Loading rates...</p>
+</header>
+
+<div class="wrapper">
+    <div class="grid">
+        <div>
+            <div class="card">
+                <h2>Today's Gold Price (Per 1 Gram)</h2>
+                <div class="price-row">
+                    <span>24K Gold</span>
+                    <span class="val">₹<span id="g24">--</span></span>
+                </div>
+                <div class="price-row">
+                    <span>22K Gold</span>
+                    <span class="val">₹<span id="g22">--</span></span>
+                </div>
+                <div class="price-row">
+                    <span>Silver (Per KG)</span>
+                    <span class="val">₹<span id="s1kg">--</span></span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>City-wise Gold Rates</h2>
+                <table id="city-table">
+                    <thead>
+                        <tr><th>City</th><th>24K</th><th>22K</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <div class="card">
+                <h3>Gold Jewelry Calculator</h3>
+                <label>Weight (Grams)</label>
+                <input type="number" id="weight" class="calc-input" placeholder="e.g. 10">
+                
+                <label>Carat</label>
+                <select id="carat" class="calc-input">
+                    <option value="24">24K Gold</option>
+                    <option value="22" selected>22K Gold (Jewelry)</option>
+                </select>
+
+                <label>Making Charges (%)</label>
+                <input type="number" id="making" class="calc-input" value="10">
+
+                <button class="calc-btn" onclick="calculatePrice()">Calculate Total Price</button>
+
+                <div id="result" class="result-box">
+                    <strong>Total Estimate:</strong>
+                    <div id="total-val" style="font-size: 1.4rem; color: #d35400;"></div>
+                    <small>*Includes 3% GST</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentRates = {};
+
+    async function loadData() {
+        const res = await fetch('/api/market-data');
+        const data = await res.json();
+        currentRates = data;
+
+        document.getElementById('update-time').innerText = "Last Updated: " + data.update_time;
+        document.getElementById('g24').innerText = data.gold.k24;
+        document.getElementById('g22').innerText = data.gold.k22;
+        document.getElementById('s1kg').innerText = data.silver.per_kg;
+
+        const tbody = document.querySelector('#city-table tbody');
+        data.cities.forEach(city => {
+            tbody.innerHTML += `<tr><td>${city.name}</td><td>₹${city.p24}</td><td>₹${city.p22}</td></tr>`;
+        });
+    }
+
+    function calculatePrice() {
+        const grams = parseFloat(document.getElementById('weight').value);
+        const carat = document.getElementById('carat').value;
+        const makingPercent = parseFloat(document.getElementById('making').value) / 100;
+        
+        if(!grams) return alert("Enter weight");
+
+        const baseRate = (carat == "24") ? currentRates.gold.k24 : currentRates.gold.k22;
+        const metalCost = grams * baseRate;
+        const makingCost = metalCost * makingPercent;
+        const totalBeforeTax = metalCost + makingCost;
+        const finalPrice = totalBeforeTax * 1.03; // Adding 3% GST
+
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('total-val').innerText = "₹" + finalPrice.toLocaleString('en-IN', {maximumFractionDigits: 2});
+    }
+
+    loadData();
+</script>
+
+</body>
+</html>
