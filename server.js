@@ -14,6 +14,10 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.ht
 app.get('/silver', (req, res) => res.sendFile(path.join(__dirname, 'public', 'silver.html')));
 app.get('/nifty', (req, res) => res.sendFile(path.join(__dirname, 'public', 'nifty.html')));
 app.get('/crude-oil', (req, res) => res.sendFile(path.join(__dirname, 'public', 'crude-oil.html')));
+// Add these above app.listen()
+app.get('/sensex', (req, res) => res.sendFile(path.join(__dirname, 'public', 'sensex.html')));
+app.get('/currency', (req, res) => res.sendFile(path.join(__dirname, 'public', 'currency.html')));
+app.get('/fuel', (req, res) => res.sendFile(path.join(__dirname, 'public', 'fuel.html')));
 
 // --- API: Get data for all assets ---
 app.get('/api/market-data', async (req, res) => {
@@ -41,3 +45,4 @@ app.get('/api/market-data', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Site live on port ${PORT}`));
+
