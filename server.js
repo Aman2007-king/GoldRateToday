@@ -22,6 +22,9 @@ app.get('/fuel', (req, res) => res.sendFile(path.join(__dirname, 'public', 'fuel
 app.get('/jewellers', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'jewellers.html'));
 });
+app.get('/ipo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'ipo.html'));
+});
 // --- API: Get data for all assets ---
 app.get('/api/market-data', async (req, res) => {
     const cached = myCache.get("market_data");
@@ -48,6 +51,7 @@ app.get('/api/market-data', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Site live on port ${PORT}`));
+
 
 
 
