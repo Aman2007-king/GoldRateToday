@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>India IPO Hub 2026 | Live Tracking & Application Guide</title>
     <style>
-        :root { --brand: #1e3799; --accent: #eb2f06; --success: #38ada9; --bg: #f1f2f6; }
+        :root { --brand: #1e3799; --accent: #eb2f06; --success: #38ada9; --bg: #f1f2f6; --whatsapp: #25D366; }
         body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); margin: 0; color: #2f3542; }
         
         /* Hero & Search */
@@ -35,59 +35,24 @@
         .gain { color: #059669; font-weight: bold; }
         .loss { color: #dc2626; font-weight: bold; }
         
+        .action-cell { display: flex; gap: 10px; align-items: center; }
         .apply-btn { background: var(--brand); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .apply-btn:hover { background: var(--accent); }
+        
+        /* New WhatsApp Button Style */
+        .whatsapp-btn { background: var(--whatsapp); color: white; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: flex; align-items: center; }
 
         @media (max-width: 768px) { .table-wrapper { overflow-x: auto; } }
 
         /* Referral Banner Styles */
-        .bottom-referral-banner {
-            background: linear-gradient(135deg, #0072ff, #00c6ff);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 15px;
-            margin: 40px 0;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,114,255,0.3);
-        }
+        .bottom-referral-banner { background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; padding: 40px 20px; border-radius: 15px; margin: 40px 0; text-align: center; box-shadow: 0 10px 30px rgba(0,114,255,0.3); }
         .bottom-referral-banner h2 { color: white !important; margin-bottom: 15px; }
-        .btn-white {
-            background: white;
-            color: #0072ff;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
+        .btn-white { background: white; color: #0072ff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 1.1rem; margin-top: 10px; }
         
         /* Mobile Sticky Bar Styles */
-        .sticky-mobile-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #0072ff;
-            color: white;
-            padding: 12px;
-            text-align: center;
-            z-index: 9999;
-            display: none;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-            font-size: 0.9rem;
-        }
-        .sticky-mobile-bar a {
-            color: #f1c40f;
-            font-weight: bold;
-            text-decoration: underline;
-            margin-left: 5px;
-        }
-        @media (max-width: 768px) {
-            .sticky-mobile-bar { display: block; }
-            body { padding-bottom: 60px; }
-        }
+        .sticky-mobile-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #0072ff; color: white; padding: 12px; text-align: center; z-index: 9999; display: none; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); font-size: 0.9rem; }
+        .sticky-mobile-bar a { color: #f1c40f; font-weight: bold; text-decoration: underline; margin-left: 5px; }
+        @media (max-width: 768px) { .sticky-mobile-bar { display: block; } body { padding-bottom: 60px; } }
     </style>
 </head>
 <body>
@@ -127,18 +92,7 @@
                 <thead>
                     <tr><th>Company</th><th>Type</th><th>Close Date</th><th>Price Band</th><th>Lot Size</th><th>Action</th></tr>
                 </thead>
-                <tbody id="openTable">
-                    <tr class="ipo-row"><td>Accretion Nutraveda</td><td>SME</td><td>Jan 30, 2026</td><td>₹122 - ₹129</td><td>1000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Kanishk Aluminium</td><td>SME</td><td>Jan 30, 2026</td><td>₹73 (Fixed)</td><td>1600</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Msafe Equipments</td><td>SME</td><td>Jan 30, 2026</td><td>₹116 - ₹123</td><td>1000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Kasturi Metal Composite</td><td>SME</td><td>Jan 29, 2026</td><td>₹61 - ₹64</td><td>2000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>CKK Retail Mart</td><td>SME</td><td>Feb 03, 2026</td><td>₹155 - ₹163</td><td>800</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>NFP Sampoorna Foods</td><td>SME</td><td>Feb 06, 2026</td><td>₹52 - ₹55</td><td>2000</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Biopol Chemicals</td><td>SME</td><td>Feb 10, 2026</td><td>₹102 - ₹108</td><td>1200</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Power Finance Corp (NCD)</td><td>Debt</td><td>Jan 30, 2026</td><td>₹1000</td><td>10</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Modern Diagnostic</td><td>SME</td><td>Feb 02, 2026</td><td>₹85 - ₹90</td><td>1600</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                    <tr class="ipo-row"><td>Veegaland Developers</td><td>Main</td><td>Feb 12, 2026</td><td>TBA</td><td>TBA</td><td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply</a></td></tr>
-                </tbody>
+                <tbody id="openTable"></tbody>
             </table>
         </div>
     </div>
@@ -150,18 +104,7 @@
                 <thead>
                     <tr><th>Company Name</th><th>Expected Date</th><th>Issue Size</th><th>Valuation</th><th>Status</th></tr>
                 </thead>
-                <tbody id="upcomingTable">
-                    <tr class="ipo-row"><td>Reliance Jio Platforms</td><td>Q2 2026</td><td>₹55,000 Cr</td><td>₹9.3 Trillion</td><td><span class="badge upcoming">Awaiting SEBI</span></td></tr>
-                    <tr class="ipo-row"><td>Zepto (Quick Commerce)</td><td>March 2026</td><td>₹4,500 Cr</td><td>₹35,000 Cr</td><td><span class="badge upcoming">DRHP Preparation</span></td></tr>
-                    <tr class="ipo-row"><td>Ather Energy</td><td>Feb 2026</td><td>₹3,100 Cr</td><td>₹18,000 Cr</td><td><span class="badge upcoming">Approved</span></td></tr>
-                    <tr class="ipo-row"><td>NSE (National Stock Exchange)</td><td>H2 2026</td><td>₹10,000 Cr</td><td>₹4.7 Trillion</td><td><span class="badge upcoming">DRHP Filed</span></td></tr>
-                    <tr class="ipo-row"><td>PhonePe</td><td>Q3 2026</td><td>₹12,000 Cr</td><td>₹1.2 Trillion</td><td><span class="badge upcoming">Confidential Filing</span></td></tr>
-                    <tr class="ipo-row"><td>Flipkart India</td><td>Late 2026</td><td>₹40,000 Cr</td><td>₹2.8 Trillion</td><td><span class="badge upcoming">Planned</span></td></tr>
-                    <tr class="ipo-row"><td>boAt (Imagine Marketing)</td><td>April 2026</td><td>₹2,000 Cr</td><td>₹12,000 Cr</td><td><span class="badge upcoming">DRHP Update</span></td></tr>
-                    <tr class="ipo-row"><td>Tata EV (TPEML)</td><td>H2 2026</td><td>₹15,000 Cr</td><td>₹80,000 Cr</td><td><span class="badge upcoming">Planning</span></td></tr>
-                    <tr class="ipo-row"><td>Hero FinCorp</td><td>May 2026</td><td>₹3,668 Cr</td><td>₹25,000 Cr</td><td><span class="badge upcoming">DRHP Filed</span></td></tr>
-                    <tr class="ipo-row"><td>Fractal Analytics</td><td>March 2026</td><td>₹4,900 Cr</td><td>₹15,000 Cr</td><td><span class="badge upcoming">DRHP Filed</span></td></tr>
-                </tbody>
+                <tbody id="upcomingTable"></tbody>
             </table>
         </div>
     </div>
@@ -173,18 +116,7 @@
                 <thead>
                     <tr><th>Company Name</th><th>Date</th><th>Issue Price</th><th>Subscribed</th><th>Listing Date</th></tr>
                 </thead>
-                <tbody id="closedTable">
-                    <tr class="ipo-row"><td>Hannah Joseph Hospital</td><td>Jan 28</td><td>₹70</td><td>1.61x</td><td>Jan 30</td></tr>
-                    <tr class="ipo-row"><td>Shayona Engineering</td><td>Jan 27</td><td>₹144</td><td>5.44x</td><td>Jan 30</td></tr>
-                    <tr class="ipo-row"><td>KRM Ayurveda</td><td>Jan 23</td><td>₹135</td><td>64.3x</td><td>Jan 29</td></tr>
-                    <tr class="ipo-row"><td>Digilogic Systems</td><td>Jan 22</td><td>₹104</td><td>1.12x</td><td>Jan 28</td></tr>
-                    <tr class="ipo-row"><td>Shadowfax Technologies</td><td>Jan 22</td><td>₹124</td><td>2.70x</td><td>Jan 28</td></tr>
-                    <tr class="ipo-row"><td>Aritas Vinyl</td><td>Jan 20</td><td>₹47</td><td>3.1x</td><td>Jan 23</td></tr>
-                    <tr class="ipo-row"><td>Armour Security</td><td>Jan 19</td><td>₹57</td><td>0.98x</td><td>Jan 22</td></tr>
-                    <tr class="ipo-row"><td>Indo SMC</td><td>Jan 16</td><td>₹149</td><td>12.5x</td><td>Jan 21</td></tr>
-                    <tr class="ipo-row"><td>GRE Renew Enertech</td><td>Jan 16</td><td>₹105</td><td>2.2x</td><td>Jan 21</td></tr>
-                    <tr class="ipo-row"><td>Narmadesh Brass</td><td>Jan 16</td><td>₹515</td><td>4.8x</td><td>Jan 21</td></tr>
-                </tbody>
+                <tbody id="closedTable"></tbody>
             </table>
         </div>
     </div>
@@ -196,18 +128,7 @@
                 <thead>
                     <tr><th>Company</th><th>Listing Price</th><th>Issue Price</th><th>Current Gain/Loss</th></tr>
                 </thead>
-                <tbody id="listedTable">
-                    <tr class="ipo-row"><td>Bharat Coking Coal</td><td>₹45.00</td><td>₹23.00</td><td><span class="gain">+76.0%</span></td></tr>
-                    <tr class="ipo-row"><td>Avana Electrosystems</td><td>₹77.50</td><td>₹59.00</td><td><span class="gain">+31.4%</span></td></tr>
-                    <tr class="ipo-row"><td>Defrail Technologies</td><td>₹95.00</td><td>₹74.00</td><td><span class="gain">+28.4%</span></td></tr>
-                    <tr class="ipo-row"><td>Gabion Tech</td><td>₹89.00</td><td>₹81.00</td><td><span class="gain">+9.8%</span></td></tr>
-                    <tr class="ipo-row"><td>Amagi Media Labs</td><td>₹318.00</td><td>₹361.00</td><td><span class="loss">-11.9%</span></td></tr>
-                    <tr class="ipo-row"><td>Victory Electric</td><td>₹34.45</td><td>₹41.00</td><td><span class="loss">-15.9%</span></td></tr>
-                    <tr class="ipo-row"><td>Yajur Fibres</td><td>₹134.00</td><td>₹174.00</td><td><span class="loss">-23.0%</span></td></tr>
-                    <tr class="ipo-row"><td>Indo SMC</td><td>₹153.00</td><td>₹149.00</td><td><span class="gain">+2.7%</span></td></tr>
-                    <tr class="ipo-row"><td>Aritas Vinyl</td><td>₹44.65</td><td>₹47.00</td><td><span class="loss">-5.0%</span></td></tr>
-                    <tr class="ipo-row"><td>Armour Security</td><td>₹45.60</td><td>₹57.00</td><td><span class="loss">-20.0%</span></td></tr>
-                </tbody>
+                <tbody id="listedTable"></tbody>
             </table>
         </div>
     </div>
@@ -224,6 +145,90 @@
 </div>
 
 <script>
+    // --- IPO DATA MASTER LIST ---
+    // You only need to update this list. The tables update themselves!
+    const ipoData = {
+        open: [
+            { name: "Accretion Nutraveda", type: "SME", close: "Jan 30, 2026", price: "₹122 - ₹129", lot: "1000" },
+            { name: "Kanishk Aluminium", type: "SME", close: "Jan 30, 2026", price: "₹73 (Fixed)", lot: "1600" },
+            { name: "Msafe Equipments", type: "SME", close: "Jan 30, 2026", price: "₹116 - ₹123", lot: "1000" },
+            { name: "Kasturi Metal Composite", type: "SME", close: "Jan 29, 2026", price: "₹61 - ₹64", lot: "2000" },
+            { name: "CKK Retail Mart", type: "SME", close: "Feb 03, 2026", price: "₹155 - ₹163", lot: "800" },
+            { name: "NFP Sampoorna Foods", type: "SME", close: "Feb 06, 2026", price: "₹52 - ₹55", lot: "2000" },
+            { name: "Biopol Chemicals", type: "SME", close: "Feb 10, 2026", price: "₹102 - ₹108", lot: "1200" },
+            { name: "Power Finance Corp (NCD)", type: "Debt", close: "Jan 30, 2026", price: "₹1000", lot: "10" },
+            { name: "Modern Diagnostic", type: "SME", close: "Feb 02, 2026", price: "₹85 - ₹90", lot: "1600" },
+            { name: "Veegaland Developers", type: "Main", close: "Feb 12, 2026", price: "TBA", lot: "TBA" }
+        ],
+        upcoming: [
+            { name: "Reliance Jio Platforms", date: "Q2 2026", size: "₹55,000 Cr", val: "₹9.3 Trillion", status: "Awaiting SEBI" },
+            { name: "Zepto (Quick Commerce)", date: "March 2026", size: "₹4,500 Cr", val: "₹35,000 Cr", status: "DRHP Preparation" },
+            { name: "Ather Energy", date: "Feb 2026", size: "₹3,100 Cr", val: "₹18,000 Cr", status: "Approved" },
+            { name: "NSE (National Stock Exchange)", date: "H2 2026", size: "₹10,000 Cr", val: "₹4.7 Trillion", status: "DRHP Filed" },
+            { name: "PhonePe", date: "Q3 2026", size: "₹12,000 Cr", val: "₹1.2 Trillion", status: "Confidential Filing" },
+            { name: "Flipkart India", date: "Late 2026", size: "₹40,000 Cr", val: "₹2.8 Trillion", status: "Planned" },
+            { name: "boAt (Imagine Marketing)", date: "April 2026", size: "₹2,000 Cr", val: "₹12,000 Cr", status: "DRHP Update" },
+            { name: "Tata EV (TPEML)", date: "H2 2026", size: "₹15,000 Cr", val: "₹80,000 Cr", status: "Planning" },
+            { name: "Hero FinCorp", date: "May 2026", size: "₹3,668 Cr", val: "₹25,000 Cr", status: "DRHP Filed" },
+            { name: "Fractal Analytics", date: "March 2026", size: "₹4,900 Cr", val: "₹15,000 Cr", status: "DRHP Filed" }
+        ],
+        closed: [
+            { name: "Hannah Joseph Hospital", date: "Jan 28", price: "₹70", sub: "1.61x", list: "Jan 30" },
+            { name: "Shayona Engineering", date: "Jan 27", price: "₹144", sub: "5.44x", list: "Jan 30" },
+            { name: "KRM Ayurveda", date: "Jan 23", price: "₹135", sub: "64.3x", list: "Jan 29" },
+            { name: "Digilogic Systems", date: "Jan 22", price: "₹104", sub: "1.12x", list: "Jan 28" },
+            { name: "Shadowfax Technologies", date: "Jan 22", price: "₹124", sub: "2.70x", list: "Jan 28" }
+        ],
+        listed: [
+            { name: "Bharat Coking Coal", lPrice: "₹45.00", iPrice: "₹23.00", gain: "+76.0%" },
+            { name: "Avana Electrosystems", lPrice: "₹77.50", iPrice: "₹59.00", gain: "+31.4%" },
+            { name: "Defrail Technologies", lPrice: "₹95.00", iPrice: "₹74.00", gain: "+28.4%" },
+            { name: "Gabion Tech", lPrice: "₹89.00", iPrice: "₹81.00", gain: "+9.8%" },
+            { name: "Amagi Media Labs", lPrice: "₹318.00", iPrice: "₹361.00", gain: "-11.9%" }
+        ]
+    };
+
+    const referralLink = "https://angel-one.onelink.me/Wjgr/oc2kvsya";
+
+    function refreshAllTables() {
+        const openBody = document.getElementById('openTable');
+        const upcomingBody = document.getElementById('upcomingTable');
+        const closedBody = document.getElementById('closedTable');
+        const listedBody = document.getElementById('listedTable');
+
+        // Clear existing rows
+        openBody.innerHTML = ''; upcomingBody.innerHTML = ''; closedBody.innerHTML = ''; listedBody.innerHTML = '';
+
+        // Fill Open IPOs
+        ipoData.open.forEach(item => {
+            const shareText = encodeURIComponent(`🔥 IPO Alert: ${item.name}\n💰 Price: ${item.price}\n📅 Closes: ${item.close}\n🚀 Apply here via Angel One: `);
+            const row = `<tr class="ipo-row">
+                <td>${item.name}</td><td>${item.type}</td><td>${item.close}</td><td>${item.price}</td><td>${item.lot}</td>
+                <td class="action-cell">
+                    <a href="${referralLink}" target="_blank" class="apply-btn">Apply</a>
+                    <a href="https://wa.me/?text=${shareText}${referralLink}" target="_blank" class="whatsapp-btn">Share 📲</a>
+                </td>
+            </tr>`;
+            openBody.innerHTML += row;
+        });
+
+        // Fill Upcoming
+        ipoData.upcoming.forEach(item => {
+            upcomingBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.date}</td><td>${item.size}</td><td>${item.val}</td><td><span class="badge upcoming">${item.status}</span></td></tr>`;
+        });
+
+        // Fill Closed
+        ipoData.closed.forEach(item => {
+            closedBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.date}</td><td>${item.price}</td><td>${item.sub}</td><td>${item.list}</td></tr>`;
+        });
+
+        // Fill Listed
+        ipoData.listed.forEach(item => {
+            const gainClass = item.gain.includes('+') ? 'gain' : 'loss';
+            listedBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.lPrice}</td><td>${item.iPrice}</td><td><span class="${gainClass}">${item.gain}</span></td></tr>`;
+        });
+    }
+
     function filterData() {
         const input = document.getElementById("ipoSearch").value.toLowerCase();
         const rows = document.querySelectorAll(".ipo-row");
@@ -240,6 +245,9 @@
         const total = price * lot * qty;
         document.getElementById("totalAmount").innerText = "₹" + total.toLocaleString('en-IN');
     }
+
+    // Initialize the tables on load
+    window.onload = refreshAllTables;
 </script>
 
 </body>
