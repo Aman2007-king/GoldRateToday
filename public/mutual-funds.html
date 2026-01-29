@@ -9,9 +9,10 @@
         body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); margin: 0; color: var(--text); }
         
         /* Navigation Bar */
-        .nav-bar { background: #0c2461; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        .nav-bar a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; opacity: 0.8; }
+        .nav-bar { background: #0c2461; padding: 15px; display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-bar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 0.9rem; opacity: 0.8; }
         .nav-bar a:hover, .nav-bar a.active { opacity: 1; border-bottom: 2px solid #fff; }
+        .nav-open-btn { background: var(--success); color: white !important; padding: 8px 15px; border-radius: 5px; opacity: 1 !important; border: none !important; }
 
         /* Hero Section */
         .hero { background: linear-gradient(135deg, var(--brand), #0c2461); color: white; padding: 50px 20px; text-align: center; }
@@ -20,33 +21,33 @@
 
         .container { max-width: 1250px; margin: 30px auto; padding: 0 20px; }
         
-        /* FIXED: Title Visibility */
         .section-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .section-card h2 { color: var(--brand) !important; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f1f2f6; padding-bottom: 10px; }
 
-        /* 3-Column Layout */
         .mf-layout { display: grid; grid-template-columns: 260px 1fr; gap: 25px; }
         
-        /* Column 3: Filters Sidebar */
+        /* Sidebar Styles */
         .filter-sidebar { background: #fff; padding: 20px; border-radius: 12px; height: fit-content; position: sticky; top: 80px; border: 1px solid #eee; }
         .filter-group { margin-bottom: 20px; }
         .filter-group label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; color: var(--brand); text-transform: uppercase; }
         .filter-group select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; background: #fafafa; outline: none; }
 
-        /* Column 1 & 2: Main Content */
+        /* Partner Sidebar Card */
+        .partner-card { background: #f8f9fa; border: 1px dashed var(--brand); padding: 15px; border-radius: 8px; margin-top: 25px; text-align: center; }
+        .partner-card p { font-size: 0.8rem; margin-bottom: 10px; font-weight: bold; }
+
         .table-wrapper { overflow-x: auto; background: white; border-radius: 8px; }
         table { width: 100%; border-collapse: collapse; min-width: 850px; }
         th { text-align: left; padding: 15px; background: #f8f9fa; color: #747d8c; font-size: 0.75rem; text-transform: uppercase; }
         td { padding: 15px; border-bottom: 1px solid #f1f2f6; font-size: 0.95rem; }
 
-        /* Risk Badges */
         .risk-badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
         .risk-low { background: #def7ec; color: #03543f; }
         .risk-mod { background: #fef3c7; color: #92400e; }
         .risk-high { background: #fee2e2; color: #991b1b; }
         .risk-vhigh { background: #450a0a; color: #ffffff; }
 
-        .apply-btn { background: var(--brand); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.85rem; transition: 0.3s; }
+        .apply-btn { background: var(--brand); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.8rem; transition: 0.3s; }
         .apply-btn:hover { background: var(--accent); }
 
         @media (max-width: 992px) { .mf-layout { grid-template-columns: 1fr; } .filter-sidebar { position: static; } }
@@ -57,6 +58,7 @@
 <nav class="nav-bar">
     <a href="index.html">📈 IPO TRACKER</a>
     <a href="mutual-funds.html" class="active">📊 MUTUAL FUNDS</a>
+    <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" class="nav-open-btn">OPEN FREE DEMAT ACCOUNT</a>
 </nav>
 
 <header class="hero">
@@ -98,6 +100,11 @@
                         <option value="Very High">Very High Risk</option>
                     </select>
                 </div>
+
+                <div class="partner-card">
+                    <p>Start Investing with Angel One</p>
+                    <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" class="apply-btn" style="display:block; font-size:0.7rem;">GET STARTED FREE</a>
+                </div>
             </aside>
 
             <div class="table-wrapper">
@@ -112,10 +119,14 @@
                         </tr>
                     </thead>
                     <tbody id="mfBody">
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
+    </div>
+
+    <div style="font-size: 12px; color: #666; margin-top: 20px; line-height: 1.6; padding: 15px; background: #fff; border-radius: 8px;">
+        <strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks, read all scheme related documents carefully. Past performance is not an indicator of future returns. We provide these links for your convenience; we may earn a referral commission if you open an account through the provided Angel One link.
     </div>
 </div>
 
@@ -141,7 +152,6 @@
         }
     };
 
-    // Auto-Generate Data for 20 AMCs x All Sub-categories
     let mfData = [];
     amcs.forEach(amc => {
         Object.keys(categoryData).forEach(cat => {
@@ -172,7 +182,7 @@
                 <td>${i.scheme}<br><small style="color:#747d8c">${i.cat}</small></td>
                 <td><span class="risk-badge ${i.riskClass}">${i.risk}</span></td>
                 <td style="color:var(--success); font-weight:bold;">${i.ret}</td>
-                <td><a href="#" class="apply-btn">Invest</a></td>
+                <td><a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" class="apply-btn">Invest Now</a></td>
             </tr>
         `).join('');
     }
