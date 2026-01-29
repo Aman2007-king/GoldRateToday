@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Fund Explorer 2026 | India Wealth Hub</title>
+    <style>
+        :root { --brand: #1e3799; --accent: #eb2f06; --success: #38ada9; --bg: #f1f2f6; --whatsapp: #25D366; --text: #2f3542; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); margin: 0; color: var(--text); }
+        
+        /* Navigation Bar */
+        .nav-bar { background: #0c2461; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-bar a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; opacity: 0.8; }
+        .nav-bar a:hover, .nav-bar a.active { opacity: 1; border-bottom: 2px solid #fff; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, var(--brand), #0c2461); color: white; padding: 50px 20px; text-align: center; }
+        .search-wrapper { margin-top: 20px; }
+        #globalSearch { width: 90%; max-width: 600px; padding: 15px 25px; border-radius: 50px; border: none; outline: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); font-size: 1rem; }
+
+        .container { max-width: 1250px; margin: 30px auto; padding: 0 20px; }
+        
+        /* FIXED: Title Visibility */
+        .section-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .section-card h2 { color: var(--brand) !important; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f1f2f6; padding-bottom: 10px; }
+
+        /* 3-Column Layout */
+        .mf-layout { display: grid; grid-template-columns: 260px 1fr; gap: 25px; }
+        
+        /* Column 3: Filters Sidebar */
+        .filter-sidebar { background: #fff; padding: 20px; border-radius: 12px; height: fit-content; position: sticky; top: 80px; border: 1px solid #eee; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; color: var(--brand); text-transform: uppercase; }
+        .filter-group select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; background: #fafafa; outline: none; }
+
+        /* Column 1 & 2: Main Content */
+        .table-wrapper { overflow-x: auto; background: white; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; min-width: 850px; }
+        th { text-align: left; padding: 15px; background: #f8f9fa; color: #747d8c; font-size: 0.75rem; text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid #f1f2f6; font-size: 0.95rem; }
+
+        /* Risk Badges */
+        .risk-badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+        .risk-low { background: #def7ec; color: #03543f; }
+        .risk-mod { background: #fef3c7; color: #92400e; }
+        .risk-high { background: #fee2e2; color: #991b1b; }
+        .risk-vhigh { background: #450a0a; color: #ffffff; }
+
+        .apply-btn { background: var(--brand); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.85rem; transition: 0.3s; }
+        .apply-btn:hover { background: var(--accent); }
+
+        @media (max-width: 992px) { .mf-layout { grid-template-columns: 1fr; } .filter-sidebar { position: static; } }
+    </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+    <a href="index.html">📈 IPO TRACKER</a>
+    <a href="mutual-funds.html" class="active">📊 MUTUAL FUNDS</a>
+</nav>
+
+<header class="hero">
+    <h1>Mutual Fund Explorer 2026</h1>
+    <p>Discover & Filter across 400+ Top Performing Schemes</p>
+    <div class="search-wrapper">
+        <input type="text" id="globalSearch" placeholder="Search by Fund House or Asset Class..." onkeyup="filterMF()">
+    </div>
+</header>
+
+<div class="container">
+    <div class="section-card">
+        <h2>Explore Asset Classes</h2>
+        <div class="mf-layout">
+            
+            <aside class="filter-sidebar">
+                <div class="filter-group">
+                    <label>Fund House</label>
+                    <select id="amcFilter" onchange="filterMF()">
+                        <option value="all">All 20+ AMCs</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Asset Class</label>
+                    <select id="catFilter" onchange="filterMF()">
+                        <option value="all">All Categories</option>
+                        <option value="Equity">Equity</option>
+                        <option value="Debt">Debt</option>
+                        <option value="Hybrid">Hybrid</option>
+                        <option value="Solution Oriented">Solution Oriented</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Risk Rating</label>
+                    <select id="riskFilter" onchange="filterMF()">
+                        <option value="all">All Risk Levels</option>
+                        <option value="Low to Moderate">Low/Moderate</option>
+                        <option value="High">High Risk</option>
+                        <option value="Very High">Very High Risk</option>
+                    </select>
+                </div>
+            </aside>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fund House</th>
+                            <th>Asset Class / Scheme Name</th>
+                            <th>Risk Level</th>
+                            <th>Return (3Y)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mfBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const amcs = ["SBI Mutual Fund", "ICICI Prudential", "HDFC Mutual Fund", "Nippon India", "Kotak Mahindra", "Axis Mutual Fund", "UTI Mutual Fund", "Aditya Birla Sun Life", "Mirae Asset", "DSP Mutual Fund", "Tata Mutual Fund", "HSBC Mutual Fund", "Franklin Templeton", "Bandhan Mutual Fund", "Invesco India", "Motilal Oswal", "Canara Robeco", "PPFAS Mutual Fund", "Edelweiss Mutual Fund", "Quant Mutual Fund"];
+
+    const categoryData = {
+        "Equity": {
+            subs: ["Large Cap", "Mid Cap", "Small Cap", "Large & Mid Cap", "Multi Cap", "Flexi Cap", "Value", "Contra", "ELSS"],
+            risk: "Very High", returns: "21.4%", riskClass: "risk-vhigh"
+        },
+        "Debt": {
+            subs: ["Liquid", "Low Duration", "Short Duration", "Money Market", "Long Duration", "Dynamic Bond", "Corporate Bond", "Credit Risk"],
+            risk: "Low to Moderate", returns: "7.2%", riskClass: "risk-low"
+        },
+        "Hybrid": {
+            subs: ["Conservative Hybrid", "Balanced Hybrid", "Equity Saving", "Arbitrage", "Multi Asset Allocation"],
+            risk: "Moderate", returns: "12.8%", riskClass: "risk-mod"
+        },
+        "Solution Oriented": {
+            subs: ["Retirement Fund", "Childrens Fund"],
+            risk: "High", returns: "14.5%", riskClass: "risk-high"
+        }
+    };
+
+    // Auto-Generate Data for 20 AMCs x All Sub-categories
+    let mfData = [];
+    amcs.forEach(amc => {
+        Object.keys(categoryData).forEach(cat => {
+            categoryData[cat].subs.forEach(sub => {
+                mfData.push({
+                    amc: amc,
+                    scheme: `${amc} ${sub} Fund`,
+                    cat: cat,
+                    risk: categoryData[cat].risk,
+                    riskClass: categoryData[cat].riskClass,
+                    ret: categoryData[cat].returns
+                });
+            });
+        });
+    });
+
+    function init() {
+        const amcSel = document.getElementById('amcFilter');
+        amcs.forEach(a => amcSel.innerHTML += `<option value="${a}">${a}</option>`);
+        render(mfData);
+    }
+
+    function render(data) {
+        const body = document.getElementById('mfBody');
+        body.innerHTML = data.map(i => `
+            <tr>
+                <td><b>${i.amc}</b></td>
+                <td>${i.scheme}<br><small style="color:#747d8c">${i.cat}</small></td>
+                <td><span class="risk-badge ${i.riskClass}">${i.risk}</span></td>
+                <td style="color:var(--success); font-weight:bold;">${i.ret}</td>
+                <td><a href="#" class="apply-btn">Invest</a></td>
+            </tr>
+        `).join('');
+    }
+
+    function filterMF() {
+        const search = document.getElementById('globalSearch').value.toLowerCase();
+        const amc = document.getElementById('amcFilter').value;
+        const cat = document.getElementById('catFilter').value;
+        const risk = document.getElementById('riskFilter').value;
+
+        const filtered = mfData.filter(i => {
+            const mS = i.amc.toLowerCase().includes(search) || i.scheme.toLowerCase().includes(search);
+            const mA = amc === 'all' || i.amc === amc;
+            const mC = cat === 'all' || i.cat === cat;
+            const mR = risk === 'all' || i.risk.includes(risk);
+            return mS && mA && mC && mR;
+        });
+        render(filtered);
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>
