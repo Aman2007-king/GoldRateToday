@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculators 2026 | SIP, SWP, Lumpsum & More</title>
+    <style>
+        :root { --brand: #1e3799; --accent: #eb2f06; --success: #38ada9; --bg: #f4f7f6; --text: #2d3436; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        
+        .nav-bar { background: #0c2461; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-bar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        
+        /* Ad Spaces */
+        .ad-space { background: #dfe6e9; border: 1px dashed #b2bec3; margin: 20px 0; text-align: center; padding: 20px; color: #636e72; font-size: 0.8rem; }
+
+        /* Calculator Grid */
+        .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .calc-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .calc-card h3 { color: var(--brand); border-bottom: 2px solid var(--bg); padding-bottom: 10px; margin-top: 0; }
+        
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        .input-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+
+        .result-box { background: #e8f4f8; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center; }
+        .result-box span { display: block; font-size: 1.4rem; font-weight: 800; color: var(--brand); }
+
+        /* Content Section */
+        .long-content { background: white; padding: 40px; border-radius: 15px; margin-top: 30px; }
+        .long-content h2 { color: var(--brand); font-size: 2rem; }
+        .article-section { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+    <a href="index.html">📈 IPO</a>
+    <a href="mutual-funds.html">📊 MUTUAL FUNDS</a>
+    <a href="calculators.html" style="border-bottom: 2px solid white;">🧮 CALCULATORS</a>
+    <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" style="background:var(--success); padding: 5px 10px; border-radius: 4px;">OPEN DEMAT</a>
+</nav>
+
+<div class="container">
+    <div class="ad-space">-- Google AdSense Horizontal Header Ad --</div>
+
+    <h1 style="text-align:center; color: var(--brand);">Financial Planning Tools 2026</h1>
+    
+    <div class="calc-grid">
+        <div class="calc-card">
+            <h3>SIP Calculator</h3>
+            <div class="input-group">
+                <label>Monthly Investment (₹)</label>
+                <input type="number" id="sipAmount" value="5000" oninput="calcSIP()">
+            </div>
+            <div class="input-group">
+                <label>Expected Return (%)</label>
+                <input type="number" id="sipRate" value="12" oninput="calcSIP()">
+            </div>
+            <div class="input-group">
+                <label>Time Period (Years)</label>
+                <input type="number" id="sipYears" value="10" oninput="calcSIP()">
+            </div>
+            <div class="result-box">
+                Estimated Returns: <span id="sipResult">₹11,61,695</span>
+            </div>
+        </div>
+
+        <div class="calc-card">
+            <h3>Lumpsum Calculator</h3>
+            <div class="input-group">
+                <label>Total Investment (₹)</label>
+                <input type="number" id="lumpAmount" value="100000" oninput="calcLump()">
+            </div>
+            <div class="input-group">
+                <label>Expected Return (%)</label>
+                <input type="number" id="lumpRate" value="12" oninput="calcLump()">
+            </div>
+            <div class="input-group">
+                <label>Time Period (Years)</label>
+                <input type="number" id="lumpYears" value="10" oninput="calcLump()">
+            </div>
+            <div class="result-box">
+                Estimated Returns: <span id="lumpResult">₹3,10,585</span>
+            </div>
+        </div>
+
+        <div class="calc-card">
+            <h3>SWP Calculator</h3>
+            <div class="input-group">
+                <label>Total Corpus (₹)</label>
+                <input type="number" id="swpCorpus" value="1000000" oninput="calcSWP()">
+            </div>
+            <div class="input-group">
+                <label>Monthly Withdrawal (₹)</label>
+                <input type="number" id="swpWithdraw" value="10000" oninput="calcSWP()">
+            </div>
+            <div class="input-group">
+                <label>Period (Years)</label>
+                <input type="number" id="swpYears" value="10" oninput="calcSWP()">
+            </div>
+            <div class="result-box">
+                Final Balance: <span id="swpResult">₹11,61,695</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ad-space">-- In-Article Native Ad --</div>
+
+    <div class="long-content">
+        <section class="article-section">
+            <h2>The Power of Compound Interest in 2026</h2>
+            <p>Compound interest is often referred to as the eighth wonder of the world. When you invest in Mutual Funds via a SIP (Systematic Investment Plan), you aren't just earning interest on your principal; you are earning interest on your interest. In the volatile markets of 2026, understanding how your money grows over 10, 20, or 30 years is crucial for wealth creation...</p>
+            <p>(Add 200-300 more words here about history of compounding)</p>
+        </section>
+
+        <div class="ad-space">-- Mid-Content Rectangular Ad --</div>
+
+        <section class="article-section">
+            <h2>Why Use a SIP Calculator?</h2>
+            <p>Calculators remove the guesswork from financial planning. Without a SIP calculator, an investor might not realize that increasing their monthly investment by just ₹1,000 can result in an extra ₹15 Lakhs over 20 years. Our tool uses the standard formula $$A = P \times \frac{(1+i)^n - 1}{i} \times (1+i)$$ to give you precise results...</p>
+        </section>
+
+        <section class="article-section">
+            <h2>SWP: Creating a Pension from Mutual Funds</h2>
+            <p>Systematic Withdrawal Plans (SWP) are the best way to plan for retirement in India. Instead of keeping money in a low-interest savings account, you keep your corpus in a Hybrid or Debt fund and withdraw a fixed amount every month. This ensures your capital keeps growing while you enjoy a monthly salary...</p>
+        </section>
+
+        <div class="ad-space">-- Bottom Sticky or Video Ad --</div>
+    </div>
+</div>
+
+<script>
+    function calcSIP() {
+        let P = parseFloat(document.getElementById('sipAmount').value);
+        let r = parseFloat(document.getElementById('sipRate').value) / 12 / 100;
+        let n = parseFloat(document.getElementById('sipYears').value) * 12;
+        let total = P * (((Math.pow(1 + r, n)) - 1) / r) * (1 + r);
+        document.getElementById('sipResult').innerText = "₹" + Math.round(total).toLocaleString('en-IN');
+    }
+
+    function calcLump() {
+        let P = parseFloat(document.getElementById('lumpAmount').value);
+        let r = parseFloat(document.getElementById('lumpRate').value) / 100;
+        let n = parseFloat(document.getElementById('lumpYears').value);
+        let total = P * Math.pow(1 + r, n);
+        document.getElementById('lumpResult').innerText = "₹" + Math.round(total).toLocaleString('en-IN');
+    }
+
+    function calcSWP() {
+        // Simple SWP logic for display
+        let P = parseFloat(document.getElementById('swpCorpus').value);
+        let w = parseFloat(document.getElementById('swpWithdraw').value);
+        let r = parseFloat(document.getElementById('swpRate')?.value || 12) / 12 / 100;
+        let n = parseFloat(document.getElementById('swpYears').value) * 12;
+        let balance = P * Math.pow(1 + r, n) - w * ((Math.pow(1 + r, n) - 1) / r);
+        document.getElementById('swpResult').innerText = "₹" + Math.round(Math.max(0, balance)).toLocaleString('en-IN');
+    }
+</script>
+
+</body>
+</html>
