@@ -33,6 +33,11 @@ app.get('/ipo', (req, res) => {
 app.get('/calculators', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'calculators.html'));
 });
+// Banking & Loans Route
+app.get('/banking', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'banking.html'));
+});
+
 // --- API: Get data for all assets ---
 app.get('/api/market-data', async (req, res) => {
     const cached = myCache.get("market_data");
@@ -66,3 +71,4 @@ app.listen(PORT, () => console.log(`Site live on port ${PORT}`));
 
 
                                                            
+
