@@ -50,37 +50,43 @@ const myCache = new NodeCache({ stdTTL: 86400 });
 
 app.get('/api/bullion-prices', async (req, res) => {
     const cacheKey = "daily_gold_price";
-    
-    // 1. Check if we already have the price saved
     const cachedData = myCache.get(cacheKey);
     
     if (cachedData) {
-        console.log("Serving from Cache - API not called");
         return res.json(cachedData);
     }
 
-    // 2. If no cache, call the actual API
     try {
-        console.log("Cache expired or empty. Calling External API...");
-        const response = await fetch('https://www.goldapi.io/api/XAU/INR', {
-            headers: { "x-access-token": "YOUR_API_KEY" }
+        const response = await axios.get('https://www.goldapi.io/api/XAU/INR', {
+            headers: { 'x-access-token': process.env.GOLD_API_KEY }
         });
-        const apiData = await response.json();
 
-        // Format the data as you currently do
-        const formattedData = {
-            gold24k: apiData.price_gram_24k * 10,
-            silver: 85000, // Example static or from other API
-            lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            cityPremium: { mumbai: 0, delhi: 150, chennai: 450 }
-        };
+        // SAFETY CHECK: Only cache if the price is a real number greater than 0
+        if (response.data && response.data.price_gram_24k > 0) {
+            const formattedData = {
+                gold24k: Math.round(response.data.price_gram_24k * 10).toLocaleString('en-IN'),
+                silver: "85,000", // You can update this to a live silver call too
+                lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                cityPremium: { mumbai: 0, delhi: 150, chennai: 450 },
+                rawGold: response.data.price_gram_24k * 10 // For calculator
+            };
 
-        // 3. Save this result in the cache for the next 24 hours
-        myCache.set(cacheKey, formattedData);
+            myCache.set(cacheKey, formattedData);
+            return res.json(formattedData);
+        } else {
+            throw new Error("Invalid price from API");
+        }
 
-        res.json(formattedData);
     } catch (error) {
-        res.status(500).json({ error: "Failed to fetch data" });
+        console.error("API Error:", error.message);
+        // BACKUP: Send a default price so the user doesn't see 0
+        res.json({
+            gold24k: "72,000", 
+            silver: "85,000",
+            lastUpdated: "Service Temporary Unavailable",
+            cityPremium: { mumbai: 0, delhi: 150, chennai: 450 },
+            rawGold: 72000
+        });
     }
 });
 // You must listen on '0.0.0.0' for Render to detect the port
@@ -94,6 +100,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
