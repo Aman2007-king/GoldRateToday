@@ -42,35 +42,38 @@ app.get('/bullion', (req, res) => {
 });
 
 // --- API: Get data for all assets ---
+// Ensure 'async' is present here ⬇️
 app.get('/api/bullion-prices', async (req, res) => {
-    // Check cache first
-    const cached = myCache.get("market_data");
-    if (cached) return res.json(cached);
-
     try {
         const apiKey = process.env.GOLD_API_KEY;
-        if (!apiKey) throw new Error("API Key is missing in Render Settings");
+        
+        // If API Key is missing, send fallback so frontend doesn't show 0
+        if (!apiKey) {
+            return res.json({
+                lastUpdated: "API Key Missing",
+                gold24k: 71000, gold22k: 65000, gold18k: 53000, silver: 82000
+            });
+        }
 
-        const [gold, silver] = await Promise.all([
-            axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} }),
-            axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} })
-        ]);
+        // Fetching data from GoldAPI
+        const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { 
+            headers: {'x-access-token': apiKey} 
+        });
+        const silver = await axios.get('https://www.goldapi.io/api/XAG/INR', { 
+            headers: {'x-access-token': apiKey} 
+        });
 
-        // This structure matches your bullion.html perfectly
-        const responseData = {
+        res.json({
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
             gold24k: (gold.data.price_gram_24k * 10).toFixed(0),
             gold22k: (gold.data.price_gram_22k * 10).toFixed(0),
             gold18k: (gold.data.price_gram_18k * 10).toFixed(0),
             silver: (silver.data.price_gram * 1000).toFixed(0),
             cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
-        };
-
-        myCache.set("market_data", responseData);
-        res.json(responseData);
+        });
     } catch (e) {
-        console.error("Server API Error:", e.message);
-        res.status(500).json({ error: "Failed to fetch live rates" });
+        console.error("Fetch Error:", e.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
@@ -104,6 +107,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
