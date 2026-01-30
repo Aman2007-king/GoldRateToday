@@ -73,7 +73,6 @@ app.get('/api/bullion-prices', async (req, res) => {
         res.status(500).json({ error: "Failed to fetch live rates" });
     }
 });
-        }
 
         const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
         const silver = await axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} });
@@ -105,6 +104,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
