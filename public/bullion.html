@@ -123,39 +123,30 @@
     fetch('/api/bullion-prices')
         .then(res => res.json())
         .then(data => {
-            console.log("Raw data received:", data);
+            // 1. Display the data exactly as it comes from the server
+            // If data.gold24k is "71,017", it will show "₹71,017"
+            document.getElementById('gold24').innerText = "₹" + (data.gold24k || "0");
+            document.getElementById('silverKg').innerText = "₹" + (data.silver || "0");
+            document.getElementById('time').innerText = data.lastUpdated || "Just Now";
 
-            // 1. Update display cards (Commas are okay here)
-            document.getElementById('time').innerText = data.lastUpdated;
-            document.getElementById('gold24').innerText = "₹" + data.gold24k;
-            document.getElementById('silverKg').innerText = "₹" + data.silver;
+            // 2. Prepare numbers for the calculator
+            // We remove commas ONLY for the math variables
+            let rawGold = data.gold24k ? data.gold24k.toString().replace(/,/g, '') : 0;
+            let rawSilver = data.silver ? data.silver.toString().replace(/,/g, '') : 0;
 
-            // 2. THE FIX: Strip EVERYTHING except numbers and decimals
-            // This turns "₹71,017.50" into "71017.50"
-            const cleanGold = parseFloat(data.gold24k.toString().replace(/[^0-9.]/g, ''));
-            const cleanSilver = parseFloat(data.silver.toString().replace(/[^0-9.]/g, ''));
-
-            // 3. Update the global rates object
-            if (!isNaN(cleanGold)) {
-                rates.k24 = cleanGold / 10;
-                rates.k22 = (cleanGold * 0.916) / 10;
-                rates.k18 = (cleanGold * 0.75) / 10;
-            }
+            rates.k24 = parseFloat(rawGold) / 10;
+            rates.k22 = (rates.k24 * 0.916); // Standard 22K math
+            rates.k18 = (rates.k24 * 0.75);  // Standard 18K math
+            rates.silverKg = parseFloat(rawSilver);
             
-            if (!isNaN(cleanSilver)) {
-                rates.silverKg = cleanSilver;
-            }
-
             cityOffsets = data.cityPremium || {};
 
-            console.log("Cleaned rates for calculator:", rates);
-
-            // 4. Trigger the calculator to remove the "Syncing..." message
+            // 3. Run the calculator
             calculate();
         })
         .catch(err => {
-            console.error("Fetch error:", err);
-            document.getElementById('totalPrice').innerText = "Offline - Check Connection";
+            console.error("API Connection Error:", err);
+            document.getElementById('totalPrice').innerText = "Server Connection Error";
         });
 }
 </script>
