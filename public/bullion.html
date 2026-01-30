@@ -124,40 +124,49 @@
 </div>
 
 <script>
-    // These will hold your morning prices globally
     let rates = { k24: 0, k22: 0, k18: 0 };
+    let cityOffsets = {};
 
     function updateMorningRates() {
+        // This fetches the rates you updated in prices.json this morning
         fetch('/api/bullion-prices')
             .then(res => res.json())
             .then(data => {
-                // Update Main Display IDs (Make sure these IDs match your HTML cards)
-                document.getElementById('gold24').innerText = "₹" + data.gold24k;
-                document.getElementById('silverKg').innerText = "₹" + data.silver;
-                document.getElementById('time').innerText = data.lastUpdated;
+                // Update the visual price display on your page
+                if(document.getElementById('gold24')) document.getElementById('gold24').innerText = "₹" + data.gold24k;
+                if(document.getElementById('silverKg')) document.getElementById('silverKg').innerText = "₹" + data.silver;
+                if(document.getElementById('time')) document.getElementById('time').innerText = data.lastUpdated;
 
-                // Store rates for the Calculator (convert strings to numbers)
+                // Prepare rates for calculator (removes commas and divides 10g price into 1g)
                 rates.k24 = parseFloat(data.gold24k.replace(/,/g, '')) / 10;
                 rates.k22 = parseFloat(data.gold22k.replace(/,/g, '')) / 10;
                 rates.k18 = parseFloat(data.gold18k.replace(/,/g, '')) / 10;
+                
+                // Store the city-wise price differences
+                cityOffsets = data.cityPremium || {};
             });
     }
 
     function calculate() {
         const grams = document.getElementById('grams').value || 0;
-        const selectedPurity = document.getElementById('purity').value;
+        const purity = document.getElementById('purity').value;
+        const city = document.getElementById('citySelect').value;
         
-        let pricePerGram = 0;
-        if(selectedPurity == "24") pricePerGram = rates.k24;
-        else if(selectedPurity == "22") pricePerGram = rates.k22;
-        else if(selectedPurity == "18") pricePerGram = rates.k18;
+        // Premium for the city (per gram)
+        const cityOffsetPerGram = (cityOffsets[city] || 0) / 10;
 
-        const total = pricePerGram * grams;
+        let baseRate = 0;
+        if(purity == "24") baseRate = rates.k24;
+        else if(purity == "22") baseRate = rates.k22;
+        else if(purity == "18") baseRate = rates.k18;
+
+        // Math: (Rate + City Premium) * Weight
+        const total = (baseRate + cityOffsetPerGram) * grams;
+        
         document.getElementById('totalPrice').innerText = "Total: ₹" + Math.round(total).toLocaleString('en-IN');
+        document.getElementById('cityNote').innerText = "*Price adjusted for " + city.charAt(0).toUpperCase() + city.slice(1) + " local market.";
     }
 
-    // This ensures the prices load as soon as the user opens the page
     window.onload = updateMorningRates;
 </script>
-</body>
 </html>
