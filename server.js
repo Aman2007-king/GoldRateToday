@@ -45,36 +45,43 @@ app.get('/bullion', (req, res) => {
 // Ensure 'async' is present here ⬇️
 
 // Use Render's port or default to 3000 for local testing
+const NodeCache = require("node-cache");
+// stdTTL is the "Time to Live" in seconds. 86400 seconds = 24 hours.
+const myCache = new NodeCache({ stdTTL: 86400 }); 
+
 app.get('/api/bullion-prices', async (req, res) => {
+    const cacheKey = "daily_gold_price";
+    
+    // 1. Check if we already have the price saved
+    const cachedData = myCache.get(cacheKey);
+    
+    if (cachedData) {
+        console.log("Serving from Cache - API not called");
+        return res.json(cachedData);
+    }
+
+    // 2. If no cache, call the actual API
     try {
-        const apiKey = process.env.GOLD_API_KEY;
-        
-        const [goldRes, silverRes] = await Promise.all([
-            axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} }),
-            axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} })
-        ]);
+        console.log("Cache expired or empty. Calling External API...");
+        const response = await fetch('https://www.goldapi.io/api/XAU/INR', {
+            headers: { "x-access-token": "YOUR_API_KEY" }
+        });
+        const apiData = await response.json();
 
-        // SAFETY: Check if the silver price exists in any common format
-        const rawSilverGram = silverRes.data.price_gram || (silverRes.data.price / 31.1035) || 82; 
-        const silverPriceKg = Math.round(rawSilverGram * 1000);
-
-        const pricePerGram24k = goldRes.data.price_gram_24k || (goldRes.data.price / 31.1035);
-
-        const responseData = {
+        // Format the data as you currently do
+        const formattedData = {
+            gold24k: apiData.price_gram_24k * 10,
+            silver: 85000, // Example static or from other API
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            // Format for Display
-            gold24k: Math.round(pricePerGram24k * 10).toLocaleString('en-IN'),
-            silver: silverPriceKg.toLocaleString('en-IN'),
-            // Raw numbers for Calculator (No Commas)
-            rawGold24: pricePerGram24k * 10,
-            rawSilver: silverPriceKg,
-            cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
+            cityPremium: { mumbai: 0, delhi: 150, chennai: 450 }
         };
 
-        res.json(responseData);
-    } catch (e) {
-        console.error("API Error:", e.message);
-        res.status(500).json({ error: "API connection failed" });
+        // 3. Save this result in the cache for the next 24 hours
+        myCache.set(cacheKey, formattedData);
+
+        res.json(formattedData);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch data" });
     }
 });
 // You must listen on '0.0.0.0' for Render to detect the port
@@ -88,6 +95,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
