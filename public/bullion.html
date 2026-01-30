@@ -119,59 +119,26 @@
     let cityOffsets = {};
     let myChart = null;
 
-    function updateMorningRates() {
-        // IMPORTANT: Must match the route in your server.js
-        fetch('/api/bullion-prices')
-            .then(res => res.json())
-            .then(data => {
-                // 1. Update Header
-                document.getElementById('time').innerText = data.lastUpdated;
-                document.getElementById('gold24').innerText = "₹" + data.gold24k;
-                document.getElementById('silverKg').innerText = "₹" + data.silver;
+   function updateMorningRates() {
+    fetch('/api/bullion-prices')
+        .then(res => res.json())
+        .then(data => {
+            // Update the display text
+            document.getElementById('time').innerText = data.lastUpdated;
+            document.getElementById('gold24').innerText = "₹" + data.gold24k.toLocaleString('en-IN');
+            document.getElementById('silverKg').innerText = "₹" + data.silver.toLocaleString('en-IN');
 
-                // 2. Process math for calculator
-                const g24 = parseFloat(data.gold24k.replace(/,/g, ''));
-                const g22 = parseFloat(data.gold22k.replace(/,/g, ''));
-                const g18 = parseFloat(data.gold18k.replace(/,/g, ''));
-                
-                rates.k24 = g24 / 10;
-                rates.k22 = g22 / 10;
-                rates.k18 = g18 / 10;
-                cityOffsets = data.cityPremium || {};
+            // Update the calculator variables (price per 1 gram)
+            rates.k24 = data.gold24k / 10;
+            rates.k22 = data.gold22k / 10;
+            rates.k18 = data.gold18k / 10;
+            cityOffsets = data.cityPremium;
 
-                // 3. Fill Table
-                document.getElementById('purityRows').innerHTML = `
-                    <tr><td><b>24K Gold</b></td><td>₹${Math.round(rates.k24).toLocaleString('en-IN')}</td><td>₹${g24.toLocaleString('en-IN')}</td></tr>
-                    <tr><td><b>22K Gold</b></td><td>₹${Math.round(rates.k22).toLocaleString('en-IN')}</td><td>₹${g22.toLocaleString('en-IN')}</td></tr>
-                    <tr><td><b>18K Gold</b></td><td>₹${Math.round(rates.k18).toLocaleString('en-IN')}</td><td>₹${g18.toLocaleString('en-IN')}</td></tr>
-                `;
-
-                // 4. Initialize Chart
-                const ctx = document.getElementById('trendChart').getContext('2d');
-                if (myChart) myChart.destroy();
-                
-                myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: data.history.labels,
-                        datasets: [{
-                            label: 'Gold Price (24K)',
-                            data: data.history.gold,
-                            borderColor: '#d4af37',
-                            backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false }
-                });
-                
-                document.getElementById('cityNote').innerText = "*Showing Mumbai base rates";
-            })
-            .catch(err => {
-    console.error("Data fetch failed:", err);
-    alert("Fetch Error: " + err.message + ". Check if /api/bullion-prices exists on your server.");
-});
+            // Trigger the calculator so the 0 disappears immediately
+            calculate();
+        })
+        .catch(err => console.error("Could not load real-time rates:", err));
+}
 
    function calculate() {
     const gramsInput = document.getElementById('grams');
