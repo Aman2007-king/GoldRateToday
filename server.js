@@ -42,7 +42,7 @@ app.get('/bullion', (req, res) => {
 });
 
 // --- API: Get data for all assets ---
-app.get('/api/bullion-prices', (req, res) => {
+app.get('/api/bullion-prices', async (req, res) => {
     const cached = myCache.get("market_data");
     if (cached) return res.json(cached);
 
@@ -80,6 +80,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
