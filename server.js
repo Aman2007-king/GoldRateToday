@@ -66,7 +66,13 @@ app.get('/api/bullion-prices', (req, res) => {
     } catch (e) { res.status(500).send("API Error"); }
 });
 
-app.listen(PORT, () => console.log(`Site live on port ${PORT}`));
+// Use Render's port or default to 3000 for local testing
+const PORT = process.env.PORT || 3000;
+
+// You must listen on '0.0.0.0' for Render to detect the port
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`==> Server is hooked up and listening on port ${PORT}`);
+});
 
 
 
@@ -74,6 +80,7 @@ app.listen(PORT, () => console.log(`Site live on port ${PORT}`));
 
 
                                                            
+
 
 
 
