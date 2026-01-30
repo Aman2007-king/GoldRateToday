@@ -85,7 +85,7 @@ app.get('/api/bullion-prices', async (req, res) => {
             silver: (silver.data.price_gram * 1000).toFixed(0),
             cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
         });
-    } catch (e) {
+     catch (e) {
         res.status(500).json({ error: "API connection failed" });
     }
 });
@@ -104,6 +104,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
