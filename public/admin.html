@@ -5,20 +5,25 @@
     <title>Price Admin Panel</title>
     <style>
         body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f4f4; }
-        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input { display: block; width: 100%; margin: 10px 0; padding: 10px; font-size: 1.1em; }
-        button { background: #d4af37; color: white; border: none; padding: 10px 20px; cursor: pointer; width: 100%; font-weight: bold; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; }
+        input { display: block; width: 100%; margin: 10px 0; padding: 10px; font-size: 1em; box-sizing: border-box; }
+        button { background: #d4af37; color: white; border: none; padding: 10px 20px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Update Daily Rates</h2>
+        <h2>Update Rates</h2>
         <form action="/api/update-rates" method="POST">
-            <label>Gold Rate (10g 24K):</label>
-            <input type="number" name="gold" placeholder="e.g. 169200" required>
+            <label>Admin Password:</label>
+            <input type="password" name="password" required>
+            
+            <hr>
+
+            <label>Gold Rate (10g):</label>
+            <input type="number" name="gold" placeholder="169200" required>
             
             <label>Silver Rate (1kg):</label>
-            <input type="number" name="silver" placeholder="e.g. 95000" required>
+            <input type="number" name="silver" placeholder="95000" required>
             
             <button type="submit">Update Website</button>
         </form>
