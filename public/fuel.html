@@ -1,21 +1,80 @@
-<div class="card">
-    <h2>Petrol & Diesel Prices in Major Cities</h2>
-    <input type="text" id="fuelSearch" placeholder="Search your city..." onkeyup="searchFuel()" style="margin-bottom:15px; padding:10px; width:100%;">
-    <table id="fuelTable">
-        <tr style="background:#2c3e50; color:white;">
-            <th>City</th>
-            <th>Petrol (1L)</th>
-            <th>Diesel (1L)</th>
-        </tr>
-        <tr><td>Mumbai</td><td>₹106.31</td><td>₹94.27</td></tr>
-        <tr><td>Delhi</td><td>₹96.72</td><td>₹89.62</td></tr>
-        <tr><td>Bangalore</td><td>₹101.94</td><td>₹87.89</td></tr>
-        <tr><td>Chennai</td><td>₹102.63</td><td>₹94.24</td></tr>
-        <tr><td>Hyderabad</td><td>₹109.66</td><td>₹97.82</td></tr>
-    </table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Prices India 2026 | Petrol & Diesel Rates</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        h2 { color: #1e222d; margin-top: 0; }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 20px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; background: #1e222d; padding: 10px; border-radius: 5px; }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: #f1c40f; transition: 0.3s; border-radius: 2px; }
+        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: #1e222d; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -2px 0 10px rgba(0,0,0,0.5); }
+        .sidebar-nav-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
+        .sidebar-nav-links a:hover { color: #1e222d; background: #f1c40f; }
+        .sidebar-nav .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="sidebar-nav" class="sidebar-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-nav-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Petrol & Diesel Prices in Major Cities</h2>
+        <input type="text" id="fuelSearch" placeholder="Search your city..." onkeyup="searchFuel()" style="margin-bottom:15px; padding:10px; width:100%; box-sizing: border-box; border: 1px solid #ddd; border-radius: 4px;">
+        <table id="fuelTable">
+            <tr style="background:#2c3e50; color:white;">
+                <th>City</th>
+                <th>Petrol (1L)</th>
+                <th>Diesel (1L)</th>
+            </tr>
+            <tr><td>Mumbai</td><td>₹106.31</td><td>₹94.27</td></tr>
+            <tr><td>Delhi</td><td>₹96.72</td><td>₹89.62</td></tr>
+            <tr><td>Bangalore</td><td>₹101.94</td><td>₹87.89</td></tr>
+            <tr><td>Chennai</td><td>₹102.63</td><td>₹94.24</td></tr>
+            <tr><td>Hyderabad</td><td>₹109.66</td><td>₹97.82</td></tr>
+        </table>
+    </div>
 </div>
 
 <script>
+/* --- ADDED SIDEBAR JS --- */
+function toggleSidebar() {
+    const sb = document.getElementById("sidebar-nav");
+    sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+}
+
+/* YOUR ORIGINAL SCRIPT */
 function searchFuel() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("fuelSearch");
@@ -31,3 +90,6 @@ function searchFuel() {
     }
 }
 </script>
+
+</body>
+</html>
