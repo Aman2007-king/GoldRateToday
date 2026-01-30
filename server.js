@@ -43,36 +43,38 @@ app.get('/bullion', (req, res) => {
 
 // --- API: Get data for all assets ---
 app.get('/api/bullion-prices', async (req, res) => {
-    const cached = myCache.get("market_data");
-    if (cached) return res.json(cached);
-
     try {
         const apiKey = process.env.GOLD_API_KEY;
+        
+        // If API Key is missing, don't crash, use fallback
+        if (!apiKey) {
+            console.log("No API Key found, using fallback data");
+            return res.json({
+                lastUpdated: "30 Jan 2026, 09:30 PM",
+                gold24k: 71017,
+                gold22k: 65050,
+                gold18k: 53260,
+                silver: 82000,
+                cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500 }
+            });
+        }
+
         const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
         const silver = await axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} });
 
-        // We format this to match what bullion.html expects
-        const data = {
+        res.json({
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            gold24k: gold.data.price_gram_24k * 10, // 10 grams
-            gold22k: gold.data.price_gram_22k * 10, // 10 grams
-            gold18k: gold.data.price_gram_18k * 10, // 10 grams
-            silver: (silver.data.price_gram * 1000).toFixed(0), // 1 KG
-            cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 },
-            history: {
-                labels: ["24 Jan", "25 Jan", "26 Jan", "27 Jan", "28 Jan", "29 Jan", "30 Jan"],
-                gold: [164000, 165000, 166000, 167000, 168000, 169000, gold.data.price_gram_24k * 10]
-            }
-        };
-
-        myCache.set("market_data", data);
-        res.json(data);
-    } catch (e) { 
-        console.error("API Error:", e.message);
-        res.status(500).send("API Error"); 
+            gold24k: (gold.data.price_gram_24k * 10).toFixed(0),
+            gold22k: (gold.data.price_gram_24k * 0.916 * 10).toFixed(0),
+            gold18k: (gold.data.price_gram_24k * 0.75 * 10).toFixed(0),
+            silver: (silver.data.price_gram * 1000).toFixed(0),
+            cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
+        });
+    } catch (e) {
+        res.status(500).json({ error: "API connection failed" });
     }
 });
-
+       
 // Use Render's port or default to 3000 for local testing
 
 
@@ -87,6 +89,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
