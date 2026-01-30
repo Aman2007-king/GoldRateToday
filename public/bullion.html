@@ -131,30 +131,43 @@
     </div>
 </div>
 
+<div class="section-card">
+    <h3>7-Day Gold Price Trend (24K)</h3>
+    <div style="height: 300px; width: 100%;">
+        <canvas id="trendChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-    // Global variables to store rates for the calculator
+    // 1. Initialize global variables with safe defaults
     let rates = { k24: 0, k22: 0, k18: 0 };
     let cityOffsets = {};
+    let myChart = null; // Store chart instance to prevent duplicates
 
     function updateMorningRates() {
         fetch('/api/bullion-prices')
             .then(res => res.json())
             .then(data => {
-                // 1. UPDATE TEXT DISPLAYS (Cards & Tables)
+                // Update UI Text
                 if(document.getElementById('gold24')) document.getElementById('gold24').innerText = "₹" + data.gold24k;
                 if(document.getElementById('silverKg')) document.getElementById('silverKg').innerText = "₹" + data.silver;
                 if(document.getElementById('time')) document.getElementById('time').innerText = data.lastUpdated;
 
-                // 2. PREPARE CALCULATOR DATA
+                // Prepare Calculator Data (Convert "1,52,490" string to number)
                 rates.k24 = parseFloat(data.gold24k.replace(/,/g, '')) / 10;
                 rates.k22 = parseFloat(data.gold22k.replace(/,/g, '')) / 10;
                 rates.k18 = parseFloat(data.gold18k.replace(/,/g, '')) / 10;
                 cityOffsets = data.cityPremium || {};
 
-                // 3. --- CHART LOGIC START ---
-                // This draws the 7-day trend using data from your prices.json
+                // --- CHART LOGIC ---
                 const ctx = document.getElementById('trendChart').getContext('2d');
-                new Chart(ctx, {
+                
+                // Destroy old chart if it exists (prevents memory leaks/flicker)
+                if (myChart) { myChart.destroy(); }
+
+                myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: data.history.labels,
@@ -174,32 +187,40 @@
                         scales: {
                             y: { 
                                 beginAtZero: false,
-                                ticks: { callback: value => '₹' + value.toLocaleString() }
+                                ticks: { callback: value => '₹' + value.toLocaleString('en-IN') }
                             }
                         }
                     }
                 });
-                // --- CHART LOGIC END ---
-            });
+            })
+            .catch(err => console.error("Could not load price data:", err));
     }
 
-    // This function handles the math for the calculator
     function calculate() {
-        const grams = document.getElementById('grams').value || 0;
+        const grams = parseFloat(document.getElementById('grams').value) || 0;
         const purity = document.getElementById('purity').value;
         const city = document.getElementById('citySelect').value;
+        
+        // Get city premium (divide by 10 to get per gram)
         const cityOffsetPerGram = (cityOffsets[city] || 0) / 10;
 
         let baseRate = 0;
-        if(purity == "24") baseRate = rates.k24;
-        else if(purity == "22") baseRate = rates.k22;
-        else if(purity == "18") baseRate = rates.k18;
+        if(purity === "24") baseRate = rates.k24;
+        else if(purity === "22") baseRate = rates.k22;
+        else if(purity === "18") baseRate = rates.k18;
+
+        // If data hasn't loaded yet, don't show ₹0
+        if (baseRate === 0) return;
 
         const total = (baseRate + cityOffsetPerGram) * grams;
         document.getElementById('totalPrice').innerText = "Total: ₹" + Math.round(total).toLocaleString('en-IN');
+        
+        // Update the tiny note at the bottom
+        document.getElementById('cityNote').innerText = "*Rate includes local premium for " + city.charAt(0).toUpperCase() + city.slice(1);
     }
 
-    // Runs everything when the page opens
+    // Run on load
     window.onload = updateMorningRates;
 </script>
+         
 </html>
