@@ -37,6 +37,9 @@ app.get('/calculators', (req, res) => {
 app.get('/banking', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'banking.html'));
 });
+app.get('/bullion', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'bullion.html'));
+});
 
 // --- API: Get data for all assets ---
 app.get('/api/market-data', async (req, res) => {
@@ -71,4 +74,5 @@ app.listen(PORT, () => console.log(`Site live on port ${PORT}`));
 
 
                                                            
+
 
