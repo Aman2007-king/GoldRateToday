@@ -4,11 +4,10 @@
   "gold18k": "1,27,970",
   "silver": "4,01,760",
   "lastUpdated": "30 Jan 2026, 09:30 AM",
-  "cityPremium": {
-    "mumbai": 0,
-    "delhi": 150,
-    "chennai": 500,
-    "kolkata": -220,
-    "bangalore": 140
+  "cityPremium": { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 },
+  "history": {
+    "labels": ["24 Jan", "25 Jan", "26 Jan", "27 Jan", "28 Jan", "29 Jan", "30 Jan"],
+    "gold": [147180, 147170, 148730, 148720, 164230, 164240, 170170],
+    "silver": [310000, 312000, 315000, 318000, 340000, 377000, 401760]
   }
 }
