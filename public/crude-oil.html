@@ -23,9 +23,40 @@
         .feature-link:hover { color: #f1c40f; padding-left: 5px; transition: 0.2s; }
 
         @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 60px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: #1e222d; transition: 0.3s; border-radius: 2px; }
+        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: #1e222d; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -2px 0 10px rgba(0,0,0,0.5); }
+        .sidebar-nav-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
+        .sidebar-nav-links a:hover { color: #fff; background: #f1c40f; color: #1e222d; }
+        .sidebar-nav .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
     </style>
 </head>
 <body>
+
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="sidebar-nav" class="sidebar-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-nav-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
 
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
@@ -86,6 +117,14 @@
         <a href="/" class="feature-link">🟡 Gold Rates Today</a>
     </aside>
 </div>
+
+<script>
+    /* --- ADDED SIDEBAR JS --- */
+    function toggleSidebar() {
+        const sb = document.getElementById("sidebar-nav");
+        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+    }
+</script>
 
 </body>
 </html>
