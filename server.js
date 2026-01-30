@@ -74,8 +74,8 @@ app.get('/api/bullion-prices', async (req, res) => {
     }
 });
 
-        const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
-        const silver = await axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} });
+        const gold = axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
+        const silver = axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} });
 
         res.json({
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
@@ -104,6 +104,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
