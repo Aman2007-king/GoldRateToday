@@ -85,11 +85,23 @@
         </table>
     </div>
 
+   <div class="container">
     <div class="calc-wrap">
-        <h3>Quick Gold Value Calculator</h3>
-        <p>Enter weight in grams (22K Gold):</p>
-        <input type="number" id="grams" class="calc-input" placeholder="e.g. 5" oninput="calculate()">
-        <h2 id="totalPrice" style="margin-top:20px; color: var(--gold);">Total: ₹0</h2>
+        <h3>Live Gold Value Calculator</h3>
+        <p>Select Purity:</p>
+        <select id="purity" class="calc-input" onchange="calculate()">
+            <option value="24">24K Gold (99.9% Pure)</option>
+            <option value="22" selected>22K Gold (Standard Jewellery)</option>
+            <option value="18">18K Gold (Diamond Jewellery)</option>
+        </select>
+        
+        <p style="margin-top:15px;">Enter Weight (Grams):</p>
+        <input type="number" id="grams" class="calc-input" placeholder="e.g. 10" oninput="calculate()">
+        
+        <h2 id="totalPrice" style="margin-top:20px; color: #d4af37;">Total: ₹0</h2>
+        <p style="font-size: 0.8rem; opacity: 0.8;">*Prices exclude 3% GST and Making Charges.</p>
+    </div>
+
     </div>
 
     <div class="ad-space">-- Bottom Ad --</div>
@@ -101,17 +113,40 @@
 </div>
 
 <script>
-    // Set Current Time
-    document.getElementById('time').innerText = new Date().toLocaleString();
+    // These will hold your morning prices globally
+    let rates = { k24: 0, k22: 0, k18: 0 };
 
-    // Calculation Logic
-    function calculate() {
-        const ratePerGram = 13979; // Current 22K rate
-        const grams = document.getElementById('grams').value;
-        const total = ratePerGram * grams;
-        document.getElementById('totalPrice').innerText = "Total: ₹" + total.toLocaleString('en-IN');
+    function updateMorningRates() {
+        fetch('/api/bullion-prices')
+            .then(res => res.json())
+            .then(data => {
+                // Update Main Display IDs (Make sure these IDs match your HTML cards)
+                document.getElementById('gold24').innerText = "₹" + data.gold24k;
+                document.getElementById('silverKg').innerText = "₹" + data.silver;
+                document.getElementById('time').innerText = data.lastUpdated;
+
+                // Store rates for the Calculator (convert strings to numbers)
+                rates.k24 = parseFloat(data.gold24k.replace(/,/g, '')) / 10;
+                rates.k22 = parseFloat(data.gold22k.replace(/,/g, '')) / 10;
+                rates.k18 = parseFloat(data.gold18k.replace(/,/g, '')) / 10;
+            });
     }
-</script>
 
+    function calculate() {
+        const grams = document.getElementById('grams').value || 0;
+        const selectedPurity = document.getElementById('purity').value;
+        
+        let pricePerGram = 0;
+        if(selectedPurity == "24") pricePerGram = rates.k24;
+        else if(selectedPurity == "22") pricePerGram = rates.k22;
+        else if(selectedPurity == "18") pricePerGram = rates.k18;
+
+        const total = pricePerGram * grams;
+        document.getElementById('totalPrice').innerText = "Total: ₹" + Math.round(total).toLocaleString('en-IN');
+    }
+
+    // This ensures the prices load as soon as the user opens the page
+    window.onload = updateMorningRates;
+</script>
 </body>
 </html>
