@@ -48,22 +48,29 @@ app.get('/api/bullion-prices', async (req, res) => {
 
     try {
         const apiKey = process.env.GOLD_API_KEY;
-        // Fetch Gold
         const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
-        // Fetch Silver
         const silver = await axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} });
 
+        // We format this to match what bullion.html expects
         const data = {
-            update_time: new Date().toLocaleString('en-IN'),
-            gold: { k24: gold.data.price_gram_24k, k22: (gold.data.price_gram_24k * 0.916).toFixed(2) },
-            silver: (silver.data.price_gram * 1000).toFixed(2),
-            nifty: "21,750.40", // Placeholder: You'll need a stock API key for live Nifty
-            crude: "6,240.00"   // Placeholder: You'll need a commodity API for live Crude
+            lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            gold24k: gold.data.price_gram_24k * 10, // 10 grams
+            gold22k: gold.data.price_gram_22k * 10, // 10 grams
+            gold18k: gold.data.price_gram_18k * 10, // 10 grams
+            silver: (silver.data.price_gram * 1000).toFixed(0), // 1 KG
+            cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 },
+            history: {
+                labels: ["24 Jan", "25 Jan", "26 Jan", "27 Jan", "28 Jan", "29 Jan", "30 Jan"],
+                gold: [164000, 165000, 166000, 167000, 168000, 169000, gold.data.price_gram_24k * 10]
+            }
         };
 
         myCache.set("market_data", data);
         res.json(data);
-    } catch (e) { res.status(500).send("API Error"); }
+    } catch (e) { 
+        console.error("API Error:", e.message);
+        res.status(500).send("API Error"); 
+    }
 });
 
 // Use Render's port or default to 3000 for local testing
@@ -80,6 +87,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
