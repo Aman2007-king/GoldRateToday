@@ -31,9 +31,40 @@
         .calc-input { width: 100%; padding: 12px; margin-top: 10px; border-radius: 5px; border: none; font-size: 1rem; margin-bottom: 10px; }
         
         .ad-space { background: #eee; height: 90px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: #888; border: 1px dashed #ccc; }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 15px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: white; transition: 0.3s; }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: #0c2461; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -2px 0 10px rgba(0,0,0,0.5); }
+        .sidebar-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
+        .sidebar-links a:hover { color: #fff; background: #eb2f06; }
+        .sidebar .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
     </style>
 </head>
 <body>
+
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
 
 <nav class="nav-bar">
     <a href="/">📈 IPO</a>
@@ -115,6 +146,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+    /* --- ADDED SIDEBAR JS --- */
+    function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+    }
+
     let rates = { k24: 0, k22: 0, k18: 0, silverKg: 0 };
     let cityOffsets = {};
 
@@ -125,13 +162,11 @@
                 console.log("Data Received:", data);
 
                 // 1. Update Display Cards
-                // We use || "---" so the box never stays empty
                 document.getElementById('gold24').innerText = "₹" + (data.gold24k || "0");
                 document.getElementById('silverKg').innerText = "₹" + (data.silver || "0");
                 document.getElementById('time').innerText = data.lastUpdated || "Live";
 
                 // 2. Convert to Numbers for Calculator
-                // This removes ANY non-numeric character (commas, ₹, spaces)
                 const extractNumber = (val) => {
                     if (!val) return 0;
                     return parseFloat(val.toString().replace(/[^\d.]/g, '')) || 0;
@@ -140,7 +175,7 @@
                 const goldPrice = extractNumber(data.gold24k);
                 const silverPrice = extractNumber(data.silver);
 
-                // 3. Save to Global Rates (Price per Gram for Gold)
+                // 3. Save to Global Rates
                 rates.k24 = goldPrice / 10;
                 rates.k22 = (goldPrice * 0.916) / 10;
                 rates.k18 = (goldPrice * 0.75) / 10;
@@ -167,7 +202,6 @@
         else if (purity === "22") base = rates.k22;
         else if (purity === "18") base = rates.k18;
 
-        // If it's still 0, the fetch hasn't finished or failed
         if (base === 0 && grams > 0) {
             document.getElementById('totalPrice').innerText = "Waiting for Market Data...";
             return;
