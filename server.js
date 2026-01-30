@@ -49,35 +49,37 @@ app.get('/api/bullion-prices', async (req, res) => {
     try {
         const apiKey = process.env.GOLD_API_KEY;
         
-        // Safety check: If API key didn't load, use hardcoded backup so site doesn't show 0
-        if (!apiKey) {
-            console.log("Warning: GOLD_API_KEY environment variable not found.");
-            return res.json({
-                lastUpdated: "Using Backup (Check Render Env Vars)",
-                gold24k: 71000, gold22k: 65000, gold18k: 53000, silver: 82000,
-                cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500 }
-            });
-        }
-
         const [goldRes, silverRes] = await Promise.all([
             axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} }),
             axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} })
         ]);
 
-        // Transform raw API data into the exact format bullion.html needs
+        // DATA CONVERSION LOGIC
+        // GoldAPI provides price per 1 gram. We want 10 grams for the display.
+        const pricePerGram24k = goldRes.data.price_gram_24k;
+        const pricePerGram22k = goldRes.data.price_gram_22k;
+        const pricePerGram18k = goldRes.data.price_gram_18k;
+
+        // GoldAPI provides Silver per gram or ounce. 
+        // We multiply the gram price by 1000 to get the 1 KG price for India.
+        const silverPriceKg = silverRes.data.price_gram * 1000;
+
         const responseData = {
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            gold24k: Math.round(goldRes.data.price_gram_24k * 10), // Price for 10g
-            gold22k: Math.round(goldRes.data.price_gram_22k * 10),
-            gold18k: Math.round(goldRes.data.price_gram_18k * 10),
-            silver: Math.round(silverRes.data.price_gram * 1000), // Price for 1kg
+            gold24k: Math.round(pricePerGram24k * 10).toLocaleString('en-IN'), 
+            gold22k: Math.round(pricePerGram22k * 10).toLocaleString('en-IN'),
+            gold18k: Math.round(pricePerGram18k * 10).toLocaleString('en-IN'),
+            silver: Math.round(silverPriceKg).toLocaleString('en-IN'),
+            // raw numbers for the calculator to use without commas
+            rawGold24: pricePerGram24k * 10,
+            rawSilver: silverPriceKg,
             cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
         };
 
         res.json(responseData);
     } catch (e) {
-        console.error("API Fetch Error:", e.message);
-        res.status(500).json({ error: "API connection failed" });
+        console.error("API Error:", e.message);
+        res.status(500).json({ error: "Failed to fetch rates" });
     }
 });
 
@@ -92,6 +94,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
