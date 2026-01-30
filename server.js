@@ -43,20 +43,36 @@ app.get('/bullion', (req, res) => {
 
 // --- API: Get data for all assets ---
 app.get('/api/bullion-prices', async (req, res) => {
+    // Check cache first
+    const cached = myCache.get("market_data");
+    if (cached) return res.json(cached);
+
     try {
         const apiKey = process.env.GOLD_API_KEY;
-        
-        // If API Key is missing, don't crash, use fallback
-        if (!apiKey) {
-            console.log("No API Key found, using fallback data");
-            return res.json({
-                lastUpdated: "30 Jan 2026, 09:30 PM",
-                gold24k: 71017,
-                gold22k: 65050,
-                gold18k: 53260,
-                silver: 82000,
-                cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500 }
-            });
+        if (!apiKey) throw new Error("API Key is missing in Render Settings");
+
+        const [gold, silver] = await Promise.all([
+            axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} }),
+            axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} })
+        ]);
+
+        // This structure matches your bullion.html perfectly
+        const responseData = {
+            lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            gold24k: (gold.data.price_gram_24k * 10).toFixed(0),
+            gold22k: (gold.data.price_gram_22k * 10).toFixed(0),
+            gold18k: (gold.data.price_gram_18k * 10).toFixed(0),
+            silver: (silver.data.price_gram * 1000).toFixed(0),
+            cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
+        };
+
+        myCache.set("market_data", responseData);
+        res.json(responseData);
+    } catch (e) {
+        console.error("Server API Error:", e.message);
+        res.status(500).json({ error: "Failed to fetch live rates" });
+    }
+});
         }
 
         const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
@@ -89,6 +105,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
