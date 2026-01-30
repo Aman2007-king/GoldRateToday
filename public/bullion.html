@@ -168,8 +168,10 @@
                 
                 document.getElementById('cityNote').innerText = "*Showing Mumbai base rates";
             })
-            .catch(err => console.error("API Error:", err));
-    }
+            .catch(err => {
+    console.error("Data fetch failed:", err);
+    alert("Fetch Error: " + err.message + ". Check if /api/bullion-prices exists on your server.");
+});
 
    function calculate() {
     const gramsInput = document.getElementById('grams');
