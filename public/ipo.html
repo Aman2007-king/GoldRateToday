@@ -53,9 +53,40 @@
         .sticky-mobile-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #0072ff; color: white; padding: 12px; text-align: center; z-index: 9999; display: none; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); font-size: 0.9rem; }
         .sticky-mobile-bar a { color: #f1c40f; font-weight: bold; text-decoration: underline; margin-left: 5px; }
         @media (max-width: 768px) { .sticky-mobile-bar { display: block; } body { padding-bottom: 60px; } }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 20px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; backdrop-filter: blur(5px); }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: white; transition: 0.3s; border-radius: 2px; }
+        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #0c2461; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.3); }
+        .sidebar-nav-links a { padding: 15px 30px; text-decoration: none; font-size: 1.1rem; color: #ecf0f1; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; }
+        .sidebar-nav-links a:hover { background: #1e3799; color: #f1c40f; padding-left: 40px; }
+        .sidebar-nav .closebtn { position: absolute; top: 15px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
     </style>
 </head>
 <body>
+
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="sidebar-nav" class="sidebar-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-nav-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
 
 <header class="hero">
     <h1>India IPO Intelligence Tracker 2026</h1>
@@ -145,8 +176,13 @@
 </div>
 
 <script>
+    /* --- ADDED SIDEBAR JS --- */
+    function toggleSidebar() {
+        const sb = document.getElementById("sidebar-nav");
+        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+    }
+
     // --- IPO DATA MASTER LIST ---
-    // You only need to update this list. The tables update themselves!
     const ipoData = {
         open: [
             { name: "Accretion Nutraveda", type: "SME", close: "Jan 30, 2026", price: "₹122 - ₹129", lot: "1000" },
@@ -196,10 +232,8 @@
         const closedBody = document.getElementById('closedTable');
         const listedBody = document.getElementById('listedTable');
 
-        // Clear existing rows
         openBody.innerHTML = ''; upcomingBody.innerHTML = ''; closedBody.innerHTML = ''; listedBody.innerHTML = '';
 
-        // Fill Open IPOs
         ipoData.open.forEach(item => {
             const shareText = encodeURIComponent(`🔥 IPO Alert: ${item.name}\n💰 Price: ${item.price}\n📅 Closes: ${item.close}\n🚀 Apply here via Angel One: `);
             const row = `<tr class="ipo-row">
@@ -212,17 +246,14 @@
             openBody.innerHTML += row;
         });
 
-        // Fill Upcoming
         ipoData.upcoming.forEach(item => {
             upcomingBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.date}</td><td>${item.size}</td><td>${item.val}</td><td><span class="badge upcoming">${item.status}</span></td></tr>`;
         });
 
-        // Fill Closed
         ipoData.closed.forEach(item => {
             closedBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.date}</td><td>${item.price}</td><td>${item.sub}</td><td>${item.list}</td></tr>`;
         });
 
-        // Fill Listed
         ipoData.listed.forEach(item => {
             const gainClass = item.gain.includes('+') ? 'gain' : 'loss';
             listedBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.lPrice}</td><td>${item.iPrice}</td><td><span class="${gainClass}">${item.gain}</span></td></tr>`;
@@ -246,7 +277,6 @@
         document.getElementById("totalAmount").innerText = "₹" + total.toLocaleString('en-IN');
     }
 
-    // Initialize the tables on load
     window.onload = refreshAllTables;
 </script>
 
