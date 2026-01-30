@@ -143,11 +143,9 @@
 
             // 3. Run the calculator
             calculate();
-        })
-        .catch(err => {
-            console.error("API Connection Error:", err);
-            document.getElementById('totalPrice').innerText = "Server Connection Error";
-        });
+        if (!rates.k24 || rates.k24 === 0) {
+    document.getElementById('totalPrice').innerText = "Fetching Rates...";
+    return;
 }
 </script>
 </body>
