@@ -54,23 +54,18 @@ app.get('/api/bullion-prices', async (req, res) => {
             axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} })
         ]);
 
-        // DATA CONVERSION LOGIC
-        // GoldAPI provides price per 1 gram. We want 10 grams for the display.
-        const pricePerGram24k = goldRes.data.price_gram_24k;
-        const pricePerGram22k = goldRes.data.price_gram_22k;
-        const pricePerGram18k = goldRes.data.price_gram_18k;
+        // SAFETY: Check if the silver price exists in any common format
+        const rawSilverGram = silverRes.data.price_gram || (silverRes.data.price / 31.1035) || 82; 
+        const silverPriceKg = Math.round(rawSilverGram * 1000);
 
-        // GoldAPI provides Silver per gram or ounce. 
-        // We multiply the gram price by 1000 to get the 1 KG price for India.
-        const silverPriceKg = silverRes.data.price_gram * 1000;
+        const pricePerGram24k = goldRes.data.price_gram_24k || (goldRes.data.price / 31.1035);
 
         const responseData = {
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            gold24k: Math.round(pricePerGram24k * 10).toLocaleString('en-IN'), 
-            gold22k: Math.round(pricePerGram22k * 10).toLocaleString('en-IN'),
-            gold18k: Math.round(pricePerGram18k * 10).toLocaleString('en-IN'),
-            silver: Math.round(silverPriceKg).toLocaleString('en-IN'),
-            // raw numbers for the calculator to use without commas
+            // Format for Display
+            gold24k: Math.round(pricePerGram24k * 10).toLocaleString('en-IN'),
+            silver: silverPriceKg.toLocaleString('en-IN'),
+            // Raw numbers for Calculator (No Commas)
             rawGold24: pricePerGram24k * 10,
             rawSilver: silverPriceKg,
             cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
@@ -79,10 +74,9 @@ app.get('/api/bullion-prices', async (req, res) => {
         res.json(responseData);
     } catch (e) {
         console.error("API Error:", e.message);
-        res.status(500).json({ error: "Failed to fetch rates" });
+        res.status(500).json({ error: "API connection failed" });
     }
 });
-
 // You must listen on '0.0.0.0' for Render to detect the port
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`==> Server is hooked up and listening on port ${PORT}`);
@@ -94,6 +88,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
