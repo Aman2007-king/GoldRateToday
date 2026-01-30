@@ -153,10 +153,11 @@
     const city = document.getElementById('citySelect').value;
     
     // Safety check: if rates aren't loaded yet, try to show a message
-    if (!rates || rates.k24 === 0) {
-        document.getElementById('totalPrice').innerText = "Loading Rates...";
-        return;
-    }
+   if (!rates || rates.k24 === 0 || isNaN(rates.k24)) {
+    console.log("Current rates status:", rates); // This tells us the truth in F12 Console
+    document.getElementById('totalPrice').innerText = "Syncing with Live Market...";
+    return;
+}
 
     const offset = (cityOffsets[city] || 0) / 10;
     let base = 0;
