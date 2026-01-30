@@ -119,70 +119,45 @@
     let cityOffsets = {};
     let myChart = null;
 
-   function updateMorningRates() {
+ function updateMorningRates() {
     fetch('/api/bullion-prices')
         .then(res => res.json())
         .then(data => {
-            // 1. Update the display text (This works fine with commas)
+            console.log("Raw data received:", data);
+
+            // 1. Update display cards (Commas are okay here)
             document.getElementById('time').innerText = data.lastUpdated;
             document.getElementById('gold24').innerText = "₹" + data.gold24k;
             document.getElementById('silverKg').innerText = "₹" + data.silver;
 
-            // 2. THE FIX: Remove commas before doing math
-            // We use .replace(/,/g, '') to turn "71,017" back into "71017"
-            const cleanGold24 = parseFloat(data.gold24k.toString().replace(/,/g, ''));
-            const cleanGold22 = parseFloat(data.gold22k.toString().replace(/,/g, ''));
-            const cleanGold18 = parseFloat(data.gold18k.toString().replace(/,/g, ''));
+            // 2. THE FIX: Strip EVERYTHING except numbers and decimals
+            // This turns "₹71,017.50" into "71017.50"
+            const cleanGold = parseFloat(data.gold24k.toString().replace(/[^0-9.]/g, ''));
+            const cleanSilver = parseFloat(data.silver.toString().replace(/[^0-9.]/g, ''));
 
-            // 3. Update the calculator variables
-            rates.k24 = cleanGold24 / 10;
-            rates.k22 = cleanGold22 / 10;
-            rates.k18 = cleanGold18 / 10;
+            // 3. Update the global rates object
+            if (!isNaN(cleanGold)) {
+                rates.k24 = cleanGold / 10;
+                rates.k22 = (cleanGold * 0.916) / 10;
+                rates.k18 = (cleanGold * 0.75) / 10;
+            }
+            
+            if (!isNaN(cleanSilver)) {
+                rates.silverKg = cleanSilver;
+            }
+
             cityOffsets = data.cityPremium || {};
 
-            // 4. Trigger the calculator
+            console.log("Cleaned rates for calculator:", rates);
+
+            // 4. Trigger the calculator to remove the "Syncing..." message
             calculate();
         })
-        .catch(err => console.error("Could not load real-time rates:", err));
+        .catch(err => {
+            console.error("Fetch error:", err);
+            document.getElementById('totalPrice').innerText = "Offline - Check Connection";
+        });
 }
-
-   function calculate() {
-    const gramsInput = document.getElementById('grams');
-    const grams = parseFloat(gramsInput.value) || 0;
-    const purity = document.getElementById('purity').value;
-    const city = document.getElementById('citySelect').value;
-    
-    // Safety check: if rates aren't loaded yet, try to show a message
-   if (!rates || rates.k24 === 0 || isNaN(rates.k24)) {
-    console.log("Current rates status:", rates); // This tells us the truth in F12 Console
-    document.getElementById('totalPrice').innerText = "Syncing with Live Market...";
-    return;
-}
-
-    const offset = (cityOffsets[city] || 0) / 10;
-    let base = 0;
-
-    if (purity === "24") base = rates.k24;
-    else if (purity === "22") base = rates.k22;
-    else if (purity === "18") base = rates.k18;
-    else if (purity === "silver") base = parseFloat(document.getElementById('silverKg').innerText.replace(/[^0-9.]/g, '')) / 1000;
-
-    const total = (base + offset) * grams;
-    
-    if (total > 0) {
-        document.getElementById('totalPrice').innerText = "Total: ₹" + Math.round(total).toLocaleString('en-IN');
-    } else {
-        document.getElementById('totalPrice').innerText = "Total: ₹0";
-    }
-    
-    document.getElementById('cityNote').innerText = "*Rate adjusted for " + city.charAt(0).toUpperCase() + city.slice(1);
-}
-    // Ensure this line is at the very end of your script tag
-    window.onload = function() {
-        console.log("Page loaded, fetching rates...");
-        updateMorningRates();
-    };
-</script>
 </script>
 </body>
 </html>
