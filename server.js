@@ -4,15 +4,31 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Body parser to read form data
+// Middleware to read form data and serve static files
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 
-// --- GLOBAL PRICE VARIABLES ---
+// --- CONFIGURATION ---
+// This password will be checked when you click "Update"
+// On Render, set an Environment Variable ADMIN_PASSWORD to hide this
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '1234'; 
+
+// --- GLOBAL VARIABLES (Prices saved in server memory) ---
 let currentGoldPrice = 169200; 
 let currentSilverPrice = 95000;
+let lastUpdateDate = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-// --- PAGE ROUTES ---
+// --- PASSWORD PROTECTION MIDDLEWARE ---
+const checkAuth = (req, res, next) => {
+    if (req.body.password === ADMIN_PASSWORD) {
+        next();
+    } else {
+        res.status(401).send('<h1>Incorrect Password</h1><a href="/admin-panel">Try Again</a>');
+    }
+};
+
+// --- HTML PAGE ROUTES ---
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 app.get('/bullion', (req, res) => res.sendFile(path.join(__dirname, 'public', 'bullion.html')));
 app.get('/silver', (req, res) => res.sendFile(path.join(__dirname, 'public', 'silver.html')));
@@ -27,31 +43,33 @@ app.get('/ipo', (req, res) => res.sendFile(path.join(__dirname, 'public', 'ipo.h
 app.get('/calculators', (req, res) => res.sendFile(path.join(__dirname, 'public', 'calculators.html')));
 app.get('/banking', (req, res) => res.sendFile(path.join(__dirname, 'public', 'banking.html')));
 
-// --- ADMIN PAGE ROUTE ---
+// --- ADMIN PANEL ROUTE ---
 app.get('/admin-panel', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
 
-// --- API: Returns prices to your website ---
+// --- API: Get Prices (Used by your website cards) ---
 app.get('/api/bullion-prices', (req, res) => {
     res.json({
         gold24k: currentGoldPrice.toLocaleString('en-IN'),
         silver: currentSilverPrice.toLocaleString('en-IN'),
-        lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        lastUpdated: lastUpdateDate,
         cityPremium: { mumbai: 0, delhi: 150, chennai: 450 },
         rawGold: currentGoldPrice
     });
 });
 
-// --- API: Receives updates from Admin Panel ---
-app.post('/api/update-rates', (req, res) => {
+// --- API: Update Prices (Used by Admin Panel) ---
+app.post('/api/update-rates', checkAuth, (req, res) => {
     const { gold, silver } = req.body;
-    if (gold) currentGoldPrice = Number(gold);
-    if (silver) currentSilverPrice = Number(silver);
     
-    console.log(`Updated Rates -> Gold: ${currentGoldPrice}, Silver: ${currentSilverPrice}`);
-    // Redirect back to admin page after update
-    res.send('<h1>Success! Rates updated.</h1><a href="/admin-panel">Go Back</a>');
+    currentGoldPrice = Number(gold);
+    currentSilverPrice = Number(silver);
+    lastUpdateDate = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+    console.log(`Updated! Gold: ${currentGoldPrice}, Silver: ${currentSilverPrice}`);
+    res.send('<h1>Rates Updated Successfully!</h1><a href="/admin-panel">Back to Admin</a>');
 });
 
+// Start Server
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`==> Server live on port ${PORT}`);
+    console.log(`==> Server running on port ${PORT}`);
 });
