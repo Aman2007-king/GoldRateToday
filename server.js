@@ -77,22 +77,6 @@ app.get('/api/bullion-prices', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
-        const gold = axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} });
-        const silver = axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} });
-
-        res.json({
-            lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            gold24k: (gold.data.price_gram_24k * 10).toFixed(0),
-            gold22k: (gold.data.price_gram_24k * 0.916 * 10).toFixed(0),
-            gold18k: (gold.data.price_gram_24k * 0.75 * 10).toFixed(0),
-            silver: (silver.data.price_gram * 1000).toFixed(0),
-            cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
-        });
-     catch (e) {
-        res.status(500).json({ error: "API connection failed" });
-    }
-});
        
 // Use Render's port or default to 3000 for local testing
 
@@ -108,6 +92,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
