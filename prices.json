@@ -1,7 +1,14 @@
 {
-  "gold24k": "1,52,490",
-  "gold22k": "1,39,792",
-  "gold18k": "1,14,367",
-  "silver": "3,19,720",
-  "lastUpdated": "30 Jan 2026, 09:30 AM"
+  "gold24k": "1,70,170",
+  "gold22k": "1,56,400",
+  "gold18k": "1,27,970",
+  "silver": "4,01,760",
+  "lastUpdated": "30 Jan 2026, 09:30 AM",
+  "cityPremium": {
+    "mumbai": 0,
+    "delhi": 150,
+    "chennai": 500,
+    "kolkata": -220,
+    "bangalore": 140
+  }
 }
