@@ -66,26 +66,26 @@ app.get('/api/bullion-prices', async (req, res) => {
 
 // 1. Check if we got valid data from the API
 if (response.data && response.data.price_gram_24k > 0) {
-    const priceFor10Grams = Math.round(response.data.price_gram_24k * 10);
-    const marketOffset = 27200; 
+    // 1. Get the base price for 10 grams (14,200 * 10 = 1,42,000)
+    const basePrice10g = Math.round(response.data.price_gram_24k * 10);
+    
+    // 2. The Total Target Price is 1,69,200. 
+    // So the offset needed is 1,69,200 - 1,42,000 = 27,200.
+    const mumbaiPrice = basePrice10g + 27200;
 
-    // 2. Format the data correctly for Mumbai/India
     const formattedData = {
-        gold24k: (priceFor10Grams + marketOffset).toLocaleString('en-IN'),
-        silver: "3,95,000", 
+        gold24k: mumbaiPrice.toLocaleString('en-IN'),
+        silver: "95,000", 
         lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
         cityPremium: { 
-            mumbai: marketOffset, 
-            delhi: marketOffset + 150, 
-            chennai: marketOffset + 450 
+            mumbai: 27200, 
+            delhi: 27350, 
+            chennai: 27650 
         },
-        rawGold: priceFor10Grams + marketOffset 
+        rawGold: mumbaiPrice // Send this to the calculator
     };
 
-    // 3. Save this valid data into the cache for 24 hours
     myCache.set(cacheKey, formattedData);
-    
-    // 4. Send the response to the user
     return res.json(formattedData);
         } else {
             throw new Error("Invalid price from API");
@@ -114,6 +114,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
