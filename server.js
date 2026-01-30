@@ -43,43 +43,43 @@ app.get('/bullion', (req, res) => {
 
 // --- API: Get data for all assets ---
 // Ensure 'async' is present here ⬇️
+
+// Use Render's port or default to 3000 for local testing
 app.get('/api/bullion-prices', async (req, res) => {
     try {
         const apiKey = process.env.GOLD_API_KEY;
         
-        // If API Key is missing, send fallback so frontend doesn't show 0
+        // Safety check: If API key didn't load, use hardcoded backup so site doesn't show 0
         if (!apiKey) {
+            console.log("Warning: GOLD_API_KEY environment variable not found.");
             return res.json({
-                lastUpdated: "API Key Missing",
-                gold24k: 71000, gold22k: 65000, gold18k: 53000, silver: 82000
+                lastUpdated: "Using Backup (Check Render Env Vars)",
+                gold24k: 71000, gold22k: 65000, gold18k: 53000, silver: 82000,
+                cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500 }
             });
         }
 
-        // Fetching data from GoldAPI
-        const gold = await axios.get('https://www.goldapi.io/api/XAU/INR', { 
-            headers: {'x-access-token': apiKey} 
-        });
-        const silver = await axios.get('https://www.goldapi.io/api/XAG/INR', { 
-            headers: {'x-access-token': apiKey} 
-        });
+        const [goldRes, silverRes] = await Promise.all([
+            axios.get('https://www.goldapi.io/api/XAU/INR', { headers: {'x-access-token': apiKey} }),
+            axios.get('https://www.goldapi.io/api/XAG/INR', { headers: {'x-access-token': apiKey} })
+        ]);
 
-        res.json({
+        // Transform raw API data into the exact format bullion.html needs
+        const responseData = {
             lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            gold24k: (gold.data.price_gram_24k * 10).toFixed(0),
-            gold22k: (gold.data.price_gram_22k * 10).toFixed(0),
-            gold18k: (gold.data.price_gram_18k * 10).toFixed(0),
-            silver: (silver.data.price_gram * 1000).toFixed(0),
+            gold24k: Math.round(goldRes.data.price_gram_24k * 10), // Price for 10g
+            gold22k: Math.round(goldRes.data.price_gram_22k * 10),
+            gold18k: Math.round(goldRes.data.price_gram_18k * 10),
+            silver: Math.round(silverRes.data.price_gram * 1000), // Price for 1kg
             cityPremium: { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 }
-        });
-    } 
-    catch (e) {
-        console.error("Fetch Error:", e.message);
-        res.status(500).json({ error: "Internal Server Error" });
+        };
+
+        res.json(responseData);
+    } catch (e) {
+        console.error("API Fetch Error:", e.message);
+        res.status(500).json({ error: "API connection failed" });
     }
 });
-       
-// Use Render's port or default to 3000 for local testing
-
 
 // You must listen on '0.0.0.0' for Render to detect the port
 app.listen(PORT, '0.0.0.0', () => {
@@ -92,6 +92,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
