@@ -46,6 +46,53 @@
         .sidebar-nav-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
         .sidebar-nav-links a:hover { color: #2c3e50; background: #f1c40f; }
         .sidebar-nav .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
+
+        /* Global Professional Footer CSS */
+        .main-footer {
+            background: #0a192f;
+            color: #a8b2d1;
+            padding: 60px 20px 30px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            border-top: 4px solid #f1c40f;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: left;
+        }
+        .footer-section h4 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #a8b2d1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-links a:hover {
+            color: #f1c40f;
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -202,6 +249,36 @@
         </div>
     </aside>
 </div>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>India Wealth Hub</h4>
+            <p>Your trusted source for real-time gold rates, IPO analysis, and mutual fund insights in 2026.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Market Tools</h4>
+            <ul class="footer-links">
+                <li><a href="/">Gold Tracker</a></li>
+                <li><a href="/mutual-funds">Mutual Fund Explorer</a></li>
+                <li><a href="/silver">Live Silver Rates</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Legal & Corporate</h4>
+            <ul class="footer-links">
+                <li><a href="policies.html">About Us</a></li>
+                <li><a href="policies.html">Privacy Policy</a></li>
+                <li><a href="policies.html">Financial Disclaimer</a></li>
+                <li><a href="policies.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 India Wealth Hub | Designed for Indian Investors</p>
+        <p style="opacity: 0.6; font-size: 0.7rem;">Data provided is for informational purposes only. Investment in securities is subject to market risks.</p>
+    </div>
+</footer>
 
 <script>
     /* --- ADDED SIDEBAR JS --- */
