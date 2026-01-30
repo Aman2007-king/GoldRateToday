@@ -132,35 +132,62 @@
 </div>
 
 <script>
+    // Global variables to store rates for the calculator
     let rates = { k24: 0, k22: 0, k18: 0 };
     let cityOffsets = {};
 
     function updateMorningRates() {
-        // This fetches the rates you updated in prices.json this morning
         fetch('/api/bullion-prices')
             .then(res => res.json())
             .then(data => {
-                // Update the visual price display on your page
+                // 1. UPDATE TEXT DISPLAYS (Cards & Tables)
                 if(document.getElementById('gold24')) document.getElementById('gold24').innerText = "₹" + data.gold24k;
                 if(document.getElementById('silverKg')) document.getElementById('silverKg').innerText = "₹" + data.silver;
                 if(document.getElementById('time')) document.getElementById('time').innerText = data.lastUpdated;
 
-                // Prepare rates for calculator (removes commas and divides 10g price into 1g)
+                // 2. PREPARE CALCULATOR DATA
                 rates.k24 = parseFloat(data.gold24k.replace(/,/g, '')) / 10;
                 rates.k22 = parseFloat(data.gold22k.replace(/,/g, '')) / 10;
                 rates.k18 = parseFloat(data.gold18k.replace(/,/g, '')) / 10;
-                
-                // Store the city-wise price differences
                 cityOffsets = data.cityPremium || {};
+
+                // 3. --- CHART LOGIC START ---
+                // This draws the 7-day trend using data from your prices.json
+                const ctx = document.getElementById('trendChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.history.labels,
+                        datasets: [{
+                            label: 'Gold Price (24K) per 10g',
+                            data: data.history.gold,
+                            borderColor: '#d4af37',
+                            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { 
+                                beginAtZero: false,
+                                ticks: { callback: value => '₹' + value.toLocaleString() }
+                            }
+                        }
+                    }
+                });
+                // --- CHART LOGIC END ---
             });
     }
 
+    // This function handles the math for the calculator
     function calculate() {
         const grams = document.getElementById('grams').value || 0;
         const purity = document.getElementById('purity').value;
         const city = document.getElementById('citySelect').value;
-        
-        // Premium for the city (per gram)
         const cityOffsetPerGram = (cityOffsets[city] || 0) / 10;
 
         let baseRate = 0;
@@ -168,13 +195,11 @@
         else if(purity == "22") baseRate = rates.k22;
         else if(purity == "18") baseRate = rates.k18;
 
-        // Math: (Rate + City Premium) * Weight
         const total = (baseRate + cityOffsetPerGram) * grams;
-        
         document.getElementById('totalPrice').innerText = "Total: ₹" + Math.round(total).toLocaleString('en-IN');
-        document.getElementById('cityNote').innerText = "*Price adjusted for " + city.charAt(0).toUpperCase() + city.slice(1) + " local market.";
     }
 
+    // Runs everything when the page opens
     window.onload = updateMorningRates;
 </script>
 </html>
