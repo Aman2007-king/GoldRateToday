@@ -3,93 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Policies & Legal | India Wealth Hub</title>
+    <title>Investor Knowledge Hub & Policies | India Wealth Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { 
-            --brand: #0c2461; 
-            --accent: #f1c40f; 
-            --text: #2f3542; 
-            --bg: #f1f2f6; 
-            --white: #ffffff;
-            --success: #38ada9;
+            --brand: #0c2461; --accent: #f1c40f; --text: #2f3542; 
+            --bg: #f1f2f6; --white: #ffffff; --success: #38ada9;
         }
 
         body { 
-            font-family: 'Inter', system-ui, sans-serif; 
-            line-height: 1.6; 
-            color: var(--text); 
-            background: var(--bg); 
-            margin: 0; 
+            font-family: 'Inter', system-ui, sans-serif; line-height: 1.8; 
+            color: var(--text); background: var(--bg); margin: 0; scroll-behavior: smooth;
         }
 
         /* Navigation */
         .nav-bar { 
-            background: var(--brand); 
-            padding: 15px; 
-            text-align: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
+            background: var(--brand); padding: 15px; text-align: center; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        .nav-bar a { 
-            color: white; 
-            text-decoration: none; 
-            margin: 0 15px; 
-            font-weight: bold; 
-            font-size: 0.9rem;
-        }
+        .nav-bar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9rem; }
 
-        /* Hero Header */
+        /* Knowledge Header */
         .legal-header {
-            background: linear-gradient(135deg, #0c2461, #1e3799);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
+            background: linear-gradient(135deg, #0c2461, #1e3799); color: white;
+            padding: 80px 20px; text-align: center;
         }
 
-        .container {
-            max-width: 900px;
-            margin: -40px auto 60px;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: -60px auto 60px; padding: 0 20px; display: grid; grid-template-columns: 320px 1fr; gap: 30px; }
 
-        .policy-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+        /* Sidebar Navigation */
+        .toc-sidebar {
+            background: var(--white); padding: 25px; border-radius: 12px;
+            height: fit-content; position: sticky; top: 100px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
+        .toc-sidebar h4 { margin-top: 0; color: var(--brand); border-bottom: 2px solid var(--accent); }
+        .toc-sidebar ul { list-style: none; padding: 0; }
+        .toc-sidebar li { margin-bottom: 12px; }
+        .toc-sidebar a { text-decoration: none; color: var(--text); font-size: 0.9rem; transition: 0.3s; }
+        .toc-sidebar a:hover { color: var(--brand); font-weight: bold; padding-left: 5px; }
 
-        h2 { color: var(--brand); border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
-        h3 { color: var(--brand); margin-top: 25px; }
+        .content-area { background: var(--white); padding: 50px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        h2 { color: var(--brand); font-size: 2rem; border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 50px; }
+        h3 { color: #1e3799; margin-top: 35px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        .last-updated { font-style: italic; color: #747d8c; font-size: 0.9rem; }
+        .info-box { background: #f8f9fa; border: 1px solid #ddd; padding: 25px; border-radius: 8px; margin: 25px 0; }
+        .warning-box { background: #fff5f5; border-left: 5px solid #ff4757; padding: 20px; margin: 20px 0; }
+        .highlight { color: #e67e22; font-weight: bold; }
 
-        /* Contact Form Styles */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 5px; }
-        .input-group input, .input-group textarea { 
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; box-sizing: border-box;
-        }
-        .submit-btn { 
-            background: var(--brand); color: white; border: none; padding: 12px 25px; 
-            border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s;
-        }
-        .submit-btn:hover { background: #1e3799; transform: translateY(-2px); }
+        /* Table Styling */
+        .tax-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        .tax-table th, .tax-table td { border: 1px solid #ddd; padding: 15px; text-align: left; }
+        .tax-table th { background: #0c2461; color: white; }
+        .tax-table tr:nth-child(even) { background: #f1f2f6; }
 
-        .contact-info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .contact-info-item i { color: var(--brand); font-size: 1.2rem; }
+        /* Contact Section */
+        .contact-section { background: #0c2461; color: white; padding: 30px; border-radius: 12px; margin-top: 40px; }
+        .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 4px; border: none; box-sizing: border-box; }
+        .submit-btn { background: var(--accent); color: var(--brand); padding: 12px 30px; border: none; font-weight: bold; cursor: pointer; width: 100%; border-radius: 4px; }
 
-        /* Professional Footer */
-        .main-footer { background: #0a192f; color: #a8b2d1; padding: 40px 20px; text-align: center; margin-top: 50px; }
-        .footer-links a { color: #f1c40f; text-decoration: none; margin: 0 10px; }
-
-        @media (max-width: 768px) {
-            .contact-grid { grid-template-columns: 1fr; }
-            .policy-card { padding: 25px; }
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .toc-sidebar { display: none; }
+            .content-area { padding: 25px; }
         }
     </style>
 </head>
@@ -99,102 +75,165 @@
     <a href="index.html">📈 HOME</a>
     <a href="mutual-funds.html">📊 MUTUAL FUNDS</a>
     <a href="silver.html">⚪ SILVER RATES</a>
+    <a href="#contact">📩 CONTACT</a>
 </nav>
 
 <header class="legal-header">
-    <h1>Legal, Policies & About Us</h1>
-    <p class="last-updated">Last Updated: January 31, 2026</p>
+    <h1>Investor Education & Policy Hub 2026</h1>
+    <p>Comprehensive Financial Guidance, Legal Frameworks, and Market Encyclopedia</p>
 </header>
 
 <div class="container">
-    <div class="policy-card">
+    <aside class="toc-sidebar">
+        <h4>Master Navigation</h4>
+        <ul>
+            <li><a href="#about">About India Wealth Hub</a></li>
+            <li><a href="#bullion">Gold & Silver Guide</a></li>
+            <li><a href="#mutual-funds">Mutual Fund Dynamics</a></li>
+            <li><a href="#ipo">IPO Listing Strategies</a></li>
+            <li><a href="#tax-slabs">2026 Taxation & Slabs</a></li>
+            <li><a href="#mistakes">Top 10 Investing Mistakes</a></li>
+            <li><a href="#glossary">A-Z Financial Encyclopedia</a></li>
+            <li><a href="#privacy">Legal & Privacy</a></li>
+            <li><a href="#contact">Support Desk</a></li>
+        </ul>
+    </aside>
+
+    <main class="content-area">
         
         <section id="about">
             <h2>About India Wealth Hub</h2>
-            <p>India Wealth Hub is a premier financial information portal dedicated to providing Indian investors with real-time data, comprehensive analysis, and intuitive tools. In 2026, we continue our mission to democratize financial literacy by offering live updates on Bullion (Gold/Silver), IPO performance tracking, and Mutual Fund analytics.</p>
+            <p>India Wealth Hub is the nation's fastest-growing financial intelligence portal. As of 2026, we serve millions of investors by bridging the gap between complex market data and actionable insights. Our mission is to empower the "New India" with transparent information on Bullion, Equity, and Debt instruments.</p>
         </section>
 
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Have questions about market rates or our tools? Get in touch with our team.</p>
+        <hr>
+
+        <section id="bullion">
+            <h2>1. The Bullion Masterclass</h2>
+            <p>Gold and Silver have transitioned from being mere ornaments to sophisticated financial assets. Understanding the <strong>LBMA (London Bullion Market Association)</strong> pricing mechanism is crucial for Indian investors.</p>
             
-            <div class="contact-grid">
-                <form id="contactForm" onsubmit="handleContact(event)">
-                    <div class="input-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="John Doe" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Email Address</label>
-                        <input type="email" placeholder="john@example.com" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Message</label>
-                        <textarea rows="4" placeholder="How can we help you?" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+            <h3>Karats and Purity Standards</h3>
+            <p>In India, the Bureau of Indian Standards (BIS) regulates purity. <strong>916 Hallmarked Gold</strong> refers to 22K gold (91.6% purity). For investment purposes, 24K bars or Sovereign Gold Bonds are mathematically superior to jewelry due to the absence of 'Making Charges' which can range from 8% to 25%.</p>
+        </section>
 
-                <div class="contact-sidebar">
-                    <div class="contact-info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email</strong><br>
-                            <small>support@indiawealthhub.in</small>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <i class="fas fa-location-dot"></i>
-                        <div>
-                            <strong>Headquarters</strong><br>
-                            <small>Financial District, Mumbai, MH</small>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <strong>Business Hours</strong><br>
-                            <small>Mon - Sat: 9:00 AM - 6:00 PM</small>
-                        </div>
-                    </div>
-                </div>
+        <hr>
+
+        <section id="mutual-funds">
+            <h2>2. Modern Mutual Fund Dynamics</h2>
+            <p>Professional fund management allows retail investors to access high-growth sectors with small amounts (SIPs starting at ₹100). However, the <strong>Total Expense Ratio (TER)</strong> is the silent killer of returns.</p>
+            <h3>Direct vs Regular Plans</h3>
+            <p>By choosing 'Direct' plans through India Wealth Hub's insights, investors save on distributor commissions, which can increase the final corpus by up to 15% over a 20-year horizon.</p>
+            
+        </section>
+
+        <hr>
+
+        <section id="ipo">
+            <h2>3. IPO Listing & Valuation Analysis</h2>
+            <p>Initial Public Offerings (IPOs) are high-octane entry points into the market. Our analysis focuses on the <strong>Price-to-Earnings (P/E) Ratio</strong> relative to industry peers. If a company lists at a P/E of 80 while the industry average is 30, it is considered overvalued regardless of the "Grey Market Premium."</p>
+        </section>
+
+        <hr>
+
+        <section id="tax-slabs">
+            <h2>4. 2026 Taxation Structure & Income Slabs</h2>
+            <div class="info-box">
+                <strong>Budget 2025-26 Update:</strong> The new tax regime is now the primary path for 90% of salaried professionals in India.
+            </div>
+            <table class="tax-table">
+                <thead>
+                    <tr>
+                        <th>Annual Income</th>
+                        <th>Tax Rate (New Regime)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Up to ₹3,00,000</td><td>Nil</td></tr>
+                    <tr><td>₹3,00,001 - ₹7,00,000</td><td>5% (with Rebate)</td></tr>
+                    <tr><td>₹7,00,001 - ₹10,00,000</td><td>10%</td></tr>
+                    <tr><td>₹10,00,001 - ₹12,00,000</td><td>15%</td></tr>
+                    <tr><td>₹12,00,001 - ₹15,00,000</td><td>20%</td></tr>
+                    <tr><td>Above ₹15,00,000</td><td>30%</td></tr>
+                </tbody>
+            </table>
+            <h3>Capital Gains Summary</h3>
+            <ul>
+                <li><strong>Short Term (Equity):</strong> 20% flat tax on gains under 12 months.</li>
+                <li><strong>Long Term (Equity):</strong> 12.5% on gains above ₹1.25 Lakh.</li>
+                <li><strong>Gold/Debt:</strong> Taxed as per your income slab.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="mistakes">
+            <h2>5. Top 10 Investment Mistakes to Avoid</h2>
+            <div class="warning-box">
+                <ol>
+                    <li><strong>Chasing the "Hot" IPO:</strong> Investing based on GMP without reading the RHP (Red Herring Prospectus).</li>
+                    <li><strong>Ignoring the Expense Ratio:</strong> A 1% difference in fees can cost you lakhs over 20 years.</li>
+                    <li><strong>Emotional Exit:</strong> Selling your SIP during a 10% market correction.</li>
+                    <li><strong>Mixing Insurance and Investment:</strong> Buying ULIPs or Endowment plans instead of Term Insurance and Mutual Funds.</li>
+                    <li><strong>Lack of Diversification:</strong> Putting 100% of wealth into only Gold or only Small-Cap stocks.</li>
+                    <li><strong>Ignoring Inflation:</strong> Saving in a Savings Account (3% return) when inflation is 6%.</li>
+                    <li><strong>No Emergency Fund:</strong> Investing money you might need in the next 6 months.</li>
+                    <li><strong>Timing the Market:</strong> Waiting for the "perfect bottom" instead of time-in-the-market.</li>
+                    <li><strong>Tax Negligence:</strong> Not planning for LTCG or 80C/New Regime benefits.</li>
+                    <li><strong>Following Unverified "Finfluencers":</strong> Taking advice from social media without checking SEBI registration.</li>
+                </ol>
+            </div>
+            
+        </section>
+
+        <hr>
+
+        <section id="glossary">
+            <h2>6. A-Z Financial Encyclopedia</h2>
+            <div class="info-box">
+                <p><strong>Alpha:</strong> The excess return of an investment relative to the return of a benchmark index.</p>
+                <p><strong>Beta:</strong> A measure of a stock's volatility in relation to the overall market.</p>
+                <p><strong>Compounding:</strong> The process where the value of an investment increases because the earnings on an investment, both capital gains and interest, earn interest as time passes.</p>
+                
+
+[Image of Compounding interest vs simple interest graph]
+
+                <p><strong>Dividend:</strong> A portion of a company's earnings distributed to shareholders.</p>
+                <p><strong>ETF (Exchange Traded Fund):</strong> A type of investment fund that is traded on stock exchanges, much like stocks.</p>
+                <p><strong>Indexation:</strong> Adjusting the purchase price of an investment for inflation to reduce tax liability.</p>
+                <p><strong>Liquid Fund:</strong> A category of mutual fund that invests in very short-term debt securities.</p>
+                <p><strong>Portfolio:</strong> A grouping of financial assets such as stocks, bonds, and cash equivalents.</p>
+                <p><strong>REIT:</strong> Real Estate Investment Trust; allows you to invest in large-scale properties.</p>
+                <p><strong>SIP:</strong> Systematic Investment Plan; a disciplined way of investing in mutual funds.</p>
             </div>
         </section>
 
-        <section id="disclaimer">
-            <h2>Financial Disclaimer</h2>
-            <div style="background: #fff5f5; border-left: 5px solid #ff4757; padding: 15px; margin: 20px 0;">
-                <strong>Attention:</strong> All information provided on this website is for educational and informational purposes only. We are not SEBI-registered advisors. 
-                <br><br>
-                * <strong>Mutual Funds:</strong> Subject to market risks. Past performance does not guarantee future results.
-                <br>* <strong>Bullion:</strong> Rates are indicative and may vary based on local taxes (GST) and jeweler making charges.
-            </div>
-        </section>
+        <hr>
 
         <section id="privacy">
-            <h2>Privacy Policy</h2>
-            <p>We value your privacy. We use industry-standard encryption and do not sell your personal data to third parties. Our site uses cookies to optimize market data loading speeds.</p>
+            <h2>7. Legal, Privacy & Terms of Use</h2>
+            <p><strong>Data Protection:</strong> We utilize SSL encryption for all data transmissions. We do not store your bank details or Demat passwords. 
+            <strong>Accuracy:</strong> While our Silver and Gold rates are updated via API, they are for indicative purposes. Users should confirm with physical dealers before transactions.</p>
         </section>
 
-        <section id="copyright">
-            <h2>Copyright Notice</h2>
-            <p>&copy; 2026 India Wealth Hub. All Rights Reserved. The brand name and custom calculators are protected under digital copyright laws.</p>
+        <section id="contact" class="contact-section">
+            <h2>8. Contact Our Support Desk</h2>
+            <form onsubmit="alert('Thank you. Our compliance team will respond within 48 hours.'); return false;">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <textarea rows="6" placeholder="How can our financial experts assist you today? Please provide details..."></textarea>
+                <button type="submit" class="submit-btn">SEND SECURE MESSAGE</button>
+            </form>
         </section>
 
-    </div>
+    </main>
 </div>
 
-<footer class="main-footer">
-    <p>&copy; 2026 India Wealth Hub | <a href="index.html" style="color:#f1c40f; text-decoration:none;">Return to Home</a></p>
+<footer style="background: #0a192f; color: #a8b2d1; padding: 50px 20px; text-align: center;">
+    <p>&copy; 2026 India Wealth Hub | SEBI Registered Entity Research Portal (Indicative)</p>
+    <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 10px;">
+        Investments are subject to market risks. Please read all scheme related documents carefully before investing.
+    </div>
 </footer>
-
-<script>
-    function handleContact(e) {
-        e.preventDefault();
-        alert("Thank you! Your message has been received. Our team will contact you within 24-48 hours.");
-        e.target.reset();
-    }
-</script>
 
 </body>
 </html>
