@@ -37,9 +37,40 @@
 
         /* Ads */
         .ad-banner { background: #fff; border: 1px dashed #ccc; padding: 20px; text-align: center; color: #999; margin: 20px 0; border-radius: 8px; }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 15px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: white; transition: 0.3s; }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: #0c2461; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -2px 0 10px rgba(0,0,0,0.5); }
+        .sidebar-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
+        .sidebar-links a:hover { color: #fff; background: #eb2f06; }
+        .sidebar .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
     </style>
 </head>
 <body>
+
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
 
 <nav class="nav-bar">
     <a href="/">📈 IPO</a>
@@ -156,8 +187,6 @@
         <h2>Essential Guide to CIBIL & Loan Procedures (2026)</h2>
         <p>In the evolving financial ecosystem of 2026, the **CIBIL Score** acts as the primary gatekeeper for credit. A CIBIL score is a 3-digit number representing your creditworthiness, derived from your past credit history and repayment patterns. </p>
         
-        [attachment_0](attachment)
-        
         <h3>Why CIBIL is Mandatory for Loans</h3>
         <p>Lenders use your CIBIL score to decide the **Risk-Based Premium** on your interest rate. If your score is above 750, you qualify for the "Prime" rates shown in our tables above. A score below 680 may lead to your application being flagged or rejected by major public sector banks like SBI or PNB.</p>
 
@@ -181,6 +210,12 @@
 </div>
 
 <script>
+    /* --- ADDED SIDEBAR JS --- */
+    function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+    }
+
     // Data for 25+ Banks
     const banksData = [
         { n: "HDFC Bank", p: "DigiSave", b: "5000", l: "https://www.hdfcbank.com/" },
@@ -233,5 +268,4 @@
     }
 </script>
 </body>
-                                                                                                                    </html>
-    
+</html>
