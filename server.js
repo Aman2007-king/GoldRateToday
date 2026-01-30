@@ -87,7 +87,6 @@ if (response.data && response.data.price_gram_24k > 0) {
     
     // 4. Send the response to the user
     return res.json(formattedData);
-}
         } else {
             throw new Error("Invalid price from API");
         }
@@ -115,6 +114,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
