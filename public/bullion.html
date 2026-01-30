@@ -115,38 +115,73 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    let rates = { k24: 0, k22: 0, k18: 0 };
+    let rates = { k24: 0, k22: 0, k18: 0, silverKg: 0 };
     let cityOffsets = {};
-    let myChart = null;
 
- function updateMorningRates() {
-    fetch('/api/bullion-prices')
-        .then(res => res.json())
-        .then(data => {
-            // 1. Display the data exactly as it comes from the server
-            // If data.gold24k is "71,017", it will show "₹71,017"
-            document.getElementById('gold24').innerText = "₹" + (data.gold24k || "0");
-            document.getElementById('silverKg').innerText = "₹" + (data.silver || "0");
-            document.getElementById('time').innerText = data.lastUpdated || "Just Now";
+    function updateMorningRates() {
+        fetch('/api/bullion-prices')
+            .then(res => res.json())
+            .then(data => {
+                console.log("Data Received:", data);
 
-            // 2. Prepare numbers for the calculator
-            // We remove commas ONLY for the math variables
-            let rawGold = data.gold24k ? data.gold24k.toString().replace(/,/g, '') : 0;
-            let rawSilver = data.silver ? data.silver.toString().replace(/,/g, '') : 0;
+                // 1. Update Display Cards
+                // We use || "---" so the box never stays empty
+                document.getElementById('gold24').innerText = "₹" + (data.gold24k || "0");
+                document.getElementById('silverKg').innerText = "₹" + (data.silver || "0");
+                document.getElementById('time').innerText = data.lastUpdated || "Live";
 
-            rates.k24 = parseFloat(rawGold) / 10;
-            rates.k22 = (rates.k24 * 0.916); // Standard 22K math
-            rates.k18 = (rates.k24 * 0.75);  // Standard 18K math
-            rates.silverKg = parseFloat(rawSilver);
-            
-            cityOffsets = data.cityPremium || {};
+                // 2. Convert to Numbers for Calculator
+                // This removes ANY non-numeric character (commas, ₹, spaces)
+                const extractNumber = (val) => {
+                    if (!val) return 0;
+                    return parseFloat(val.toString().replace(/[^\d.]/g, '')) || 0;
+                };
 
-            // 3. Run the calculator
-            calculate();
-        if (!rates.k24 || rates.k24 === 0) {
-    document.getElementById('totalPrice').innerText = "Fetching Rates...";
-    return;
-}
+                const goldPrice = extractNumber(data.gold24k);
+                const silverPrice = extractNumber(data.silver);
+
+                // 3. Save to Global Rates (Price per Gram for Gold)
+                rates.k24 = goldPrice / 10;
+                rates.k22 = (goldPrice * 0.916) / 10;
+                rates.k18 = (goldPrice * 0.75) / 10;
+                rates.silverKg = silverPrice;
+                cityOffsets = data.cityPremium || {};
+
+                // 4. Force calculation
+                calculate();
+            })
+            .catch(err => {
+                console.error("Fetch Error:", err);
+                document.getElementById('totalPrice').innerText = "Connection Error";
+            });
+    }
+
+    function calculate() {
+        const grams = parseFloat(document.getElementById('grams').value) || 0;
+        const purity = document.getElementById('purity').value;
+        const city = document.getElementById('citySelect').value;
+        const offset = (cityOffsets[city] || 0) / 10;
+
+        let base = 0;
+        if (purity === "24") base = rates.k24;
+        else if (purity === "22") base = rates.k22;
+        else if (purity === "18") base = rates.k18;
+
+        // If it's still 0, the fetch hasn't finished or failed
+        if (base === 0 && grams > 0) {
+            document.getElementById('totalPrice').innerText = "Waiting for Market Data...";
+            return;
+        }
+
+        const total = (base + offset) * grams;
+        document.getElementById('totalPrice').innerText = "Total: ₹" + Math.round(total).toLocaleString('en-IN');
+        
+        if(document.getElementById('cityNote')) {
+            document.getElementById('cityNote').innerText = "*Rate adjusted for " + city.toUpperCase();
+        }
+    }
+
+    window.onload = updateMorningRates;
 </script>
 </body>
 </html>
