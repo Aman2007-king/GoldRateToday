@@ -202,7 +202,12 @@
     
     document.getElementById('cityNote').innerText = "*Rate adjusted for " + city.charAt(0).toUpperCase() + city.slice(1);
 }
-    window.onload = updateMorningRates;
+    // Ensure this line is at the very end of your script tag
+    window.onload = function() {
+        console.log("Page loaded, fetching rates...");
+        updateMorningRates();
+    };
+</script>
 </script>
 </body>
 </html>
