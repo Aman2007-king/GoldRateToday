@@ -38,31 +38,63 @@
         #calc-result { margin-top: 15px; padding: 15px; background: #fff9e6; border: 1px dashed var(--gold-dark); display: none; }
 
         @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 60px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; background: #2c3e50; padding: 10px; border-radius: 5px; border: 1px solid #f1c40f; }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: #f1c40f; transition: 0.3s; border-radius: 2px; }
+        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: #2c3e50; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -2px 0 10px rgba(0,0,0,0.5); }
+        .sidebar-nav-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
+        .sidebar-nav-links a:hover { color: #2c3e50; background: #f1c40f; }
+        .sidebar-nav .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-  "symbols": [
-    { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
-    { "proName": "FOREXCOM:XAGUSD", "title": "Silver" },
-    { "proName": "BSE:SENSEX", "title": "SENSEX" },
-    { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
-    { "proName": "FX_IDC:USDINR", "title": "USD to INR" },
-    { "proName": "MCX:CRUDEOIL1!", "title": "Crude Oil" }
-  ],
-  "showSymbolLogo": true,
-  "colorTheme": "light",
-  "isTransparent": false,
-  "displayMode": "adaptive",
-  "locale": "in"
-}
-  </script>
+
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
 </div>
+
+<div id="sidebar-nav" class="sidebar-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-nav-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
+
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+        "symbols": [
+            { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
+            { "proName": "FOREXCOM:XAGUSD", "title": "Silver" },
+            { "proName": "BSE:SENSEX", "title": "SENSEX" },
+            { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
+            { "proName": "FX_IDC:USDINR", "title": "USD to INR" },
+            { "proName": "MCX:CRUDEOIL1!", "title": "Crude Oil" }
+        ],
+        "showSymbolLogo": true,
+        "colorTheme": "light",
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "locale": "in"
+    }
+    </script>
+</div>
+
 <style>
-    /* Ensures the ticker doesn't hide behind your navbar */
     .tradingview-widget-container {
         position: sticky;
         top: 0;
@@ -70,7 +102,8 @@
         margin-bottom: 0px;
     }
 </style>
-    <nav class="navbar">
+
+<nav class="navbar">
     <div class="nav-content">
         <a href="/" class="nav-link">Gold</a>
         <a href="/silver" class="nav-link">Silver</a>
@@ -81,7 +114,6 @@
         <a href="/mutual-funds">Mutual Funds</a>
         <a href="/calculators">CALCULATORS</a>
         <a href="/banking">🏦 BANKING</a>
-        <a href="/bullion">
     </div>
 </nav>
 
@@ -121,8 +153,7 @@
             <thead>
                 <tr><th>City</th><th>22K (10g)</th><th>24K (10g)</th></tr>
             </thead>
-            <tbody>
-                </tbody>
+            <tbody></tbody>
         </table>
 
         <h2 class="section-title">10 Days Gold Rate Trend</h2>
@@ -130,8 +161,7 @@
             <thead>
                 <tr><th>Date</th><th>22K (1g)</th><th>24K (1g)</th></tr>
             </thead>
-            <tbody>
-                </tbody>
+            <tbody></tbody>
         </table>
     </main>
 
@@ -173,6 +203,12 @@
 </div>
 
 <script>
+    /* --- ADDED SIDEBAR JS --- */
+    function toggleSidebar() {
+        const sb = document.getElementById("sidebar-nav");
+        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+    }
+
     let globalData = null;
 
     async function init() {
@@ -184,23 +220,23 @@
     }
 
     function updateUI() {
+        if (!globalData) return;
         document.getElementById('live-clock').innerText = "Last Updated: " + globalData.update_time;
         
-        // Update main cards
         const g24_10g = globalData.gold.k24 * 10;
         const g22_10g = globalData.gold.k22 * 10;
         document.getElementById('g24').innerText = "₹" + g24_10g.toLocaleString('en-IN');
         document.getElementById('g22').innerText = "₹" + g22_10g.toLocaleString('en-IN');
         document.getElementById('s1kg').innerText = "₹" + parseFloat(globalData.silver.per_kg).toLocaleString('en-IN');
 
-        // City Table
         const cityBody = document.querySelector('#city-table tbody');
+        cityBody.innerHTML = "";
         globalData.cities.forEach(c => {
             cityBody.innerHTML += `<tr><td>${c.name}</td><td>₹${(c.p22*10).toLocaleString('en-IN')}</td><td>₹${(c.p24*10).toLocaleString('en-IN')}</td></tr>`;
         });
 
-        // Trend Table (Simulated 10 days for design)
         const trendBody = document.querySelector('#trend-table tbody');
+        trendBody.innerHTML = "";
         for(let i=0; i<7; i++) {
             let d = new Date(); d.setDate(d.getDate() - i);
             trendBody.innerHTML += `<tr><td>${d.toLocaleDateString()}</td><td>₹${globalData.gold.k22}</td><td>₹${globalData.gold.k24}</td></tr>`;
@@ -217,7 +253,7 @@
 
         let rate = (purity == "24") ? globalData.gold.k24 : (purity == "22" ? globalData.gold.k22 : globalData.gold.k18);
         const cost = (weight * unitMult) * rate;
-        const total = (cost + (cost * making)) * 1.03; // GST 3%
+        const total = (cost + (cost * making)) * 1.03;
 
         document.getElementById('calc-result').style.display = 'block';
         document.getElementById('res-val').innerText = "₹" + total.toLocaleString('en-IN', {maximumFractionDigits: 2});
