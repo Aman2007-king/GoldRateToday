@@ -62,17 +62,32 @@ app.get('/api/bullion-prices', async (req, res) => {
         });
 
         // SAFETY CHECK: Only cache if the price is a real number greater than 0
-        if (response.data && response.data.price_gram_24k > 0) {
-            const formattedData = {
-                gold24k: Math.round(response.data.price_gram_24k * 10).toLocaleString('en-IN'),
-                silver: "85,000", // You can update this to a live silver call too
-                lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-                cityPremium: { mumbai: 0, delhi: 150, chennai: 450 },
-                rawGold: response.data.price_gram_24k * 10 // For calculator
-            };
+       // ... after const response = await axios.get(...)
 
-            myCache.set(cacheKey, formattedData);
-            return res.json(formattedData);
+// 1. Check if we got valid data from the API
+if (response.data && response.data.price_gram_24k > 0) {
+    const priceFor10Grams = Math.round(response.data.price_gram_24k * 10);
+    const marketOffset = 27200; 
+
+    // 2. Format the data correctly for Mumbai/India
+    const formattedData = {
+        gold24k: (priceFor10Grams + marketOffset).toLocaleString('en-IN'),
+        silver: "3,95,000", 
+        lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        cityPremium: { 
+            mumbai: marketOffset, 
+            delhi: marketOffset + 150, 
+            chennai: marketOffset + 450 
+        },
+        rawGold: priceFor10Grams + marketOffset 
+    };
+
+    // 3. Save this valid data into the cache for 24 hours
+    myCache.set(cacheKey, formattedData);
+    
+    // 4. Send the response to the user
+    return res.json(formattedData);
+}
         } else {
             throw new Error("Invalid price from API");
         }
@@ -100,6 +115,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 
                                                            
+
 
 
 
