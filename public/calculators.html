@@ -32,14 +32,45 @@
         .long-content { background: white; padding: 40px; border-radius: 15px; margin-top: 30px; }
         .long-content h2 { color: var(--brand); font-size: 2rem; }
         .article-section { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+
+        /* --- ADDED SIDEBAR CSS --- */
+        .menu-btn { position: fixed; top: 15px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: white; transition: 0.3s; }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: #0c2461; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -2px 0 10px rgba(0,0,0,0.5); }
+        .sidebar-links a { padding: 15px 25px; text-decoration: none; font-size: 1.1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
+        .sidebar-links a:hover { color: #fff; background: #eb2f06; }
+        .sidebar .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
     </style>
 </head>
 <body>
 
+<div class="menu-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-links">
+        <a href="/">📈 IPO Home</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a>
+        <a href="/calculators">🧮 Calculators</a>
+        <a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/banking">🏦 Banking Hub</a>
+        <a href="/nifty">📈 Nifty 50</a>
+        <a href="/sensex">📉 Sensex</a>
+        <a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a>
+        <a href="/fuel">⛽ Fuel Prices</a>
+        <a href="/jewellers">💎 Top Jewellers</a>
+    </div>
+</div>
+
 <nav class="nav-bar">
-    <a href="index.html">📈 IPO</a>
-    <a href="mutual-funds.html">📊 MUTUAL FUNDS</a>
-    <a href="calculators.html" style="border-bottom: 2px solid white;">🧮 CALCULATORS</a>
+    <a href="/">📈 IPO</a>
+    <a href="/mutual-funds">📊 MUTUAL FUNDS</a>
+    <a href="/calculators" style="border-bottom: 2px solid white;">🧮 CALCULATORS</a>
     <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" style="background:var(--success); padding: 5px 10px; border-radius: 4px;">OPEN DEMAT</a>
 </nav>
 
@@ -133,6 +164,12 @@
 </div>
 
 <script>
+    /* --- ADDED SIDEBAR JS --- */
+    function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
+    }
+
     function calcSIP() {
         let P = parseFloat(document.getElementById('sipAmount').value);
         let r = parseFloat(document.getElementById('sipRate').value) / 12 / 100;
@@ -150,10 +187,9 @@
     }
 
     function calcSWP() {
-        // Simple SWP logic for display
         let P = parseFloat(document.getElementById('swpCorpus').value);
         let w = parseFloat(document.getElementById('swpWithdraw').value);
-        let r = parseFloat(document.getElementById('swpRate')?.value || 12) / 12 / 100;
+        let r = 12 / 12 / 100; // Using default 12% as per original code logic
         let n = parseFloat(document.getElementById('swpYears').value) * 12;
         let balance = P * Math.pow(1 + r, n) - w * ((Math.pow(1 + r, n) - 1) / r);
         document.getElementById('swpResult').innerText = "₹" + Math.round(Math.max(0, balance)).toLocaleString('en-IN');
