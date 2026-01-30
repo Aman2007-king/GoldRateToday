@@ -123,18 +123,24 @@
     fetch('/api/bullion-prices')
         .then(res => res.json())
         .then(data => {
-            // Update the display text
+            // 1. Update the display text (This works fine with commas)
             document.getElementById('time').innerText = data.lastUpdated;
-            document.getElementById('gold24').innerText = "₹" + data.gold24k.toLocaleString('en-IN');
-            document.getElementById('silverKg').innerText = "₹" + data.silver.toLocaleString('en-IN');
+            document.getElementById('gold24').innerText = "₹" + data.gold24k;
+            document.getElementById('silverKg').innerText = "₹" + data.silver;
 
-            // Update the calculator variables (price per 1 gram)
-            rates.k24 = data.gold24k / 10;
-            rates.k22 = data.gold22k / 10;
-            rates.k18 = data.gold18k / 10;
-            cityOffsets = data.cityPremium;
+            // 2. THE FIX: Remove commas before doing math
+            // We use .replace(/,/g, '') to turn "71,017" back into "71017"
+            const cleanGold24 = parseFloat(data.gold24k.toString().replace(/,/g, ''));
+            const cleanGold22 = parseFloat(data.gold22k.toString().replace(/,/g, ''));
+            const cleanGold18 = parseFloat(data.gold18k.toString().replace(/,/g, ''));
 
-            // Trigger the calculator so the 0 disappears immediately
+            // 3. Update the calculator variables
+            rates.k24 = cleanGold24 / 10;
+            rates.k22 = cleanGold22 / 10;
+            rates.k18 = cleanGold18 / 10;
+            cityOffsets = data.cityPremium || {};
+
+            // 4. Trigger the calculator
             calculate();
         })
         .catch(err => console.error("Could not load real-time rates:", err));
@@ -158,6 +164,7 @@
     if (purity === "24") base = rates.k24;
     else if (purity === "22") base = rates.k22;
     else if (purity === "18") base = rates.k18;
+    else if (purity === "silver") base = parseFloat(document.getElementById('silverKg').innerText.replace(/[^0-9.]/g, '')) / 1000;
 
     const total = (base + offset) * grams;
     
