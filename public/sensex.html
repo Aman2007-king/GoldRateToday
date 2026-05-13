@@ -1,21 +1,79 @@
-<div class="card" style="height: 600px; margin-top: 20px;">
-    <h2>Live Market Movement</h2>
-    <div class="tradingview-widget-container" style="height: 100%;">
-        <div id="tradingview_chart"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-        <script type="text/javascript">
-        new TradingView.widget({
-            "autosize": true,
-            "symbol": "BSE:SENSEX", // Change to "NSE:NIFTY" for the nifty page
-            "interval": "D",
-            "timezone": "Asia/Kolkata",
-            "theme": "light",
-            "style": "3",
-            "locale": "in",
-            "enable_publishing": false,
-            "allow_symbol_change": true,
-            "container_id": "tradingview_chart"
-        });
-        </script>
+bash
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSE Sensex Live Chart & Price Today | India Wealth Hub</title>
+    <style>
+        :root { --brand: #0c2461; --gold: #f1c40f; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: #333; }
+        .nav-bar { background: var(--brand); padding: 12px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-bar a { color: white; margin: 0 12px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .nav-bar a:hover { color: var(--gold); }
+        header { background: white; border-bottom: 4px solid var(--gold); padding: 20px; text-align: center; }
+        header h1 { margin: 0; font-size: 1.8rem; color: var(--brand); }
+        header p { margin: 5px 0 0; color: #666; font-size: 0.9rem; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); margin-bottom: 25px; border-top: 5px solid var(--brand); }
+        .card h2 { color: var(--brand); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .chart-wrapper { height: 550px; }
+        .main-footer { background: #0a192f; color: #a8b2d1; padding: 40px 20px 20px; margin-top: 50px; font-size: 0.85rem; border-top: 4px solid var(--gold); text-align: center; }
+        .footer-bottom { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; opacity: 0.7; }
+        .menu-btn { position: fixed; top: 60px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; background: var(--brand); padding: 10px; border-radius: 5px; border: 1px solid var(--gold); }
+        .menu-btn span { display: block; width: 25px; height: 3px; background: var(--gold); border-radius: 2px; }
+        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: var(--brand); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
+        .sidebar-nav-links a { padding: 15px 25px; text-decoration: none; font-size: 1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-nav-links a:hover { color: var(--brand); background: var(--gold); }
+        .sidebar-nav .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="menu-btn" onclick="toggleSidebar()"><span></span><span></span><span></span></div>
+<div id="sidebar-nav" class="sidebar-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-nav-links">
+        <a href="/">🏠 Home (Gold)</a><a href="/silver">🥈 Silver</a><a href="/bullion">🟡 Gold & Silver</a>
+        <a href="/nifty">📈 Nifty 50</a><a href="/sensex">📉 Sensex</a><a href="/crude-oil">🛢️ Crude Oil</a>
+        <a href="/currency">💵 Currency</a><a href="/fuel">⛽ Fuel Prices</a><a href="/ipo">📋 IPO 2026</a>
+        <a href="/mutual-funds">📊 Mutual Funds</a><a href="/calculators">🧮 Calculators</a>
+        <a href="/banking">🏦 Banking Hub</a><a href="/jewellers">💎 Top Jewellers</a><a href="/policies">⚖️ Legal & About Us</a>
     </div>
 </div>
+<nav class="nav-bar">
+    <a href="/">Gold</a><a href="/silver">Silver</a><a href="/nifty">Nifty 50</a>
+    <a href="/sensex" style="color:#f1c40f;">Sensex</a><a href="/crude-oil">Crude Oil</a><a href="/currency">Currency</a>
+    <a href="/ipo">IPO 2026</a><a href="/mutual-funds">Mutual Funds</a><a href="/calculators">Calculators</a><a href="/banking">Banking</a>
+</nav>
+<header><h1>📉 BSE Sensex — Live Chart</h1><p>Real-time BSE Sensex index price and movement</p></header>
+<div class="container">
+    <div class="card">
+        <h2>Live Market Movement</h2>
+        <div class="chart-wrapper">
+            <div class="tradingview-widget-container" style="height:100%;">
+                <div id="tradingview_chart" style="height:100%;"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                new TradingView.widget({
+                    "autosize": true, "symbol": "BSE:SENSEX", "interval": "D",
+                    "timezone": "Asia/Kolkata", "theme": "light", "style": "3",
+                    "locale": "in", "enable_publishing": false, "allow_symbol_change": true,
+                    "container_id": "tradingview_chart"
+                });
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>About BSE Sensex</h2>
+        <p>The BSE Sensex (Sensitive Index) is a free-float market-weighted stock market index of 30 well-established and financially sound companies listed on the Bombay Stock Exchange (BSE). It is the oldest stock index in India, giving investors a broad picture of the BSE's performance.</p>
+    </div>
+</div>
+<footer class="main-footer">
+    <p><strong>India Wealth Hub</strong> — Your trusted source for live financial data.</p>
+    <div class="footer-bottom"><p>&copy; 2026 India Wealth Hub | Data is for informational purposes only.</p></div>
+</footer>
+<script>function toggleSidebar() { const sb = document.getElementById("sidebar-nav"); sb.style.width = sb.style.width === "280px" ? "0" : "280px"; }</script>
+</body>
+</html>
