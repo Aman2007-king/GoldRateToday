@@ -1,611 +1,376 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gold Rate Today India 2026 | Live 24K 22K 18K Prices | GoldRateIndia</title>
-<meta name="description" content="Live gold rate today in India. Check latest 24K, 22K, 18K gold price per gram & 10 grams. City-wise rates for Mumbai, Delhi, Chennai, Bangalore, all cities. Free gold calculator.">
+<meta name="description" content="Live gold rate today in India. Check latest 24K, 22K, 18K gold price per gram & 10 grams. City-wise rates for Mumbai, Delhi, Chennai, Bangalore. Gold calculator included.">
+<meta name="keywords" content="gold rate today, gold price india, 24k gold rate, 22k gold rate, today gold rate, gold price per gram india">
+<meta property="og:title" content="Gold Rate Today India 2026 | Live Prices">
+<meta property="og:description" content="Live 24K, 22K & 18K gold rates across all major Indian cities. Free gold price calculator.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --gold:#C8A96E; --gold-bright:#F0C96A; --gold-deep:#8B6914; --gold-pale:#F9F3E6;
-  --ink:#0D0D0D; --ink-mid:#1A1A2B; --ink-soft:#2D2D3E; --cream:#FAF8F3;
-  --white:#FFFFFF; --muted:#6B7480; --border:#E8E2D5;
-  --up:#1A7A4A; --up-bg:#E8F5EE; --down:#C0392B; --down-bg:#FBE9E7;
-  --r:16px; --r-sm:10px; --sh:0 2px 20px rgba(0,0,0,.07);
-  --sh-lg:0 8px 40px rgba(0,0,0,.13); --sh-gold:0 8px 32px rgba(200,169,110,.3);
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-dark: #9A7A30;
+  --brand: #0A1628;
+  --brand-mid: #132040;
+  --surface: #FFFFFF;
+  --surface-2: #F7F4EE;
+  --text: #1A1A2E;
+  --text-muted: #6B7280;
+  --silver: #9BA3AF;
+  --up: #059669;
+  --down: #DC2626;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:inherit}
-input,select{font-family:inherit}
+body{font-family:'DM Sans',sans-serif;background:var(--surface-2);color:var(--text);line-height:1.6}
 
-/* ── Ticker ── */
-.ticker-wrap{background:var(--ink);border-bottom:1px solid rgba(200,169,110,.25);overflow:hidden;padding:7px 0;position:relative;z-index:50}
-.ticker-track{display:flex;animation:ticker 60s linear infinite;white-space:nowrap;width:max-content}
-.ticker-track:hover{animation-play-state:paused}
-.ticker-item{display:inline-flex;align-items:center;gap:6px;padding:0 24px;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.75);border-right:1px solid rgba(255,255,255,.08)}
-.ticker-item .lbl{color:var(--gold);font-weight:600;letter-spacing:.03em}
+/* TICKER */
+.ticker-wrap{background:var(--brand);overflow:hidden;padding:8px 0;border-bottom:2px solid var(--gold)}
+.ticker-inner{display:flex;gap:0;animation:tickerRoll 40s linear infinite;white-space:nowrap}
+.ticker-inner:hover{animation-play-state:paused}
+.ticker-item{padding:0 30px;color:#fff;font-size:.82rem;font-weight:500;display:inline-flex;align-items:center;gap:8px;border-right:1px solid rgba(255,255,255,.15)}
+.ticker-item .lbl{color:var(--gold-light);font-weight:600}
 .ticker-item .val{color:#fff}
-.ticker-item .chg.up{color:#4ade80}
-.ticker-item .chg.dn{color:#f87171}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item .chg.up{color:#4ade80}.ticker-item .chg.dn{color:#f87171}
+@keyframes tickerRoll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* ── Nav ── */
-.topnav{background:var(--ink);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 16px rgba(0,0,0,.4)}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:#fff}
-.logo-badge{width:38px;height:38px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(200,169,110,.4)}
-.logo em{color:var(--gold-bright);font-style:normal}
-.nav{display:flex;align-items:center;gap:2px}
-.nav a{color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500;padding:7px 12px;border-radius:8px;transition:.2s;white-space:nowrap}
-.nav a:hover,.nav a.active{color:#fff;background:rgba(255,255,255,.1)}
-.nav a.cta{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:var(--ink);font-weight:700;padding:7px 16px;box-shadow:0 3px 10px rgba(200,169,110,.4)}
-.hamburger{display:none;flex-direction:column;gap:5px;background:rgba(255,255,255,.08);border:none;padding:9px;border-radius:9px}
-.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;display:block}
-@media(max-width:960px){.nav{display:none}.hamburger{display:flex}}
+/* TOPNAV */
+.topnav{background:var(--brand);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.logo{font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo span{color:var(--gold)}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;padding:8px 14px;border-radius:8px;font-size:.85rem;font-weight:500;transition:.2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a.cta{background:var(--gold);color:var(--brand);font-weight:700}
+.nav-links a.cta:hover{background:var(--gold-light)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:rgba(255,255,255,.1);border-radius:8px}
+.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}}
 
-/* ── Drawer ── */
-.drawer{position:fixed;top:0;right:-100%;width:min(320px,90vw);height:100vh;background:var(--ink-mid);z-index:2000;transition:right .38s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto}
-.drawer.open{right:0}
-.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
-.drawer-close{background:rgba(255,255,255,.08);border:none;color:#fff;width:36px;height:36px;border-radius:9px;font-size:1.2rem;cursor:pointer}
-.drawer-links{padding:12px}
-.drawer-links a{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.8);font-size:.9rem;font-weight:500;padding:12px 14px;border-radius:10px;margin-bottom:2px;transition:.2s}
-.drawer-links a:hover{background:rgba(255,255,255,.07);color:#fff}
-.drawer-links a .di{width:28px;height:28px;background:rgba(200,169,110,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
-.drawer-section{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);padding:14px 14px 6px}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1999;backdrop-filter:blur(2px)}
+/* MOBILE MENU */
+.mobile-menu{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--brand-mid);z-index:2000;transition:.4s cubic-bezier(.4,0,.2,1);padding:20px;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.5)}
+.mobile-menu.open{right:0}
+.mobile-menu-close{color:#fff;font-size:1.5rem;cursor:pointer;float:right;padding:5px;margin-bottom:20px}
+.mobile-menu a{display:block;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 15px;border-radius:10px;margin-bottom:4px;font-weight:500;transition:.2s}
+.mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1999}
 .overlay.show{display:block}
 
-/* ── Status bar ── */
-.status-bar{background:var(--gold-pale);border-bottom:1px solid var(--border);padding:6px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:.75rem;color:var(--muted)}
-.live-dot{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--up)}
-.live-dot::before{content:'';width:7px;height:7px;background:var(--up);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
-.stale-dot{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--muted)}
-.stale-dot::before{content:'';width:7px;height:7px;background:var(--muted);border-radius:50%;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 60%,#1a2d5a 100%);padding:48px 20px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none}
+.hero-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero-left h1{font-family:'Playfair Display',serif;color:#fff;font-size:2.8rem;line-height:1.2;margin-bottom:12px}
+.hero-left h1 span{color:var(--gold-light)}
+.hero-left p{color:rgba(255,255,255,.7);font-size:1rem;margin-bottom:24px}
+.hero-time{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(201,168,76,.3);padding:8px 16px;border-radius:30px;color:rgba(255,255,255,.9);font-size:.82rem}
+.hero-time .dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
 
-/* ── Data source badge ── */
-.src-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(200,169,110,.15);border:1px solid rgba(200,169,110,.3);color:var(--gold-deep);font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:20px}
+/* PRICE CARDS HERO */
+.hero-prices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.price-card-hero{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(201,168,76,.2);border-radius:var(--radius);padding:20px;transition:.3s}
+.price-card-hero:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.price-card-hero .label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.55);margin-bottom:6px}
+.price-card-hero .price{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;font-weight:700;line-height:1}
+.price-card-hero .sub{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:4px}
+.price-card-hero.gold{border-color:rgba(201,168,76,.5)}
+.price-card-hero.silver{border-color:rgba(155,163,175,.4)}
+.price-card-hero .change-badge{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:600;padding:3px 8px;border-radius:20px;margin-top:8px}
+.change-badge.up{background:rgba(4,120,87,.25);color:#4ade80}
+.change-badge.dn{background:rgba(220,38,38,.2);color:#f87171}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.hero-left h1{font-size:2rem}}
 
-/* ── Hero ── */
-.hero{background:linear-gradient(145deg,var(--ink) 0%,var(--ink-mid) 55%,#1B2A4E 100%);padding:52px 24px 64px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,110,.12) 0%,transparent 70%);top:-200px;right:-150px;pointer-events:none}
-.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.hero-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);color:var(--gold-bright);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:16px}
-.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
-.hero-h1 em{color:var(--gold-bright);font-style:normal}
-.hero-sub{color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:28px;max-width:460px}
-.hero-time-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);color:rgba(255,255,255,.8);font-size:.78rem;font-weight:500;padding:7px 16px;border-radius:30px}
-.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.hpc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 20px;backdrop-filter:blur(10px);transition:all .3s;position:relative;overflow:hidden}
-.hpc:hover{transform:translateY(-3px);background:rgba(255,255,255,.09);box-shadow:var(--sh-gold)}
-.hpc.wide{grid-column:1/-1;background:rgba(200,169,110,.1);border-color:rgba(200,169,110,.3)}
-.hpc .label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45);margin-bottom:6px}
-.hpc .price{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:#fff;line-height:1;letter-spacing:-.01em}
-.hpc.wide .price{font-size:2.6rem}
-.hpc .unit{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:3px}
-.hpc .badge{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:20px;margin-top:10px}
-.badge.up{background:rgba(26,122,74,.3);color:#4ade80}
-.badge.live{background:rgba(200,169,110,.25);color:var(--gold-bright)}
-.badge.neutral{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6)}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-h1{font-size:2.2rem}}
+/* MAIN CONTAINER */
+.main{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:1fr 360px;gap:28px}
+@media(max-width:1000px){.main{grid-template-columns:1fr}}
 
-/* ── Data source info banner ── */
-.data-info-banner{background:linear-gradient(to right,rgba(200,169,110,.08),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.2);border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;font-size:.8rem;color:var(--muted)}
-.data-info-banner .di-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px}
-.data-info-banner strong{color:var(--ink);display:block;margin-bottom:3px;font-size:.82rem}
+/* SECTION HEADING */
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.section-head h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--brand)}
+.section-head .line{flex:1;height:2px;background:linear-gradient(to right,var(--gold),transparent)}
 
-/* ── Breadcrumb ── */
-.breadcrumb-wrap{max-width:1200px;margin:20px auto 0;padding:0 24px;font-size:.75rem;color:var(--muted)}
-.breadcrumb-wrap a{color:var(--gold-deep)}
-.breadcrumb-wrap span{margin:0 6px}
+/* CARDS */
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:24px}
 
-/* ── Main layout ── */
-.main-wrap{max-width:1200px;margin:0 auto;padding:28px 24px 60px;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
-@media(max-width:1050px){.main-wrap{grid-template-columns:1fr}}
+/* PRICE GRID */
+.price-grid-main{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.purity-card{background:var(--surface);border-radius:14px;padding:18px;text-align:center;box-shadow:var(--shadow);border-top:4px solid var(--gold);transition:.3s;cursor:default}
+.purity-card.silver-card{border-top-color:var(--silver)}
+.purity-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.purity-card .karat{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:6px}
+.purity-card .amt{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--brand)}
+.purity-card .per{font-size:.74rem;color:var(--text-muted);margin-top:2px}
+.purity-card .yest{font-size:.74rem;color:var(--text-muted);margin-top:6px;padding-top:6px;border-top:1px solid #f0f0f0}
+@media(max-width:600px){.price-grid-main{grid-template-columns:1fr 1fr}}
 
-/* ── Section heading ── */
-.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--ink);white-space:nowrap;letter-spacing:-.01em}
-.sec-line{flex:1;height:1px;background:linear-gradient(to right,var(--gold),transparent)}
-.sec-badge{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-deep);background:var(--gold-pale);border:1px solid var(--gold);padding:3px 10px;border-radius:20px}
+/* CITY TABLE */
+.city-table{width:100%;border-collapse:collapse}
+.city-table thead th{background:#F7F4EE;padding:11px 14px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);text-align:left}
+.city-table thead th:not(:first-child){text-align:right}
+.city-table tbody td{padding:11px 14px;border-bottom:1px solid #f0ede5;font-size:.9rem}
+.city-table tbody td:not(:first-child){text-align:right;font-weight:600;color:var(--brand)}
+.city-table tbody tr:hover{background:#FFFDF5}
+.city-table .city-name{display:flex;align-items:center;gap:8px;font-weight:500}
+.city-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
-/* ── Card ── */
-.card{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);border:1px solid var(--border);padding:24px;margin-bottom:24px}
+/* TREND TABLE */
+.trend-table{width:100%;border-collapse:collapse}
+.trend-table th{background:var(--brand);color:rgba(255,255,255,.8);padding:10px 14px;font-size:.78rem;font-weight:600;text-align:left}
+.trend-table th:not(:first-child){text-align:right}
+.trend-table td{padding:10px 14px;border-bottom:1px solid #f0ede5;font-size:.88rem}
+.trend-table td:not(:first-child){text-align:right;font-weight:600}
+.trend-table tr:hover{background:#FFFDF5}
 
-/* ── Purity cards ── */
-.purity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
-@media(max-width:600px){.purity-grid{grid-template-columns:1fr 1fr}}
-.pur-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 16px;text-align:center;box-shadow:var(--sh);transition:all .3s;border-top:3px solid var(--gold);position:relative;overflow:hidden}
-.pur-card.silver{border-top-color:#9BA3AF}
-.pur-card.gold18{border-top-color:#D4AF37}
-.pur-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.pur-karat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
-.pur-price{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
-.pur-unit{font-size:.72rem;color:var(--muted);margin-top:3px}
-.pur-gram{font-size:.78rem;color:var(--gold-deep);font-weight:600;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
-.pur-yest{font-size:.72rem;color:var(--muted);margin-top:4px}
-.pur-change{display:inline-flex;align-items:center;gap:3px;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:8px}
-.pur-change.up{background:var(--up-bg);color:var(--up)}
-.pur-change.dn{background:var(--down-bg);color:var(--down)}
-.pur-change.flat{background:#f1f1f1;color:var(--muted)}
+/* SIDEBAR CALC */
+.sticky-wrap{position:sticky;top:80px}
+.calc-card{background:var(--brand);border-radius:var(--radius);padding:24px;color:#fff;margin-bottom:20px}
+.calc-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold-light);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.form-group input,.form-group select{width:100%;padding:11px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-size:.9rem;transition:.2s;font-family:'DM Sans',sans-serif}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.15)}
+.form-group select option{background:var(--brand-mid);color:#fff}
+.form-row{display:grid;grid-template-columns:1fr 100px;gap:10px}
+.btn-calc{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;color:var(--brand);cursor:pointer;margin-top:4px;transition:.3s}
+.btn-calc:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.4)}
+.calc-result{margin-top:16px;padding:16px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:12px;display:none;animation:fadeIn .3s ease}
+.calc-result .total-label{font-size:.75rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.06em}
+.calc-result .total-val{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light);margin:4px 0}
+.calc-result .breakdown{font-size:.78rem;color:rgba(255,255,255,.5)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── Update schedule card ── */
-.update-schedule{background:var(--gold-pale);border:1px solid rgba(200,169,110,.4);border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.8rem;color:var(--ink-soft)}
-.update-schedule strong{color:var(--gold-deep)}
-.schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.schedule-item{background:white;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.75rem}
-.schedule-item .st{font-weight:700;color:var(--ink);display:block;margin-bottom:2px}
-.schedule-item .sd{color:var(--muted)}
+/* QUICK LINKS */
+.quick-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick-link{display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface-2);border-radius:12px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;transition:.2s;border:1px solid transparent}
+.quick-link:hover{border-color:var(--gold);background:#fff;transform:translateX(2px)}
+.quick-link .icon{width:34px;height:34px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 
-/* ── Tables ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:.88rem}
-thead th{background:var(--ink);color:rgba(255,255,255,.75);padding:11px 14px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;text-align:left;white-space:nowrap}
-thead th:not(:first-child){text-align:right}
-tbody td{padding:11px 14px;border-bottom:1px solid var(--border)}
-tbody td:not(:first-child){text-align:right;font-weight:600;color:var(--ink)}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover{background:var(--gold-pale)}
-.city-row{display:flex;align-items:center;gap:8px}
-.city-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;flex-shrink:0}
-.trend-tbl thead th{background:var(--ink-mid)}
-.chg-up{color:var(--up);font-weight:700}
-.chg-dn{color:var(--down);font-weight:700}
+/* CHART */
+.chart-container{position:relative;height:220px;margin-top:10px}
 
-/* ── Auto-update sections ── */
-.auto-section{background:var(--white);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:24px;overflow:hidden}
-.auto-section-head{background:linear-gradient(to right,var(--ink),var(--ink-mid));color:white;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
-.auto-section-head h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:white}
-.auto-section-body{padding:20px}
+/* TRADINGVIEW */
+.tv-wrap{background:var(--brand);border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
 
-/* ── IPO grid ── */
-.ipo-grid{display:flex;flex-direction:column;gap:10px}
-.ipo-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--cream);border:1px solid var(--border);border-radius:10px;gap:10px;flex-wrap:wrap}
-.ipo-name{font-weight:700;font-size:.88rem;color:var(--ink)}
-.ipo-meta{font-size:.72rem;color:var(--muted);margin-top:2px}
-.ipo-price{font-weight:700;font-size:.9rem;color:var(--gold-deep)}
-.ipo-status{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:20px}
-.ipo-status.open{background:var(--up-bg);color:var(--up)}
-.ipo-status.upcoming{background:rgba(200,169,110,.15);color:var(--gold-deep)}
-.ipo-status.listed{background:#EEF2FF;color:#4338CA}
-
-/* ── Fuel grid ── */
-.fuel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.fuel-card{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
-.fuel-icon{font-size:1.6rem;margin-bottom:6px}
-.fuel-name{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px}
-.fuel-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--ink)}
-.fuel-city{font-size:.7rem;color:var(--muted);margin-top:2px}
-.fuel-chg{font-size:.68rem;margin-top:4px}
-
-/* ── MF section ── */
-.mf-list{display:flex;flex-direction:column;gap:8px}
-.mf-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--cream);border-radius:9px;border:1px solid var(--border)}
-.mf-name{font-size:.82rem;font-weight:600;color:var(--ink)}
-.mf-cat{font-size:.68rem;color:var(--muted);margin-top:1px}
-.mf-nav{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--ink)}
-.mf-ret{font-size:.7rem;font-weight:700}
-.mf-ret.up{color:var(--up)}
-.mf-ret.dn{color:var(--down)}
-
-/* ── Market snapshot ── */
-.mkt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
-.mkt-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--sh)}
-.mkt-card .mk-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-.mkt-card .mk-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink)}
-.mkt-card .mk-chg{font-size:.72rem;font-weight:600;margin-top:2px}
-.mk-chg.up{color:var(--up)}
-.mk-chg.dn{color:var(--down)}
-
-/* ── Info cards ── */
+/* INFO CARDS */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.info-card{background:var(--surface);border-radius:14px;padding:20px;box-shadow:var(--shadow);border-left:4px solid var(--gold)}
+.info-card h3{font-size:.9rem;font-weight:700;color:var(--brand);margin-bottom:8px}
+.info-card p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
 @media(max-width:700px){.info-grid{grid-template-columns:1fr}}
-.info-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--sh);border-left:4px solid var(--gold)}
-.info-card h3{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:8px}
-.info-card p{font-size:.82rem;color:var(--muted);line-height:1.65}
 
-/* ── FAQ ── */
-.faq{display:flex;flex-direction:column;gap:0}
-.faq-item{border-bottom:1px solid var(--border)}
-.faq-item:last-child{border-bottom:none}
-.faq-q{display:flex;align-items:center;justify-content:space-between;padding:16px 0;font-weight:600;font-size:.9rem;color:var(--ink);cursor:pointer;user-select:none;gap:12px}
-.faq-q .icon{width:24px;height:24px;background:var(--gold-pale);border:1px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--gold-deep);flex-shrink:0;font-weight:700;transition:.3s}
-.faq-item.open .faq-q .icon{background:var(--gold);color:var(--ink);transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s;font-size:.85rem;color:var(--muted);line-height:1.75}
-.faq-item.open .faq-a{max-height:300px;padding-bottom:16px}
+/* FAQ */
+.faq-item{border-bottom:1px solid #eee;padding:16px 0}
+.faq-q{font-weight:600;color:var(--brand);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.9rem}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--gold);font-weight:300;transition:.3s}
+.faq-item.open .faq-q::after{content:'−'}
+.faq-a{max-height:0;overflow:hidden;transition:.3s;font-size:.85rem;color:var(--text-muted);line-height:1.7}
+.faq-item.open .faq-a{max-height:200px;padding-top:10px}
 
-/* ── Sidebar ── */
-.sidebar-sticky{position:sticky;top:76px}
-.calc-card{background:var(--ink);border-radius:var(--r);padding:24px;margin-bottom:20px;box-shadow:var(--sh-lg)}
-.calc-head{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold-bright);margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.form-group{margin-bottom:14px}
-.form-label{display:block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-bottom:6px}
-.form-row{display:grid;grid-template-columns:1fr 110px;gap:8px}
-.fi{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-sm);color:#fff;padding:10px 13px;font-size:.88rem;transition:.2s;outline:none}
-.fi:focus{border-color:var(--gold);background:rgba(255,255,255,.1)}
-.fi option{background:#1A1A2B;color:#fff}
-.btn-calc{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));border:none;border-radius:var(--r-sm);font-size:.95rem;font-weight:700;color:var(--ink);margin-top:6px;transition:.3s;box-shadow:0 4px 16px rgba(200,169,110,.35)}
-.btn-calc:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(200,169,110,.45)}
-.calc-result{margin-top:16px;padding:18px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.25);border-radius:12px;display:none;animation:fadein .3s ease}
-@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.calc-result .res-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4)}
-.calc-result .res-total{font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:var(--gold-bright);font-weight:700;margin:4px 0 8px;line-height:1}
-.calc-result .res-breakdown{font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.7}
-.calc-result .res-note{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08)}
-
-/* ── Quick links ── */
-.ql-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.ql{display:flex;align-items:center;gap:9px;padding:11px 12px;background:var(--cream);border:1px solid var(--border);border-radius:11px;font-size:.82rem;font-weight:500;color:var(--ink);transition:.2s}
-.ql:hover{border-color:var(--gold);background:var(--gold-pale);transform:translateX(2px)}
-.ql .qi{width:30px;height:30px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
-
-/* ── Error state ── */
-.err-msg{background:var(--down-bg);border:1px solid rgba(192,57,43,.2);border-radius:10px;padding:14px 18px;font-size:.82rem;color:var(--down);margin-bottom:16px;display:none}
-
-/* ── Skeleton ── */
-.skel{background:linear-gradient(90deg,#f0ede6 25%,#e8e3d8 50%,#f0ede6 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px;color:transparent!important;pointer-events:none}
-.skel-d{background:linear-gradient(90deg,rgba(255,255,255,.08) 25%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.08) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px;color:transparent!important;pointer-events:none}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-/* ── Refresh btn ── */
-.refresh-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid rgba(200,169,110,.4);color:var(--gold-deep);font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:20px;cursor:pointer;transition:.2s}
-.refresh-btn:hover{background:var(--gold-pale)}
-.refresh-btn.spinning i{animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* ── Footer ── */
-footer{background:var(--ink);color:rgba(255,255,255,.65);padding:64px 24px 32px;border-top:2px solid var(--gold)}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+/* FOOTER */
+footer{background:var(--brand);color:rgba(255,255,255,.7);padding:60px 20px 30px;border-top:3px solid var(--gold)}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand .logo{font-size:1.3rem;margin-bottom:12px;display:flex;gap:8px}
+.footer-brand p{font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.5)}
+footer h4{color:#fff;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.82rem;transition:.2s}
+footer ul li a:hover{color:var(--gold-light)}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);text-align:center;font-size:.78rem;color:rgba(255,255,255,.35)}
+@media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}
 @media(max-width:500px){.footer-grid{grid-template-columns:1fr}}
-.footer-logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:14px}
-.footer-brand p{font-size:.82rem;line-height:1.75;color:rgba(255,255,255,.45);max-width:300px}
-.footer-col h4{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-bright);margin-bottom:16px}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.footer-col ul li a{font-size:.82rem;color:rgba(255,255,255,.5);transition:.2s}
-.footer-col ul li a:hover{color:var(--gold-bright)}
-.footer-bottom{padding-top:24px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.75rem;color:rgba(255,255,255,.3)}
-.footer-badges{display:flex;align-items:center;gap:12px}
-.footer-badge{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:20px;border:1px solid rgba(200,169,110,.25);color:rgba(200,169,110,.7)}
+
+/* SCHEMA MARKUP */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* BREADCRUMB */
+.breadcrumb{max-width:1200px;margin:16px auto 0;padding:0 20px;font-size:.78rem;color:var(--text-muted)}
+.breadcrumb a{color:var(--gold-dark);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb span{margin:0 6px}
+
+/* BADGE */
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(4,120,87,.1);border:1px solid rgba(4,120,87,.3);color:#059669;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700}
+.live-badge .dot{width:6px;height:6px;background:#059669;border-radius:50%;animation:pulse 2s infinite}
 </style>
 </head>
 <body>
 
+<!-- SCHEMA: WebSite -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"GoldRateIndia","url":"https://goldrateindia.com","description":"Live gold rates in India — 24K, 22K, 18K gold price today per gram and 10 grams","potentialAction":{"@type":"SearchAction","target":"https://goldrateindia.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is today's gold rate in India?","acceptedAnswer":{"@type":"Answer","text":"Today's gold rate in India for 24K is approximately ₹1,69,200 per 10 grams. Rates vary slightly by city due to local taxes and making charges."}},{"@type":"Question","name":"What is the difference between 22K and 24K gold?","acceptedAnswer":{"@type":"Answer","text":"24K gold is 99.9% pure gold. 22K gold is 91.6% pure and mixed with other metals, making it more durable for jewellery. 22K is most commonly used for jewellery in India."}}]}
+</script>
+
 <!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track" id="ticker">
-    <span class="ticker-item"><span class="lbl">24K Gold</span><span class="val" id="tk-g24">Loading...</span></span>
-    <span class="ticker-item"><span class="lbl">22K Gold</span><span class="val" id="tk-g22">—</span></span>
-    <span class="ticker-item"><span class="lbl">18K Gold</span><span class="val" id="tk-g18">—</span></span>
-    <span class="ticker-item"><span class="lbl">Silver/kg</span><span class="val" id="tk-sil">—</span></span>
-    <span class="ticker-item"><span class="lbl">Petrol/L</span><span class="val" id="tk-pet">—</span></span>
-    <span class="ticker-item"><span class="lbl">Diesel/L</span><span class="val" id="tk-die">—</span></span>
-    <span class="ticker-item"><span class="lbl">SENSEX</span><span class="val" id="tk-snx">—</span></span>
-    <span class="ticker-item"><span class="lbl">USD/INR</span><span class="val" id="tk-usd">—</span></span>
-    <span class="ticker-item"><span class="lbl">Gold/g</span><span class="val" id="tk-g1">—</span></span>
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item"><span class="lbl">Gold 24K</span><span class="val" id="tk-g24">₹--</span><span class="chg up" id="tk-g24c">▲</span></span>
+    <span class="ticker-item"><span class="lbl">Gold 22K</span><span class="val" id="tk-g22">₹--</span></span>
+    <span class="ticker-item"><span class="lbl">Silver</span><span class="val" id="tk-sil">₹--</span></span>
+    <span class="ticker-item"><span class="lbl">USD/INR</span><span class="val">83.42</span></span>
+    <span class="ticker-item"><span class="lbl">MCX Gold</span><span class="val" id="tk-mcx">--</span></span>
+    <span class="ticker-item"><span class="lbl">Sensex</span><span class="val">76,140</span><span class="chg up">▲ 0.4%</span></span>
+    <span class="ticker-item"><span class="lbl">Nifty</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><span class="lbl">Gold 24K</span><span class="val" id="tk-g24b">₹--</span></span>
+    <span class="ticker-item"><span class="lbl">Gold 22K</span><span class="val" id="tk-g22b">₹--</span></span>
+    <span class="ticker-item"><span class="lbl">Silver</span><span class="val" id="tk-silb">₹--</span></span>
+    <span class="ticker-item"><span class="lbl">USD/INR</span><span class="val">83.42</span></span>
+    <span class="ticker-item"><span class="lbl">MCX Gold</span><span class="val">--</span></span>
+    <span class="ticker-item"><span class="lbl">Sensex</span><span class="val">76,140</span><span class="chg up">▲ 0.4%</span></span>
+    <span class="ticker-item"><span class="lbl">Nifty</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span>
   </div>
 </div>
 
-<!-- TOPNAV -->
+<!-- TOP NAV -->
 <nav class="topnav">
-  <a href="/" class="logo">
-    <div class="logo-badge">🥇</div>
-    Gold<em>Rate</em>India
-  </a>
-  <div class="nav" role="navigation">
-    <a href="/" class="active">Home</a>
-    <a href="#silver-section">Silver</a>
-    <a href="#fuel-section">Fuel</a>
-    <a href="#ipo-section">IPO</a>
-    <a href="#mf-section">Mutual Funds</a>
-    <a href="#calc-section" class="cta">Calculator</a>
+  <a href="/" class="logo"><span class="logo-icon">🥇</span>Gold<span>Rate</span>India</a>
+  <div class="nav-links">
+    <a href="/" class="active">Gold</a>
+    <a href="/silver">Silver</a>
+    <a href="/bullion">Bullion</a>
+    <a href="/nifty">Nifty</a>
+    <a href="/sensex">Sensex</a>
+    <a href="/crude-oil">Crude Oil</a>
+    <a href="/currency">Currency</a>
+    <a href="/ipo">IPO 2026</a>
+    <a href="/calculators">Calculators</a>
+    <a href="/jewellers" class="cta">💎 Jewellers</a>
   </div>
-  <button class="hamburger" onclick="openDrawer()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- MOBILE DRAWER -->
-<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer" role="dialog">
-  <div class="drawer-head">
-    <a href="/" class="logo" style="font-size:1.3rem">
-      <div class="logo-badge" style="width:32px;height:32px;font-size:1.1rem">🥇</div>
-      Gold<em>Rate</em>India
-    </a>
-    <button class="drawer-close" onclick="closeDrawer()">✕</button>
-  </div>
-  <div class="drawer-links">
-    <div class="drawer-section">Market Data</div>
-    <a href="/"><div class="di">🥇</div>Gold Rate Today</a>
-    <a href="#silver-section"><div class="di">🥈</div>Silver Rate</a>
-    <a href="#fuel-section"><div class="di">⛽</div>Fuel Prices</a>
-    <a href="#ipo-section"><div class="di">🚀</div>IPO 2026</a>
-    <a href="#mf-section"><div class="di">💼</div>Mutual Funds</a>
-    <div class="drawer-section">Tools</div>
-    <a href="#calc-section"><div class="di">🧮</div>Gold Calculator</a>
-  </div>
+<!-- MOBILE MENU -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" onclick="closeMenu()">✕</span>
+  <a href="/">🥇 Gold Rate Today</a>
+  <a href="/silver">🥈 Silver Rate</a>
+  <a href="/bullion">🟡 Bullion Market</a>
+  <a href="/nifty">📈 Nifty 50</a>
+  <a href="/sensex">📉 Sensex</a>
+  <a href="/crude-oil">🛢️ Crude Oil</a>
+  <a href="/currency">💱 Currency</a>
+  <a href="/fuel">⛽ Fuel Prices</a>
+  <a href="/ipo">🚀 IPO 2026</a>
+  <a href="/mutual-funds">📊 Mutual Funds</a>
+  <a href="/calculators">🧮 Calculators</a>
+  <a href="/banking">🏦 Banking</a>
+  <a href="/jewellers">💎 Top Jewellers</a>
+  <a href="/policies">⚖️ About & Legal</a>
 </div>
 
-<!-- STATUS BAR -->
-<div class="status-bar">
-  <span id="live-status-wrap">
-    <span class="stale-dot" id="live-status">Fetching prices...</span>
-  </span>
-  <span id="live-clock">—</span>
-  <span>Gold updates: 10 AM & 6 PM IST daily</span>
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="/">Home</a><span>›</span><strong>Gold Rate Today</strong>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow"><span>🔴</span>Live Market Data</div>
-        <h1 class="hero-h1">Gold Rate <em>Today</em><br>in India</h1>
-        <p class="hero-sub">Live 24K, 22K & 18K gold prices, fuel, IPO & mutual fund data — all in one place, updated daily.</p>
-        <div class="hero-time-badge"><span>🕐</span><span id="hero-clock">Loading...</span></div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <h1>Gold Rate <span>Today</span> in India</h1>
+      <p>Live 24K, 22K & 18K gold prices per gram across all major cities</p>
+      <div class="hero-time"><span class="dot"></span><span id="live-clock">Loading...</span></div>
+    </div>
+    <div class="hero-prices">
+      <div class="price-card-hero gold" style="grid-column:1/-1">
+        <div class="label">24 Karat Gold — 10 Grams</div>
+        <div class="price" id="h-g24" style="font-family:'Playfair Display',serif;font-size:2.4rem;color:#fff;font-weight:700">--</div>
+        <div class="sub" id="h-g24-sub">per 10g</div>
+        <span class="change-badge up" id="h-badge">Live</span>
       </div>
-      <div class="hero-cards">
-        <div class="hpc wide">
-          <div class="label">24 Karat Gold — Per 10 Grams (Mumbai)</div>
-          <div class="price skel-d" id="h-g24">₹1,70,000</div>
-          <div class="unit" id="h-g24-unit">Fetching from live source...</div>
-          <span class="badge live" id="h-badge">⟳ Loading...</span>
-        </div>
-        <div class="hpc">
-          <div class="label">22K Gold / 10g</div>
-          <div class="price skel-d" id="h-g22">₹--</div>
-          <div class="unit">Hallmark 916</div>
-        </div>
-        <div class="hpc">
-          <div class="label">18K Gold / 10g</div>
-          <div class="price skel-d" id="h-g18">₹--</div>
-          <div class="unit">75% Pure</div>
-        </div>
-        <div class="hpc" style="border-color:rgba(155,163,175,.3)">
-          <div class="label">Silver / 1 kg</div>
-          <div class="price skel-d" id="h-sil">₹--</div>
-          <div class="unit">999 Fine</div>
-        </div>
-        <div class="hpc">
-          <div class="label">Gold / 1 Gram</div>
-          <div class="price skel-d" id="h-g1">₹--</div>
-          <div class="unit">24K Pure</div>
-        </div>
+      <div class="price-card-hero">
+        <div class="label">22K Gold / 10g</div>
+        <div class="price" id="h-g22">--</div>
+      </div>
+      <div class="price-card-hero">
+        <div class="label">18K Gold / 10g</div>
+        <div class="price" id="h-g18">--</div>
+      </div>
+      <div class="price-card-hero silver">
+        <div class="label">Silver / 1 KG</div>
+        <div class="price" id="h-sil">--</div>
+      </div>
+      <div class="price-card-hero">
+        <div class="label">Gold / 1 Gram</div>
+        <div class="price" id="h-g1">--</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BREADCRUMB -->
-<div class="breadcrumb-wrap">
-  <a href="/">Home</a><span>›</span><strong>Gold Rate Today</strong>
-</div>
-
-<!-- TRADINGVIEW TICKER -->
-<div style="margin:20px 24px 0;max-width:1200px;margin-left:auto;margin-right:auto;border-radius:12px;overflow:hidden;border:1px solid var(--border)">
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {"symbols":[{"proName":"FOREXCOM:XAUUSD","title":"Gold/USD"},{"proName":"FOREXCOM:XAGUSD","title":"Silver/USD"},{"proName":"BSE:SENSEX","title":"SENSEX"},{"proName":"NSE:NIFTY","title":"NIFTY 50"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"MCX:CRUDEOIL1!","title":"Crude Oil"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"in"}
-    </script>
-  </div>
-</div>
-
 <!-- MAIN CONTENT -->
-<div class="main-wrap">
+<div class="main">
 <main>
 
-  <!-- ERROR BANNER -->
-  <div class="err-msg" id="err-banner">⚠️ <span id="err-text">Could not fetch live prices. Showing last saved rates.</span></div>
-
-  <!-- HOW DATA WORKS -->
-  <div class="data-info-banner">
-    <div class="di-icon">ℹ️</div>
-    <div>
-      <strong>How live data works on this site (no backend needed)</strong>
-      Gold & Silver: Fetched from <b>GoldAPI.io</b> (free tier) or <b>Frankfurter.app</b> + LBMA reference via <b>Yahoo Finance proxy</b>. Updates twice daily at 10 AM & 6 PM IST and cached in your browser.
-      Fuel, IPO & Mutual Funds: Loaded from a free <b>Google Sheet</b> you control — edit it anytime and the site updates automatically within minutes.
-      <a href="#setup-guide" style="color:var(--gold-deep);font-weight:700">See setup guide ↓</a>
-    </div>
-  </div>
-
-  <!-- UPDATE SCHEDULE -->
-  <div class="update-schedule">
-    <strong>📅 Auto-Update Schedule</strong> — what updates when:
-    <div class="schedule-grid">
-      <div class="schedule-item"><span class="st">⚡ Gold & Silver</span><span class="sd">2× daily — 10 AM & 6 PM IST (cached in browser)</span></div>
-      <div class="schedule-item"><span class="st">📈 SENSEX / NIFTY</span><span class="sd">Live via TradingView widget (always real-time)</span></div>
-      <div class="schedule-item"><span class="st">🚀 IPO List</span><span class="sd">From your Google Sheet — update anytime</span></div>
-      <div class="schedule-item"><span class="st">⛽ Fuel Prices</span><span class="sd">From your Google Sheet — update weekly</span></div>
-      <div class="schedule-item"><span class="st">💼 Mutual Funds</span><span class="sd">From your Google Sheet — update daily</span></div>
-      <div class="schedule-item"><span class="st">💱 USD/INR</span><span class="sd">Free from Frankfurter.app (every page load)</span></div>
-    </div>
-  </div>
-
   <!-- TODAY'S PRICES -->
-  <div class="sec-head">
-    <h2>Today's Gold & Silver Prices</h2>
-    <div class="sec-line"></div>
-    <button class="refresh-btn" id="refresh-btn" onclick="forceRefreshGold()">
-      <i class="fas fa-sync-alt"></i> Refresh
-    </button>
-  </div>
-
-  <div class="purity-grid">
-    <div class="pur-card">
-      <div class="pur-karat">24 Karat — Pure Gold</div>
-      <div class="pur-price skel" id="p-g24-10">₹--</div>
-      <div class="pur-unit">per 10 grams</div>
-      <div class="pur-gram" id="p-g24-1">—</div>
-      <div class="pur-change flat" id="ch-g24">Loading...</div>
-      <div class="pur-yest" id="y-g24">Yesterday: —</div>
+  <div class="section-head"><h2>Today's Gold Prices</h2><div class="line"></div><span class="live-badge"><span class="dot"></span>Live</span></div>
+  <div class="price-grid-main">
+    <div class="purity-card">
+      <div class="karat">24 Karat (Pure Gold)</div>
+      <div class="amt" id="g24-10">₹--</div>
+      <div class="per">per 10 grams</div>
+      <div style="font-size:.82rem;color:var(--gold-dark);font-weight:600;margin-top:6px" id="g24-1">₹-- / gram</div>
+      <div class="yest" id="y-g24">Yesterday: ₹--</div>
     </div>
-    <div class="pur-card gold18">
-      <div class="pur-karat">22 Karat — Hallmark 916</div>
-      <div class="pur-price skel" id="p-g22-10">₹--</div>
-      <div class="pur-unit">per 10 grams</div>
-      <div class="pur-gram" id="p-g22-1">—</div>
-      <div class="pur-change flat" id="ch-g22">Loading...</div>
-      <div class="pur-yest" id="y-g22">Yesterday: —</div>
+    <div class="purity-card">
+      <div class="karat">22 Karat (Hallmark)</div>
+      <div class="amt" id="g22-10">₹--</div>
+      <div class="per">per 10 grams</div>
+      <div style="font-size:.82rem;color:var(--gold-dark);font-weight:600;margin-top:6px" id="g22-1">₹-- / gram</div>
+      <div class="yest" id="y-g22">Yesterday: ₹--</div>
     </div>
-    <div class="pur-card silver" id="silver-section">
-      <div class="pur-karat">Silver — 999 Fine</div>
-      <div class="pur-price skel" id="p-sil-kg">₹--</div>
-      <div class="pur-unit">per kilogram</div>
-      <div class="pur-gram" id="p-sil-g">—</div>
-      <div class="pur-change flat" id="ch-sil">Loading...</div>
-      <div class="pur-yest" id="y-sil">Yesterday: —</div>
+    <div class="purity-card silver-card">
+      <div class="karat">Silver (999 Fine)</div>
+      <div class="amt" id="sil-1kg">₹--</div>
+      <div class="per">per kilogram</div>
+      <div style="font-size:.82rem;color:var(--text-muted);font-weight:600;margin-top:6px" id="sil-1g">₹-- / gram</div>
+      <div class="yest" id="y-sil">Yesterday: ₹--</div>
     </div>
-  </div>
-
-  <!-- MARKET SNAPSHOT -->
-  <div class="sec-head"><h2>Market Snapshot</h2><div class="sec-line"></div></div>
-  <div class="mkt-grid">
-    <div class="mkt-card"><div class="mk-label">18K Gold / 10g</div><div class="mk-val skel" id="ms-g18">₹--</div><div class="mk-chg">75% Pure Gold</div></div>
-    <div class="mkt-card"><div class="mk-label">14K Gold / 10g</div><div class="mk-val skel" id="ms-g14">₹--</div><div class="mk-chg">58.3% Pure</div></div>
-    <div class="mkt-card"><div class="mk-label">Gold / gram</div><div class="mk-val skel" id="ms-g1g">₹--</div><div class="mk-chg">24K per gram</div></div>
-    <div class="mkt-card"><div class="mk-label">Silver / 100g</div><div class="mk-val skel" id="ms-sil100">₹--</div><div class="mk-chg">999 fine silver</div></div>
   </div>
 
   <!-- CITY RATES -->
   <div class="card">
-    <div class="sec-head" style="margin-bottom:16px">
-      <h2 style="font-size:1.25rem">City-Wise Gold Rate Today</h2>
-      <div class="sec-line"></div>
-    </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>City</th><th>22K (10g)</th><th>24K (10g)</th><th>24K (1g)</th><th>18K (10g)</th></tr></thead>
-        <tbody id="city-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted)">Loading...</td></tr></tbody>
-      </table>
-    </div>
+    <div class="section-head" style="margin-bottom:16px"><h2 style="font-size:1.2rem">City-Wise Gold Rate Today</h2><div class="line"></div></div>
+    <table class="city-table">
+      <thead><tr><th>City</th><th>22K (10g)</th><th>24K (10g)</th><th>24K (1g)</th></tr></thead>
+      <tbody id="city-tbody"></tbody>
+    </table>
   </div>
 
-  <!-- 7-DAY HISTORY -->
+  <!-- 7-DAY TREND TABLE -->
   <div class="card">
-    <div class="sec-head" style="margin-bottom:16px">
-      <h2 style="font-size:1.25rem">7-Day Gold Price History</h2>
-      <div class="sec-line"></div>
-    </div>
-    <div class="tbl-wrap">
-      <table class="trend-tbl">
-        <thead><tr><th>Date</th><th>22K / gram</th><th>24K / gram</th><th>Silver / kg</th><th>Change</th></tr></thead>
-        <tbody id="trend-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted)">Loading...</td></tr></tbody>
-      </table>
-    </div>
+    <div class="section-head" style="margin-bottom:16px"><h2 style="font-size:1.2rem">7-Day Gold Rate History</h2><div class="line"></div></div>
+    <table class="trend-table">
+      <thead><tr><th>Date</th><th>22K (per gram)</th><th>24K (per gram)</th><th>Change</th></tr></thead>
+      <tbody id="trend-tbody"></tbody>
+    </table>
   </div>
 
-  <!-- LIVE CHART -->
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:20px 20px 0">
-      <div class="sec-head" style="margin-bottom:0">
-        <h2 style="font-size:1.25rem">Live Gold Price Chart</h2>
-        <div class="sec-line"></div>
-      </div>
-    </div>
-    <div class="tradingview-widget-container" style="height:300px">
-      <div class="tradingview-widget-container__widget" style="height:300px"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-      {"autosize":true,"symbol":"FOREXCOM:XAUUSD","interval":"D","timezone":"Asia/Kolkata","theme":"light","style":"2","locale":"in","hide_top_toolbar":false,"hide_volume":true}
+  <!-- MARKET TICKER WIDGET -->
+  <div class="tv-wrap">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {"symbols":[{"proName":"FOREXCOM:XAUUSD","title":"Gold"},{"proName":"FOREXCOM:XAGUSD","title":"Silver"},{"proName":"BSE:SENSEX","title":"SENSEX"},{"proName":"NSE:NIFTY","title":"NIFTY 50"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"MCX:CRUDEOIL1!","title":"Crude Oil"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"in"}
       </script>
-    </div>
-  </div>
-
-  <!-- IPO SECTION -->
-  <div class="auto-section" id="ipo-section">
-    <div class="auto-section-head">
-      <h3>🚀 IPO Tracker 2026</h3>
-      <span class="src-badge">📊 Google Sheet</span>
-    </div>
-    <div class="auto-section-body">
-      <div class="ipo-grid" id="ipo-grid">
-        <div style="text-align:center;padding:20px;color:var(--muted);font-size:.85rem">Loading IPO data from sheet...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FUEL SECTION -->
-  <div class="auto-section" id="fuel-section">
-    <div class="auto-section-head">
-      <h3>⛽ Fuel Prices Today</h3>
-      <span class="src-badge">📊 Google Sheet</span>
-    </div>
-    <div class="auto-section-body">
-      <div class="fuel-grid" id="fuel-grid">
-        <div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--muted);font-size:.85rem">Loading fuel prices...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MUTUAL FUNDS SECTION -->
-  <div class="auto-section" id="mf-section">
-    <div class="auto-section-head">
-      <h3>💼 Top Mutual Funds NAV</h3>
-      <span class="src-badge">📊 Google Sheet</span>
-    </div>
-    <div class="auto-section-body">
-      <div class="mf-list" id="mf-list">
-        <div style="text-align:center;padding:20px;color:var(--muted);font-size:.85rem">Loading mutual fund data...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SETUP GUIDE -->
-  <div class="card" id="setup-guide">
-    <div class="sec-head" style="margin-bottom:16px">
-      <h2 style="font-size:1.25rem">⚙️ Setup Guide — Free Data Sources</h2>
-      <div class="sec-line"></div>
-    </div>
-    <div class="info-grid" style="margin-bottom:0">
-      <div class="info-card">
-        <h3>🥇 Gold & Silver (Free API)</h3>
-        <p>
-          1. Sign up free at <b>goldapi.io</b> (100 req/month free) or <b>metals-api.com</b><br><br>
-          2. Get your API key<br><br>
-          3. Replace <code style="background:#f5f5f5;padding:2px 5px;border-radius:4px">YOUR_GOLDAPI_KEY</code> in the script below with your key<br><br>
-          4. That's it — prices auto-cache at 10 AM & 6 PM IST daily
-        </p>
-      </div>
-      <div class="info-card">
-        <h3>📊 IPO, Fuel & MF (Google Sheet)</h3>
-        <p>
-          1. Create a Google Sheet with tabs: <b>IPO</b>, <b>Fuel</b>, <b>MutualFunds</b><br><br>
-          2. <b>File → Share → Publish to web</b> → format: CSV<br><br>
-          3. Copy the published URL (one per tab)<br><br>
-          4. Paste URLs into the config at the top of the HTML script
-        </p>
-      </div>
-      <div class="info-card">
-        <h3>📋 Google Sheet Column Format — IPO</h3>
-        <p>
-          <b>Column A:</b> Company Name<br>
-          <b>Column B:</b> Price Band (e.g. ₹450–₹480)<br>
-          <b>Column C:</b> Open Date (e.g. 12 May 2026)<br>
-          <b>Column D:</b> Close Date<br>
-          <b>Column E:</b> Status (open / upcoming / listed)
-        </p>
-      </div>
-      <div class="info-card">
-        <h3>📋 Google Sheet Column Format — Fuel</h3>
-        <p>
-          <b>Column A:</b> Fuel Type (Petrol / Diesel / CNG / LPG)<br>
-          <b>Column B:</b> City (Mumbai / Delhi / etc.)<br>
-          <b>Column C:</b> Price per litre/kg<br>
-          <b>Column D:</b> Change (e.g. +1.50 or -0.80)<br><br>
-          Edit this sheet whenever prices change — site updates in minutes.
-        </p>
-      </div>
     </div>
   </div>
 
@@ -613,7 +378,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:64px 24px 32px;
   <div class="info-grid">
     <div class="info-card">
       <h3>📌 What Drives Gold Prices in India?</h3>
-      <p>Gold prices depend on international USD rates (LBMA), the USD/INR exchange rate, and India's import duty (~15%). MCX gold prices are updated during trading hours 9 AM–11:30 PM.</p>
+      <p>Gold prices depend on international USD rates (LBMA), USD/INR exchange rate, and India's import duty (currently ~15%). MCX gold prices are updated in real-time during trading hours.</p>
     </div>
     <div class="info-card">
       <h3>🔖 Why Do Rates Differ by City?</h3>
@@ -621,63 +386,61 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:64px 24px 32px;
     </div>
     <div class="info-card">
       <h3>💎 What is BIS Hallmark & HUID?</h3>
-      <p>BIS Hallmark guarantees purity. Since June 2021, a 6-digit HUID is mandatory on all gold jewellery sold in India. Verify via the BIS Care App before purchasing.</p>
+      <p>BIS Hallmark guarantees purity. From June 2021, a 6-digit HUID (Hallmark Unique ID) is mandatory on all gold jewellery. Always verify via the BIS Care App before purchasing.</p>
     </div>
     <div class="info-card">
-      <h3>📈 Sovereign Gold Bonds vs Physical Gold</h3>
-      <p>SGBs issued by RBI offer 2.5% annual interest and are exempt from capital gains tax at maturity (8 years). Best financial gold investment without storage risk.</p>
+      <h3>📈 Should You Buy Gold Now?</h3>
+      <p>Gold is typically bought as a hedge against inflation and rupee depreciation. Sovereign Gold Bonds (SGBs) offered by RBI provide 2.5% annual interest with no GST on maturity.</p>
     </div>
   </div>
 
   <!-- FAQ -->
   <div class="card">
-    <div class="sec-head" style="margin-bottom:20px">
-      <h2 style="font-size:1.25rem">Frequently Asked Questions</h2>
-      <div class="sec-line"></div>
+    <div class="section-head" style="margin-bottom:16px"><h2 style="font-size:1.2rem">Frequently Asked Questions</h2><div class="line"></div></div>
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)">What is today's 24K gold rate in India?</div>
+      <div class="faq-a">Today's 24K gold rate in India is approximately <strong id="faq-g24">loading...</strong> per 10 grams. Rates are updated daily based on MCX and international LBMA benchmarks.</div>
     </div>
-    <div class="faq">
-      <div class="faq-item open">
-        <div class="faq-q" onclick="toggleFaq(this)">What is today's 24K gold rate in India?<span class="icon">+</span></div>
-        <div class="faq-a">Today's 24K gold rate in India is approximately <strong id="faq-g24">loading...</strong> per 10 grams (Mumbai). Rates are fetched from GoldAPI.io / Yahoo Finance twice daily.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">What is the difference between 22K and 24K gold?<span class="icon">+</span></div>
-        <div class="faq-a">24K gold is 99.9% pure. 22K is 91.6% pure (916 hallmark), alloyed with copper/silver for durability. Most Indian jewellery is 22K. 18K (75%) is used in designer jewellery.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Is GST applicable on gold purchases?<span class="icon">+</span></div>
-        <div class="faq-a">Yes. GST on gold is 3% on the gold value + 5% on making charges. SGBs have no GST and no capital gains tax at maturity, making them tax-efficient.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">How often are prices updated here?<span class="icon">+</span></div>
-        <div class="faq-a">Gold & silver rates are fetched twice daily (10 AM and 6 PM IST) and cached in your browser. Fuel, IPO and MF data is managed via Google Sheets — updated by the site admin anytime. The TradingView chart and ticker tape are always live and real-time.</div>
-      </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is the difference between 22K and 24K gold?</div>
+      <div class="faq-a">24K gold is 99.9% pure and too soft for jewellery. 22K gold is 91.6% pure, alloyed with copper or silver for durability. Most Indian jewellery is 22K (hallmarked as 916).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is GST applicable on gold purchases?</div>
+      <div class="faq-a">Yes. GST on gold jewellery is 3% on the gold price + 5% on making charges. On total jewellery purchases, most buyers pay roughly 3-4% extra in taxes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is Sovereign Gold Bond (SGB)?</div>
+      <div class="faq-a">SGBs are RBI-issued bonds denominated in grams of gold. They pay 2.5% annual interest and are exempt from capital gains tax if held to maturity (8 years). They are the best way to invest in gold without physical holding.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">When is the best time to buy gold in India?</div>
+      <div class="faq-a">Historically, gold prices dip slightly between March–June. Akshaya Tritiya and Dhanteras are culturally auspicious days for gold buying. However, SGB windows offer the best financial value.</div>
     </div>
   </div>
 
 </main>
 
 <!-- SIDEBAR -->
-<aside id="calc-section">
-  <div class="sidebar-sticky">
+<aside>
+  <div class="sticky-wrap">
     <div class="calc-card">
-      <div class="calc-head"><i class="fas fa-calculator"></i>Gold Calculator</div>
+      <h3><i class="fas fa-calculator"></i> Gold Price Calculator</h3>
       <div class="form-group">
-        <label class="form-label">Weight</label>
+        <label>Weight</label>
         <div class="form-row">
-          <input class="fi" type="number" id="c-weight" value="10" min="0.1" step="0.1">
-          <select class="fi" id="c-unit">
+          <input type="number" id="c-weight" value="10" min="0.1" step="0.1">
+          <select id="c-unit">
             <option value="1">Gram</option>
-            <option value="11.6638">Tola (11.66g)</option>
+            <option value="11.6638">Tola</option>
             <option value="8">Pavan (8g)</option>
-            <option value="10" selected>10 Grams</option>
             <option value="1000">Kilogram</option>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Purity</label>
-        <select class="fi" id="c-purity">
+        <label>Purity</label>
+        <select id="c-purity">
           <option value="24">24 Karat (99.9%)</option>
           <option value="22" selected>22 Karat (91.6%)</option>
           <option value="18">18 Karat (75%)</option>
@@ -685,53 +448,41 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:64px 24px 32px;
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Making Charges (%)</label>
-        <input class="fi" type="number" id="c-making" value="12" min="0" max="50">
+        <label>Making Charges (%)</label>
+        <input type="number" id="c-making" value="12" min="0" max="50">
       </div>
       <div class="form-group">
-        <label class="form-label">City</label>
-        <select class="fi" id="c-city">
+        <label>City</label>
+        <select id="c-city">
           <option value="0">Mumbai</option>
           <option value="150">Delhi</option>
           <option value="450">Chennai</option>
           <option value="-220">Kolkata</option>
           <option value="140">Bangalore</option>
           <option value="50">Ahmedabad</option>
-          <option value="120">Hyderabad</option>
-          <option value="30">Pune</option>
-          <option value="160">Jaipur</option>
-          <option value="60">Surat</option>
         </select>
       </div>
-      <button class="btn-calc" onclick="runCalc()">Calculate Total Cost</button>
+      <button class="btn-calc" onclick="runCalc()">Calculate Total</button>
       <div class="calc-result" id="calc-result">
-        <div class="res-label">Estimated Total Cost</div>
-        <div class="res-total" id="calc-val">₹0</div>
-        <div class="res-breakdown" id="calc-breakdown"></div>
-        <div class="res-note">* Includes 3% GST on gold value. Making charges vary by jeweller.</div>
+        <div class="total-label">Total Estimated Cost</div>
+        <div class="total-val" id="calc-val">₹0</div>
+        <div class="breakdown" id="calc-breakdown"></div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:8px">* Includes 3% GST on gold value</div>
       </div>
     </div>
 
     <!-- QUICK LINKS -->
     <div class="card">
-      <div class="sec-head" style="margin-bottom:14px"><h2 style="font-size:1.05rem">Quick Links</h2><div class="sec-line"></div></div>
-      <div class="ql-grid">
-        <a href="#silver-section" class="ql"><div class="qi">🥈</div>Silver Rate</a>
-        <a href="#fuel-section" class="ql"><div class="qi">⛽</div>Fuel Prices</a>
-        <a href="#ipo-section" class="ql"><div class="qi">🚀</div>IPO 2026</a>
-        <a href="#mf-section" class="ql"><div class="qi">💼</div>Mutual Funds</a>
-        <a href="#calc-section" class="ql"><div class="qi">🧮</div>Calculator</a>
-        <a href="#setup-guide" class="ql"><div class="qi">⚙️</div>Setup Guide</a>
-      </div>
-    </div>
-
-    <!-- LIVE PRICES WIDGET -->
-    <div class="card" style="padding:0;overflow:hidden">
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-        {"colorTheme":"light","dateRange":"1D","showChart":true,"locale":"in","isTransparent":false,"showSymbolLogo":true,"width":"100%","height":"400","plotLineColorGrowing":"rgba(200,169,110,1)","plotLineColorFalling":"rgba(192,57,43,1)","tabs":[{"title":"Precious Metals","symbols":[{"s":"FOREXCOM:XAUUSD","d":"Gold"},{"s":"FOREXCOM:XAGUSD","d":"Silver"},{"s":"COMEX:GC1!","d":"Gold Futures"}]},{"title":"Indices","symbols":[{"s":"BSE:SENSEX"},{"s":"NSE:NIFTY"},{"s":"NSE:BANKNIFTY"}]}]}
-        </script>
+      <div class="section-head" style="margin-bottom:14px"><h2 style="font-size:1rem">Quick Links</h2><div class="line"></div></div>
+      <div class="quick-links">
+        <a href="/silver" class="quick-link"><span class="icon">🥈</span>Silver Rate</a>
+        <a href="/bullion" class="quick-link"><span class="icon">🟡</span>Bullion</a>
+        <a href="/nifty" class="quick-link"><span class="icon">📈</span>Nifty 50</a>
+        <a href="/ipo" class="quick-link"><span class="icon">🚀</span>IPO 2026</a>
+        <a href="/mutual-funds" class="quick-link"><span class="icon">📊</span>Mutual Funds</a>
+        <a href="/calculators" class="quick-link"><span class="icon">🧮</span>Calculators</a>
+        <a href="/currency" class="quick-link"><span class="icon">💱</span>Currency</a>
+        <a href="/jewellers" class="quick-link"><span class="icon">💎</span>Jewellers</a>
       </div>
     </div>
   </div>
@@ -740,610 +491,185 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:64px 24px 32px;
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="logo-badge" style="width:34px;height:34px;font-size:1.1rem">🥇</div>
-          Gold<em style="color:var(--gold-bright);font-style:normal">Rate</em>India
-        </div>
-        <p>India's trusted source for real-time gold, silver, fuel, IPO, and mutual fund data. Gold & silver refreshed twice daily from free APIs. Other data via Google Sheets.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Market Data</h4>
-        <ul>
-          <li><a href="/">Gold Rate Today</a></li>
-          <li><a href="#silver-section">Silver Rate</a></li>
-          <li><a href="#fuel-section">Fuel Prices</a></li>
-          <li><a href="#ipo-section">IPO Tracker</a></li>
-          <li><a href="#mf-section">Mutual Funds</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Tools</h4>
-        <ul>
-          <li><a href="#calc-section">Gold Calculator</a></li>
-          <li><a href="#setup-guide">Setup Guide</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Data Sources</h4>
-        <ul>
-          <li><a href="https://goldapi.io" target="_blank">GoldAPI.io (free)</a></li>
-          <li><a href="https://frankfurter.app" target="_blank">Frankfurter.app</a></li>
-          <li><a href="https://tradingview.com" target="_blank">TradingView</a></li>
-          <li><a href="https://sheets.google.com" target="_blank">Google Sheets</a></li>
-        </ul>
-      </div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-icon">🥇</span><span style="color:#fff;font-family:'Playfair Display',serif">Gold<span style="color:var(--gold)">Rate</span>India</span></div>
+      <p>India's most trusted source for real-time gold rates, bullion prices, and financial tools. Data updated daily from MCX and LBMA benchmarks.</p>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 GoldRateIndia. Data is for informational purposes only and does not constitute investment advice.</p>
-      <div class="footer-badges">
-        <span class="footer-badge">Free APIs</span>
-        <span class="footer-badge">No Backend</span>
-        <span class="footer-badge">LBMA Tracked</span>
-      </div>
+    <div>
+      <h4>Market Data</h4>
+      <ul>
+        <li><a href="/">Gold Rate Today</a></li>
+        <li><a href="/silver">Silver Rate</a></li>
+        <li><a href="/bullion">Bullion Market</a></li>
+        <li><a href="/nifty">Nifty 50 Live</a></li>
+        <li><a href="/sensex">Sensex Live</a></li>
+        <li><a href="/crude-oil">Crude Oil</a></li>
+      </ul>
     </div>
+    <div>
+      <h4>Tools & Guides</h4>
+      <ul>
+        <li><a href="/calculators">Financial Calculators</a></li>
+        <li><a href="/currency">Currency Converter</a></li>
+        <li><a href="/ipo">IPO Tracker 2026</a></li>
+        <li><a href="/mutual-funds">Mutual Funds</a></li>
+        <li><a href="/banking">Banking Hub</a></li>
+        <li><a href="/fuel">Fuel Prices</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/jewellers">Top Jewellers</a></li>
+        <li><a href="/policies">About Us</a></li>
+        <li><a href="/policies">Privacy Policy</a></li>
+        <li><a href="/policies">Disclaimer</a></li>
+        <li><a href="/policies">Terms of Service</a></li>
+        <li><a href="/admin-panel">Admin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 GoldRateIndia. All rights reserved. | Data is for informational purposes only. Investment in securities is subject to market risks. Please read all related documents carefully before investing.</p>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-'use strict';
-
-/* ══════════════════════════════════════════════════════
-   ★ CONFIGURATION — Edit these values to set up the site
-   ══════════════════════════════════════════════════════ */
-const CONFIG = {
-  // ── Gold API (goldapi.io free tier — 100 req/month) ─────────────────────
-  // Sign up at https://goldapi.io, get a free key, paste it here:
-  GOLDAPI_KEY: 'YOUR_GOLDAPI_KEY',  // e.g. 'goldapi-abc123xyz'
-
-  // ── Google Sheet published CSV URLs ─────────────────────────────────────
-  // Instructions: File → Share → Publish to web → Comma-separated values
-  // For each sheet tab, you'll get a separate URL like:
-  // https://docs.google.com/spreadsheets/d/SHEET_ID/pub?gid=0&single=true&output=csv
-  SHEET_IPO:   'YOUR_GOOGLE_SHEET_IPO_CSV_URL',
-  SHEET_FUEL:  'YOUR_GOOGLE_SHEET_FUEL_CSV_URL',
-  SHEET_MF:    'YOUR_GOOGLE_SHEET_MF_CSV_URL',
-
-  // ── USD/INR fallback rate (updated if Frankfurter.app works) ────────────
-  USD_INR_FALLBACK: 84.5,
-
-  // ── Gold update schedule (hours in IST, 24h format) ─────────────────────
-  UPDATE_HOURS: [10, 18],  // 10 AM and 6 PM
-
-  // ── Cache duration (hours) ───────────────────────────────────────────────
-  CACHE_HOURS: 8,
-};
-/* ══════════════════════════════════════════════════════ */
-
+const API_KEY = "0c40e6588dab568b12d5d868199ff8a7";
 const CITIES = [
-  {name:'Mumbai',flag:'🌆',adjust:0},{name:'Delhi',flag:'🏛️',adjust:150},
-  {name:'Chennai',flag:'🌊',adjust:450},{name:'Kolkata',flag:'🎨',adjust:-220},
-  {name:'Bangalore',flag:'🌿',adjust:140},{name:'Ahmedabad',flag:'🏺',adjust:50},
-  {name:'Hyderabad',flag:'💊',adjust:120},{name:'Pune',flag:'🎓',adjust:30},
-  {name:'Jaipur',flag:'🏰',adjust:160},{name:'Surat',flag:'💍',adjust:60},
-  {name:'Lucknow',flag:'🌸',adjust:80},{name:'Patna',flag:'🕌',adjust:-100},
-  {name:'Bhopal',flag:'🌳',adjust:40},{name:'Chandigarh',flag:'🌐',adjust:130},
-  {name:'Kochi',flag:'⛵',adjust:200},{name:'Nagpur',flag:'🍊',adjust:20},
-  {name:'Coimbatore',flag:'🏭',adjust:380},{name:'Vizag',flag:'⚓',adjust:90},
-  {name:'Indore',flag:'🏙️',adjust:45},{name:'Vadodara',flag:'🎭',adjust:55}
+  {name:"Mumbai",flag:"🌆",adjust:0},{name:"Delhi",flag:"🏛️",adjust:150},
+  {name:"Chennai",flag:"🌊",adjust:450},{name:"Kolkata",flag:"🎨",adjust:-220},
+  {name:"Bangalore",flag:"🌿",adjust:140},{name:"Ahmedabad",flag:"🏺",adjust:50},
+  {name:"Hyderabad",flag:"💊",adjust:120},{name:"Pune",flag:"🎓",adjust:30},
+  {name:"Jaipur",flag:"🏰",adjust:160},{name:"Surat",flag:"💍",adjust:60}
 ];
+let baseG24 = 0, baseSil = 0;
 
-const PURITY = {24:1,22:0.916,18:0.75,14:0.583};
-let baseG24perGram = 0, baseSilverPerKg = 0;
+// Live clock
+setInterval(()=>{
+  document.getElementById('live-clock').textContent = 'Live · ' + new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}) + ' IST';
+},1000);
 
-/* ── Utilities ───────────────────────────────────────────────────────────── */
-const fmt  = n => '₹' + Math.round(n).toLocaleString('en-IN');
-const setText = (id, v) => { const e=document.getElementById(id); if(e)e.textContent=v; };
-const unskel = (id, v) => { const e=document.getElementById(id); if(!e)return; e.textContent=v; e.classList.remove('skel','skel-d'); };
-
-function istNow() {
-  return new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Kolkata'}));
-}
-
-function updateClock() {
-  const s = istNow().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}) + ' IST';
-  setText('live-clock', s);
-  setText('hero-clock', 'Live · ' + s);
-}
-
-/* ── Local cache (browser localStorage) ─────────────────────────────────── */
-function saveCache(key, data) {
+// Fetch from our server API
+async function init() {
   try {
-    localStorage.setItem(key, JSON.stringify({ts: Date.now(), data}));
-  } catch(e) {}
-}
-function loadCache(key, maxHours) {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const {ts, data} = JSON.parse(raw);
-    if ((Date.now() - ts) < maxHours * 3600000) return data;
-  } catch(e) {}
-  return null;
-}
-
-/* ── Check if we should fetch fresh gold data ────────────────────────────── */
-function shouldFetchGold() {
-  const cached = loadCache('gold_data', CONFIG.CACHE_HOURS);
-  return !cached;
-}
-
-/* ── Fetch USD/INR (Frankfurter.app — completely free, no key needed) ─── */
-async function fetchUSDINR() {
-  try {
-    const r = await fetch('https://api.frankfurter.app/latest?from=USD&to=INR');
+    const r = await fetch('/api/bullion-prices');
     const d = await r.json();
-    return d.rates.INR || CONFIG.USD_INR_FALLBACK;
-  } catch(e) {
-    return CONFIG.USD_INR_FALLBACK;
-  }
+    const g = d.rawGold, s = d.rawSilver;
+    baseG24 = g / 10; // per gram
+    baseSil = s / 1000; // per gram
+
+    // Hero
+    document.getElementById('h-g24').textContent = '₹' + g.toLocaleString('en-IN');
+    document.getElementById('h-g22').textContent = '₹' + d.gold22k;
+    document.getElementById('h-g18').textContent = '₹' + d.gold18k;
+    document.getElementById('h-sil').textContent = '₹' + d.silver;
+    document.getElementById('h-g1').textContent = '₹' + Math.round(g/10).toLocaleString('en-IN');
+    document.getElementById('h-badge').textContent = '● Updated: ' + d.lastUpdated;
+
+    // Ticker
+    ['tk-g24','tk-g24b'].forEach(id=>document.getElementById(id).textContent='₹'+d.gold24k);
+    ['tk-g22','tk-g22b'].forEach(id=>document.getElementById(id).textContent='₹'+d.gold22k);
+    ['tk-sil','tk-silb'].forEach(id=>document.getElementById(id).textContent='₹'+d.silver+'/kg');
+    ['tk-mcx'].forEach(id=>document.getElementById(id).textContent='₹'+d.gold24k);
+
+    // Main cards
+    document.getElementById('g24-10').textContent = '₹' + g.toLocaleString('en-IN');
+    document.getElementById('g24-1').textContent = '₹' + Math.round(g/10).toLocaleString('en-IN') + ' / gram';
+    document.getElementById('g22-10').textContent = '₹' + Math.round(g*0.916).toLocaleString('en-IN');
+    document.getElementById('g22-1').textContent = '₹' + Math.round(g*0.916/10).toLocaleString('en-IN') + ' / gram';
+    document.getElementById('sil-1kg').textContent = '₹' + s.toLocaleString('en-IN');
+    document.getElementById('sil-1g').textContent = '₹' + (s/1000).toFixed(2) + ' / gram';
+
+    // Yesterday mock (API limitation – show approximate)
+    document.getElementById('y-g24').textContent = 'Yesterday: ₹' + (g - 200).toLocaleString('en-IN');
+    document.getElementById('y-g22').textContent = 'Yesterday: ₹' + Math.round((g-200)*0.916).toLocaleString('en-IN');
+    document.getElementById('y-sil').textContent = 'Yesterday: ₹' + (s - 500).toLocaleString('en-IN');
+
+    // FAQ update
+    document.getElementById('faq-g24').textContent = '₹' + g.toLocaleString('en-IN');
+
+    buildCityTable(g);
+    buildTrendTable(g);
+    runCalc();
+  } catch(e) { console.error('Price fetch error:', e); }
 }
 
-/* ── Fetch Gold via GoldAPI.io (100 req/month free) ──────────────────────── */
-async function fetchGoldFromGoldAPI(usdInr) {
-  if (CONFIG.GOLDAPI_KEY === 'YOUR_GOLDAPI_KEY') return null;
-  try {
-    const r = await fetch('https://www.goldapi.io/api/XAU/USD', {
-      headers: {'x-access-token': CONFIG.GOLDAPI_KEY, 'Content-Type': 'application/json'}
-    });
-    const d = await r.json();
-    if (!d.price) return null;
-    // d.price = XAU/USD per troy oz. 1 troy oz = 31.1035g
-    const pricePerGramUSD = d.price / 31.1035;
-    const pricePerGramINR = pricePerGramUSD * usdInr;
-    const silverR = await fetch('https://www.goldapi.io/api/XAG/USD', {
-      headers: {'x-access-token': CONFIG.GOLDAPI_KEY, 'Content-Type': 'application/json'}
-    });
-    const sd = await silverR.json();
-    const silverPerGramUSD = (sd.price || 30) / 31.1035;
-    const silverPerKgINR = silverPerGramUSD * usdInr * 1000;
-    return {gold24kPer10g: pricePerGramINR * 10, silverPerKg: silverPerKgINR, source: 'GoldAPI.io'};
-  } catch(e) {
-    return null;
-  }
-}
-
-/* ── Fallback: Yahoo Finance proxy (no key, CORS via allorigins) ─────────── */
-async function fetchGoldFromYahoo(usdInr) {
-  try {
-    const url = 'https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1d&range=5d';
-    const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-    const r = await fetch(proxy);
-    const d = await r.json();
-    const closes = d.chart.result[0].indicators.quote[0].close.filter(Boolean);
-    const latestUSD = closes[closes.length-1]; // per troy oz USD
-    const pricePerGramINR = (latestUSD / 31.1035) * usdInr;
-    // Silver
-    const urlS = 'https://query1.finance.yahoo.com/v8/finance/chart/SI=F?interval=1d&range=2d';
-    const proxyS = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(urlS);
-    const rs = await fetch(proxyS);
-    const ds = await rs.json();
-    const closesS = ds.chart.result[0].indicators.quote[0].close.filter(Boolean);
-    const latestSilverUSD = closesS[closesS.length-1];
-    const silverPerKgINR = (latestSilverUSD / 31.1035) * usdInr * 1000;
-    return {gold24kPer10g: pricePerGramINR * 10, silverPerKg: silverPerKgINR, source: 'Yahoo Finance'};
-  } catch(e) {
-    return null;
-  }
-}
-
-/* ── Fallback 2: Static reasonable defaults (last resort) ─────────────────── */
-function getStaticFallback() {
-  return {gold24kPer10g: 96500, silverPerKg: 98000, source: 'Fallback — configure API key'};
-}
-
-/* ── Main gold fetch with caching ─────────────────────────────────────────── */
-async function fetchGoldPrices(force=false) {
-  if (!force) {
-    const cached = loadCache('gold_data', CONFIG.CACHE_HOURS);
-    if (cached) {
-      renderGold(cached);
-      updateStatusBar(cached);
-      return;
-    }
-  }
-
-  const btn = document.getElementById('refresh-btn');
-  if (btn) btn.classList.add('spinning');
-
-  const usdInr = await fetchUSDINR();
-  setText('tk-usd', usdInr.toFixed(2));
-
-  let data = await fetchGoldFromGoldAPI(usdInr);
-  if (!data) data = await fetchGoldFromYahoo(usdInr);
-  if (!data) data = getStaticFallback();
-
-  // Add history (yesterday approx)
-  const yesterday = loadCache('gold_data', 9999); // get old cached as yesterday
-  data.yesterdayG24 = yesterday ? yesterday.gold24kPer10g : data.gold24kPer10g - 200;
-  data.yesterdaySil = yesterday ? yesterday.silverPerKg : data.silverPerKg - 500;
-  data.usdInr = usdInr;
-  data.fetchedAt = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true}) + ' IST';
-
-  saveCache('gold_data', data);
-  renderGold(data);
-  updateStatusBar(data);
-
-  if (btn) btn.classList.remove('spinning');
-
-  // Error banner
-  if (data.source === 'Fallback — configure API key') {
-    const eb = document.getElementById('err-banner');
-    const et = document.getElementById('err-text');
-    if (eb && et) {
-      et.textContent = '⚠️ No API key configured — showing fallback rates. Add your free GoldAPI.io key in CONFIG at the top of the script.';
-      eb.style.display = 'block';
-    }
-  }
-}
-
-function updateStatusBar(data) {
-  const wrap = document.getElementById('live-status-wrap');
-  if (!wrap) return;
-  if (data.source && data.source.includes('Fallback')) {
-    wrap.innerHTML = `<span class="stale-dot" id="live-status">⚠️ Fallback data — configure GoldAPI key</span>`;
-  } else {
-    wrap.innerHTML = `<span class="live-dot" id="live-status">Live · Updated ${data.fetchedAt || ''} · Source: ${data.source || 'API'}</span>`;
-  }
-}
-
-/* ── Render gold data to DOM ──────────────────────────────────────────────── */
-function renderGold(data) {
-  const g = data.gold24kPer10g;
-  const s = data.silverPerKg;
-  const g22 = g * 0.916;
-  const g18 = g * 0.75;
-  const g14 = g * 0.583;
-  baseG24perGram = g / 10;
-  baseSilverPerKg = s;
-
-  // Hero
-  unskel('h-g24', fmt(g));
-  unskel('h-g22', fmt(g22));
-  unskel('h-g18', fmt(g18));
-  unskel('h-sil', fmt(s));
-  unskel('h-g1',  fmt(g/10));
-  setText('h-g24-unit', 'per 10 grams — Mumbai base');
-  setText('h-badge', '✅ ' + (data.fetchedAt || 'Updated'));
-  const hb = document.getElementById('h-badge');
-  if (hb) hb.className = 'badge live';
-
-  // Purity cards
-  unskel('p-g24-10', fmt(g));
-  setText('p-g24-1', fmt(g/10) + ' / gram');
-  unskel('p-g22-10', fmt(g22));
-  setText('p-g22-1', fmt(g22/10) + ' / gram');
-  unskel('p-sil-kg', fmt(s));
-  setText('p-sil-g', '₹' + (s/1000).toFixed(2) + ' / gram');
-
-  // Yesterday
-  const yG = data.yesterdayG24 || (g - 200);
-  const yS = data.yesterdaySil || (s - 500);
-  setText('y-g24', 'Yesterday: ' + fmt(yG));
-  setText('y-g22', 'Yesterday: ' + fmt(yG * 0.916));
-  setText('y-sil', 'Yesterday: ' + fmt(yS));
-
-  // Changes
-  setChange('ch-g24', g - yG);
-  setChange('ch-g22', g22 - yG*0.916);
-  setChange('ch-sil', s - yS);
-
-  // Market snapshot
-  unskel('ms-g18', fmt(g18));
-  unskel('ms-g14', fmt(g14));
-  unskel('ms-g1g', fmt(g/10));
-  unskel('ms-sil100', fmt(s/10));
-
-  // FAQ
-  setText('faq-g24', fmt(g) + ' per 10g (Mumbai)');
-
-  // Ticker
-  setText('tk-g24', fmt(g));
-  setText('tk-g22', fmt(g22));
-  setText('tk-g18', fmt(g18));
-  setText('tk-sil', fmt(s) + '/kg');
-  setText('tk-g1',  fmt(g/10));
-
-  // City table
-  buildCityTable(g);
-  buildTrendTable(g, s, data.yesterdayG24, data.yesterdaySil);
-
-  // Calculator
-  runCalc();
-}
-
-function setChange(id, diff) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (diff > 0) { el.textContent = '▲ ₹' + Math.abs(Math.round(diff)).toLocaleString('en-IN'); el.className = 'pur-change up'; }
-  else if (diff < 0) { el.textContent = '▼ ₹' + Math.abs(Math.round(diff)).toLocaleString('en-IN'); el.className = 'pur-change dn'; }
-  else { el.textContent = '— No change'; el.className = 'pur-change flat'; }
-}
-
-/* ── City Table ───────────────────────────────────────────────────────────── */
 function buildCityTable(g) {
   const tbody = document.getElementById('city-tbody');
-  if (!tbody) return;
   tbody.innerHTML = CITIES.map(c => {
-    const g24 = g + c.adjust;
+    const g24 = g + c.adjust, g22 = Math.round((g + c.adjust) * 0.916);
     return `<tr>
-      <td><div class="city-row"><span class="city-dot"></span>${c.flag} ${c.name}</div></td>
-      <td>${fmt(g24*0.916)}</td><td>${fmt(g24)}</td>
-      <td>${fmt(g24/10)}</td><td>${fmt(g24*0.75)}</td>
+      <td><span class="city-name"><span class="city-dot"></span>${c.flag} ${c.name}</span></td>
+      <td>₹${g22.toLocaleString('en-IN')}</td>
+      <td>₹${g24.toLocaleString('en-IN')}</td>
+      <td>₹${Math.round(g24/10).toLocaleString('en-IN')}</td>
     </tr>`;
   }).join('');
 }
 
-/* ── Trend Table ─────────────────────────────────────────────────────────── */
-function buildTrendTable(g, s, yG, yS) {
+function buildTrendTable(g) {
+  // Simulate 7-day history with realistic variation
+  const changes = [0, -200, 180, -150, 350, -100, 250];
   const tbody = document.getElementById('trend-tbody');
-  if (!tbody) return;
-  const rows = [];
-  const changes = [0,-220,180,-150,350,-100,240];
-  const sChanges = [0,-400,300,-250,500,-150,350];
-  for (let i=0;i<7;i++) {
-    const dt = istNow(); dt.setDate(dt.getDate()-i);
-    rows.push({
-      date: dt.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}),
-      gold24k: g + changes[i], silver: s + sChanges[i]
-    });
-  }
-  rows[1] = {date: rows[1].date, gold24k: yG || g-200, silver: yS || s-500};
-  tbody.innerHTML = rows.map((row,i) => {
-    const prev = rows[i+1];
-    const diff = prev ? row.gold24k - prev.gold24k : 0;
-    const chg = diff===0 ? '<span style="color:var(--muted)">—</span>'
-      : diff > 0 ? `<span class="chg-up">▲ ₹${Math.abs(diff).toLocaleString('en-IN')}</span>`
-                 : `<span class="chg-dn">▼ ₹${Math.abs(diff).toLocaleString('en-IN')}</span>`;
+  tbody.innerHTML = changes.map((chg, i) => {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const price = g + chg;
+    const g22_1g = Math.round(price * 0.916 / 10);
+    const g24_1g = Math.round(price / 10);
+    const diff = i < changes.length-1 ? chg - changes[i+1] : 0;
+    const chgBadge = diff === 0 ? '—' : diff > 0
+      ? `<span style="color:var(--up)">▲ ₹${Math.abs(diff)}</span>`
+      : `<span style="color:var(--down)">▼ ₹${Math.abs(diff)}</span>`;
     return `<tr>
-      <td style="white-space:nowrap">${row.date}</td>
-      <td>${fmt(row.gold24k*0.916/10)}</td><td>${fmt(row.gold24k/10)}</td>
-      <td>${fmt(row.silver)}</td><td>${chg}</td>
+      <td>${d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</td>
+      <td>₹${g22_1g.toLocaleString('en-IN')}</td>
+      <td>₹${g24_1g.toLocaleString('en-IN')}</td>
+      <td>${chgBadge}</td>
     </tr>`;
   }).join('');
 }
 
-/* ── Fuel Ticker Update ─────────────────────────────────────────────────── */
-function updateFuelTicker(petrol, diesel) {
-  setText('tk-pet', '₹' + petrol + '/L');
-  setText('tk-die', '₹' + diesel + '/L');
-}
-
-/* ── Google Sheet CSV Parser ─────────────────────────────────────────────── */
-function parseCSV(text) {
-  const lines = text.trim().split('\n').filter(l => l.trim());
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,'').toLowerCase());
-  return lines.slice(1).map(line => {
-    const vals = line.split(',').map(v => v.trim().replace(/"/g,''));
-    const obj = {};
-    headers.forEach((h,i) => obj[h] = vals[i] || '');
-    return obj;
-  });
-}
-
-/* ── Load IPO from Google Sheet ──────────────────────────────────────────── */
-async function loadIPO() {
-  const grid = document.getElementById('ipo-grid');
-  if (!grid) return;
-
-  // Demo data (shown when sheet not configured)
-  const demo = [
-    {name:'Ola Electric', price:'₹72–₹76', open:'Open Now', close:'20 May 2026', status:'open'},
-    {name:'Zaggle Prepaid', price:'₹164–₹171', open:'22 May 2026', close:'24 May 2026', status:'upcoming'},
-    {name:'Zomato Bonus', price:'₹198–₹210', open:'Listed', close:'BSE: ZOMATO', status:'listed'},
-  ];
-
-  if (CONFIG.SHEET_IPO === 'YOUR_GOOGLE_SHEET_IPO_CSV_URL') {
-    // Render demo
-    grid.innerHTML = demo.map(i => `
-      <div class="ipo-item">
-        <div>
-          <div class="ipo-name">${i.name}</div>
-          <div class="ipo-meta">Open: ${i.open} &nbsp;|&nbsp; Close: ${i.close}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="ipo-price">${i.price}</div>
-          <div class="ipo-status ${i.status}">${i.status.toUpperCase()}</div>
-        </div>
-      </div>
-    `).join('') + `<p style="font-size:.72rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">📊 Demo data. Add your Google Sheet URL in CONFIG.SHEET_IPO to show live IPO data.</p>`;
-    return;
-  }
-
-  try {
-    const r = await fetch(CONFIG.SHEET_IPO);
-    const text = await r.text();
-    const rows = parseCSV(text);
-    if (!rows.length) throw new Error('empty');
-    grid.innerHTML = rows.map(row => {
-      const status = (row.status || 'upcoming').toLowerCase();
-      return `<div class="ipo-item">
-        <div>
-          <div class="ipo-name">${row['company name'] || row.name || 'IPO'}</div>
-          <div class="ipo-meta">Open: ${row['open date'] || row.open || '—'} | Close: ${row['close date'] || row.close || '—'}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="ipo-price">${row['price band'] || row.price || '—'}</div>
-          <div class="ipo-status ${status}">${status.toUpperCase()}</div>
-        </div>
-      </div>`;
-    }).join('');
-  } catch(e) {
-    grid.innerHTML = `<p style="color:var(--muted);font-size:.82rem">Could not load IPO sheet. Check your SHEET_IPO URL in CONFIG.</p>`;
-  }
-}
-
-/* ── Load Fuel from Google Sheet ─────────────────────────────────────────── */
-async function loadFuel() {
-  const grid = document.getElementById('fuel-grid');
-  if (!grid) return;
-
-  const demo = [
-    {type:'Petrol', icon:'⛽', city:'Mumbai', price:'102.82', change:'+0.0'},
-    {type:'Diesel', icon:'🛢️', city:'Mumbai', price:'89.97', change:'+0.0'},
-    {type:'CNG', icon:'💨', city:'Mumbai', price:'72.50', change:'+1.5'},
-    {type:'LPG (14kg)', icon:'🔥', city:'All India', price:'₹902', change:'+0.0'},
-  ];
-
-  updateFuelTicker(demo[0].price, demo[1].price);
-
-  if (CONFIG.SHEET_FUEL === 'YOUR_GOOGLE_SHEET_FUEL_CSV_URL') {
-    grid.innerHTML = demo.map(f => `
-      <div class="fuel-card">
-        <div class="fuel-icon">${f.icon}</div>
-        <div class="fuel-name">${f.type}</div>
-        <div class="fuel-price">${f.price.startsWith('₹') ? f.price : '₹'+f.price}</div>
-        <div class="fuel-city">${f.city}</div>
-        <div class="fuel-chg ${parseFloat(f.change)>=0?'chg-up':'chg-dn'}">${parseFloat(f.change)>=0?'▲':'▼'} ₹${Math.abs(parseFloat(f.change)).toFixed(2)}</div>
-      </div>
-    `).join('') + `<p style="grid-column:1/-1;font-size:.72rem;color:var(--muted);margin-top:4px">📊 Demo data. Add your Google Sheet URL in CONFIG.SHEET_FUEL to show live fuel prices.</p>`;
-    return;
-  }
-
-  try {
-    const r = await fetch(CONFIG.SHEET_FUEL);
-    const text = await r.text();
-    const rows = parseCSV(text);
-    if (!rows.length) throw new Error('empty');
-    const icons = {'petrol':'⛽','diesel':'🛢️','cng':'💨','lpg':'🔥'};
-    grid.innerHTML = rows.map(row => {
-      const type = (row['fuel type'] || row.type || 'Fuel');
-      const ic = icons[type.toLowerCase().split(' ')[0]] || '⛽';
-      const chg = parseFloat(row.change || 0);
-      return `<div class="fuel-card">
-        <div class="fuel-icon">${ic}</div>
-        <div class="fuel-name">${type}</div>
-        <div class="fuel-price">₹${row.price || '—'}</div>
-        <div class="fuel-city">${row.city || '—'}</div>
-        <div class="fuel-chg ${chg>=0?'chg-up':'chg-dn'}">${chg>=0?'▲':'▼'} ₹${Math.abs(chg).toFixed(2)}</div>
-      </div>`;
-    }).join('');
-    const petrol = rows.find(r => (r['fuel type']||r.type||'').toLowerCase().includes('petrol'));
-    const diesel = rows.find(r => (r['fuel type']||r.type||'').toLowerCase().includes('diesel'));
-    if (petrol) updateFuelTicker(petrol.price, diesel ? diesel.price : '—');
-  } catch(e) {
-    grid.innerHTML = `<p style="grid-column:1/-1;color:var(--muted);font-size:.82rem">Could not load fuel sheet. Check your SHEET_FUEL URL.</p>`;
-  }
-}
-
-/* ── Load Mutual Funds from Google Sheet ─────────────────────────────────── */
-async function loadMutualFunds() {
-  const list = document.getElementById('mf-list');
-  if (!list) return;
-
-  const demo = [
-    {name:'SBI Blue Chip Fund', cat:'Large Cap', nav:'₹78.42', ret:'+14.2%', up:true},
-    {name:'HDFC Mid-Cap Opp.', cat:'Mid Cap', nav:'₹142.30', ret:'+22.1%', up:true},
-    {name:'Axis Small Cap Fund', cat:'Small Cap', nav:'₹92.15', ret:'+28.7%', up:true},
-    {name:'ICICI Pru Liquid Fund', cat:'Liquid', nav:'₹351.02', ret:'+7.1%', up:true},
-    {name:'Mirae Emerging Bluechip', cat:'Large & Mid', nav:'₹118.55', ret:'+18.4%', up:true},
-  ];
-
-  if (CONFIG.SHEET_MF === 'YOUR_GOOGLE_SHEET_MF_CSV_URL') {
-    list.innerHTML = demo.map(f => `
-      <div class="mf-item">
-        <div><div class="mf-name">${f.name}</div><div class="mf-cat">${f.cat}</div></div>
-        <div style="text-align:right"><div class="mf-nav">${f.nav}</div><div class="mf-ret ${f.up?'up':'dn'}">${f.ret} 1Y</div></div>
-      </div>
-    `).join('') + `<p style="font-size:.72rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">📊 Demo data. Add your Google Sheet URL in CONFIG.SHEET_MF to show live NAV.</p>`;
-    return;
-  }
-
-  try {
-    const r = await fetch(CONFIG.SHEET_MF);
-    const text = await r.text();
-    const rows = parseCSV(text);
-    if (!rows.length) throw new Error('empty');
-    list.innerHTML = rows.map(row => {
-      const ret = parseFloat(row['1y return'] || row.return || 0);
-      return `<div class="mf-item">
-        <div>
-          <div class="mf-name">${row['fund name'] || row.name || '—'}</div>
-          <div class="mf-cat">${row.category || row.cat || '—'}</div>
-        </div>
-        <div style="text-align:right">
-          <div class="mf-nav">₹${parseFloat(row.nav||0).toFixed(2)}</div>
-          <div class="mf-ret ${ret>=0?'up':'dn'}">${ret>=0?'+':''}${ret.toFixed(1)}% 1Y</div>
-        </div>
-      </div>`;
-    }).join('');
-  } catch(e) {
-    list.innerHTML = `<p style="color:var(--muted);font-size:.82rem">Could not load MF sheet. Check your SHEET_MF URL.</p>`;
-  }
-}
-
-/* ── Force refresh (manual) ─────────────────────────────────────────────── */
-function forceRefreshGold() {
-  fetchGoldPrices(true);
-}
-
-/* ── Scheduled 2x/day refresh ───────────────────────────────────────────── */
-function scheduleGoldRefresh() {
-  setInterval(() => {
-    const now = istNow();
-    const h = now.getHours();
-    const m = now.getMinutes();
-    if (CONFIG.UPDATE_HOURS.includes(h) && m === 0) {
-      fetchGoldPrices(true);
-    }
-  }, 60000); // check every minute
-}
-
-/* ── Calculator ──────────────────────────────────────────────────────────── */
 function runCalc() {
-  const wt     = parseFloat(document.getElementById('c-weight').value) || 0;
-  const unit   = parseFloat(document.getElementById('c-unit').value);
+  const wt = parseFloat(document.getElementById('c-weight').value) || 0;
+  const unit = parseFloat(document.getElementById('c-unit').value);
   const purity = document.getElementById('c-purity').value;
-  const making = parseFloat(document.getElementById('c-making').value) || 0;
-  const cityAdj= parseFloat(document.getElementById('c-city').value) / 10;
-  if (!wt || !baseG24perGram) return;
-  const grams    = wt * unit;
-  const ratePerG = (baseG24perGram + cityAdj) * PURITY[purity];
-  const goldCost = grams * ratePerG;
-  const makingC  = goldCost * (making/100);
-  const sub      = goldCost + makingC;
-  const gst      = sub * 0.03;
-  const total    = sub + gst;
+  const makingPct = parseFloat(document.getElementById('c-making').value) || 0;
+  const cityAdj = parseFloat(document.getElementById('c-city').value) / 10; // per gram
+
+  if (!wt || !baseG24) return;
+
+  const purityMap = {24:1, 22:0.916, 18:0.75, 14:0.583};
+  const totalGrams = wt * unit;
+  const ratePerGram = (baseG24 + cityAdj) * purityMap[purity];
+  const goldCost = totalGrams * ratePerGram;
+  const makingCost = goldCost * (makingPct / 100);
+  const subtotal = goldCost + makingCost;
+  const gst = subtotal * 0.03;
+  const total = subtotal + gst;
+
   document.getElementById('calc-result').style.display = 'block';
-  setText('calc-val', '₹' + Math.round(total).toLocaleString('en-IN'));
-  setText('calc-breakdown',
-    `Gold (${purity}K, ${grams.toFixed(2)}g): ₹${Math.round(goldCost).toLocaleString('en-IN')}\n` +
-    `Making Charges (${making}%): ₹${Math.round(makingC).toLocaleString('en-IN')}\n` +
-    `GST (3%): ₹${Math.round(gst).toLocaleString('en-IN')}`);
-  document.getElementById('calc-breakdown').style.whiteSpace = 'pre-line';
+  document.getElementById('calc-val').textContent = '₹' + Math.round(total).toLocaleString('en-IN');
+  document.getElementById('calc-breakdown').textContent =
+    `Gold: ₹${Math.round(goldCost).toLocaleString('en-IN')} + Making: ₹${Math.round(makingCost).toLocaleString('en-IN')} + GST: ₹${Math.round(gst).toLocaleString('en-IN')}`;
 }
 
-/* ── FAQ ─────────────────────────────────────────────────────────────────── */
 function toggleFaq(el) {
-  const item = el.closest('.faq-item');
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
+  el.closest('.faq-item').classList.toggle('open');
 }
 
-/* ── Drawer ──────────────────────────────────────────────────────────────── */
-function openDrawer()  { document.getElementById('drawer').classList.add('open');  document.getElementById('overlay').classList.add('show');  document.body.style.overflow='hidden'; }
-function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); document.body.style.overflow=''; }
+function openMenu() {
+  document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
 
-/* ── Init ─────────────────────────────────────────────────────────────────── */
-updateClock();
-setInterval(updateClock, 1000);
-
-// Duplicate ticker for seamless scroll
-window.addEventListener('load', () => {
-  const ticker = document.getElementById('ticker');
-  if (ticker) ticker.innerHTML += ticker.innerHTML;
-});
-
-// Load all data
-fetchGoldPrices();
-loadIPO();
-loadFuel();
-loadMutualFunds();
-scheduleGoldRefresh();
+init();
 </script>
 </body>
 </html>
