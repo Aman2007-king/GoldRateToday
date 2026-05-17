@@ -3,20 +3,241 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Best Mutual Funds India 2026 | Top SIP Returns | GoldRateIndia</title>
-<meta name="description" content="Best performing mutual funds in India 2026. Compare returns, risk, AUM for large cap, mid cap, small cap, flexi cap and liquid funds.">
+<meta name="description" content="Best performing mutual funds in India 2026. Compare 1Y, 3Y, 5Y returns, risk, AUM for large cap, mid cap, small cap, flexi cap and liquid funds. Free SIP calculator.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/shared.css">
 <style>
-.risk-low{background:rgba(5,150,105,.1);color:var(--up);border:1px solid rgba(5,150,105,.2);padding:3px 9px;border-radius:20px;font-size:.66rem;font-weight:700}
-.risk-mod{background:rgba(234,179,8,.1);color:#B45309;border:1px solid rgba(234,179,8,.25);padding:3px 9px;border-radius:20px;font-size:.66rem;font-weight:700}
-.risk-high{background:rgba(220,38,38,.1);color:var(--dn);border:1px solid rgba(220,38,38,.2);padding:3px 9px;border-radius:20px;font-size:.66rem;font-weight:700}
-.risk-vlow{background:rgba(99,102,241,.1);color:#4F46E5;border:1px solid rgba(99,102,241,.2);padding:3px 9px;border-radius:20px;font-size:.66rem;font-weight:700}
-.star{color:#F59E0B}
+/* ── Page-specific tokens ── */
+:root {
+  --mf-blue: #2563EB;
+  --mf-blue-bg: rgba(37,99,235,.08);
+  --mf-green: #059669;
+  --mf-orange: #D97706;
+  --mf-red: #DC2626;
+  --mf-purple: #7C3AED;
+}
+
+/* ── Hero override ── */
+.hero-mf {
+  background: linear-gradient(145deg,#060c1a 0%,#0f1e3d 55%,#0a2850 100%);
+  padding: 48px 24px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-mf::before {
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(37,99,235,.15) 0%,transparent 70%);
+  top:-150px;right:-80px;
+  pointer-events:none;
+}
+.hero-mf::after {
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232563EB' fill-opacity='0.03'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-inner-mf { max-width:1220px;margin:0 auto;position:relative;z-index:1; }
+
+.hero-stats { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px; }
+@media(max-width:800px){ .hero-stats{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:480px){ .hero-stats{grid-template-columns:1fr 1fr} }
+.hs-card {
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:18px;
+  backdrop-filter:blur(8px);
+  text-align:center;
+}
+.hs-val { font-size:1.8rem;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif; }
+.hs-label { font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);margin-top:4px; }
+.hs-sub { font-size:.72rem;color:#4ade80;font-weight:600;margin-top:2px; }
+
+/* ── Filter strip ── */
+.filter-strip {
+  display:flex;gap:8px;flex-wrap:wrap;
+  padding:18px 0 8px;
+  position:sticky;top:60px;z-index:50;
+  background:var(--cream);
+  padding-bottom:12px;
+  margin-bottom:4px;
+}
+.fbtn {
+  padding:7px 16px;border-radius:30px;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  font-size:.76rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.fbtn:hover { border-color:var(--gold);color:var(--ink); }
+.fbtn.active { background:var(--ink);color:#fff;border-color:var(--ink); }
+
+/* ── Fund cards grid ── */
+.mf-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:28px; }
+.mf-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  transition:all .3s;
+  cursor:default;
+  position:relative;
+  overflow:hidden;
+}
+.mf-card::before {
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:4px;
+  background:var(--gold);
+  border-radius:16px 0 0 16px;
+}
+.mf-card:hover { transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--gold); }
+.mf-card-head { display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px; }
+.mf-name { font-weight:700;color:var(--ink);font-size:.95rem;line-height:1.3;flex:1; }
+.mf-cat {
+  font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;
+  background:var(--mf-blue-bg);color:var(--mf-blue);border:1px solid rgba(37,99,235,.18);
+}
+.mf-returns { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px; }
+.mf-ret { text-align:center;background:var(--surface2);border-radius:10px;padding:10px 6px; }
+.mf-ret .rv {
+  font-size:1.15rem;font-weight:700;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--mf-green);
+}
+.mf-ret .rl { font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:2px; }
+.mf-meta { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:8px; }
+.mf-aum { font-size:.75rem;color:var(--muted);font-weight:500; }
+.mf-aum strong { color:var(--ink); }
+.risk-chip {
+  font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  padding:3px 9px;border-radius:20px;
+}
+.risk-vlow  { background:rgba(99,102,241,.1);color:#4F46E5;border:1px solid rgba(99,102,241,.2); }
+.risk-low   { background:rgba(5,150,105,.1);color:#059669;border:1px solid rgba(5,150,105,.2); }
+.risk-mod   { background:rgba(217,119,6,.1);color:#B45309;border:1px solid rgba(217,119,6,.2); }
+.risk-modh  { background:rgba(234,88,12,.1);color:#C2410C;border:1px solid rgba(234,88,12,.2); }
+.risk-high  { background:rgba(220,38,38,.1);color:#DC2626;border:1px solid rgba(220,38,38,.2); }
+.star-row { display:flex;gap:2px;align-items:center; }
+.star { color:#F59E0B;font-size:.8rem; }
+.star-e { color:var(--border);font-size:.8rem; }
+.mf-sip { font-size:.72rem;color:var(--muted);margin-top:2px; }
+.mf-sip strong { color:var(--mf-green); }
+.apply-btn-mf {
+  display:inline-block;
+  width:100%;margin-top:12px;
+  text-align:center;
+  padding:10px;border-radius:10px;
+  background:linear-gradient(135deg,#E8C96A,#9A7A30);
+  color:var(--ink);font-weight:700;font-size:.82rem;
+  transition:.2s;border:none;cursor:pointer;
+}
+.apply-btn-mf:hover { opacity:.9;transform:translateY(-1px); }
+
+/* ── SIP Calculator ── */
+.sip-card {
+  background:linear-gradient(135deg,#060c1a 0%,#0f1e3d 100%);
+  border-radius:16px;padding:28px;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);
+  margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.sip-card::before {
+  content:'';position:absolute;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(37,99,235,.12),transparent 70%);
+  top:-100px;right:-80px;pointer-events:none;
+}
+.sip-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;z-index:1; }
+@media(max-width:700px){ .sip-grid{grid-template-columns:1fr} }
+.sip-inputs { display:flex;flex-direction:column;gap:16px; }
+.sip-field label {
+  display:block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:rgba(255,255,255,.45);margin-bottom:6px;
+}
+.sip-field input, .sip-field select {
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;color:#fff;font-size:.9rem;
+  outline:none;transition:.2s;font-family:inherit;
+}
+.sip-field input:focus, .sip-field select:focus { border-color:#4F8EF7;background:rgba(255,255,255,.1); }
+.sip-field input[type=range] { padding:6px 0;background:transparent;border:none;cursor:pointer; }
+.sip-result-panel {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;
+  padding:24px;
+  display:flex;flex-direction:column;gap:16px;
+  justify-content:center;
+}
+.sip-res-row { display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07); }
+.sip-res-row:last-child{border-bottom:none;}
+.sip-res-label { font-size:.75rem;color:rgba(255,255,255,.5);font-weight:500; }
+.sip-res-val { font-size:1rem;font-weight:700;color:#fff; }
+.sip-res-val.big {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;color:#4ade80;
+}
+.donut-wrap { position:relative;width:140px;height:140px;margin:0 auto; }
+.donut-wrap svg { transform:rotate(-90deg); }
+.donut-label {
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+}
+.donut-label .dl-val { font-size:.85rem;font-weight:700;color:#4ade80; }
+.donut-label .dl-sub { font-size:.6rem;color:rgba(255,255,255,.4);margin-top:2px; }
+
+/* ── Gold vs MF comparison ── */
+.compare-strip {
+  background:linear-gradient(135deg,var(--gold-pale),#fff);
+  border:1px solid var(--gold);
+  border-radius:16px;padding:24px;
+  margin-bottom:24px;
+}
+.compare-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px; }
+@media(max-width:600px){ .compare-grid{grid-template-columns:1fr} }
+.cmp-item { text-align:center;padding:16px;border-radius:12px;background:var(--surface); }
+.cmp-icon { font-size:2rem;margin-bottom:8px; }
+.cmp-name { font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px; }
+.cmp-ret { font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--ink); }
+.cmp-sub { font-size:.72rem;color:var(--muted);margin-top:3px; }
+
+/* ── Table view toggle ── */
+.view-toggle { display:flex;gap:6px;margin-bottom:14px; }
+.vbtn {
+  padding:6px 14px;border-radius:8px;font-size:.76rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:.2s;
+}
+.vbtn.active { background:var(--ink);color:#fff;border-color:var(--ink); }
 </style>
 </head>
 <body>
-<div class="ticker" aria-hidden="true"><div class="ticker-inner"><span class="ti"><span class="lbl">Nifty 50</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span><span class="ti"><span class="lbl">Sensex</span><span class="val">76,140</span><span class="chg up">▲ 0.4%</span></span><span class="ti"><span class="lbl">Gold</span><span class="val">₹1,69,200</span></span><span class="ti"><span class="lbl">Nifty 50</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span><span class="ti"><span class="lbl">Sensex</span><span class="val">76,140</span></span><span class="ti"><span class="lbl">Gold</span><span class="val">₹1,69,200</span></span></div></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner" id="mf-ticker">
+    <span class="ti"><span class="lbl">Nifty 50</span><span class="val" id="tk-nifty">23,108</span><span class="chg up">▲ 0.3%</span></span>
+    <span class="ti"><span class="lbl">Sensex</span><span class="val" id="tk-sensex">76,140</span><span class="chg up">▲ 0.4%</span></span>
+    <span class="ti"><span class="lbl">Gold 24K</span><span class="val" id="tk-gold">₹--</span></span>
+    <span class="ti"><span class="lbl">Silver/kg</span><span class="val" id="tk-silver">₹--</span></span>
+    <span class="ti"><span class="lbl">USD/INR</span><span class="val" id="tk-usd">₹--</span></span>
+    <span class="ti"><span class="lbl">Nifty 50</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span>
+    <span class="ti"><span class="lbl">Sensex</span><span class="val">76,140</span><span class="chg up">▲ 0.4%</span></span>
+    <span class="ti"><span class="lbl">Gold 24K</span><span class="val" id="tk-gold2">₹--</span></span>
+    <span class="ti"><span class="lbl">USD/INR</span><span class="val" id="tk-usd2">₹--</span></span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
 <nav class="navbar">
   <a href="/" class="nav-logo"><span class="gem">🥇</span>Gold<em>Rate</em>India</a>
   <div class="nav-links">
@@ -28,121 +249,424 @@
 <div class="drawer-bg" id="dbg" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-hd"><span>🥇 GoldRateIndia</span><span class="drawer-close" onclick="closeDrawer()">✕</span></div>
-  <a href="/"><span class="di">🥇</span>Gold Rate</a><a href="/mutual-funds" class="active"><span class="di">📊</span>Mutual Funds</a>
-  <a href="/ipo"><span class="di">🚀</span>IPO 2026</a><a href="/calculators"><span class="di">🧮</span>Calculators</a>
-  <a href="/nifty"><span class="di">📈</span>Nifty 50</a><a href="/banking"><span class="di">🏦</span>Banking</a>
+  <a href="/"><span class="di">🥇</span>Gold Rate</a>
+  <a href="/silver"><span class="di">🥈</span>Silver</a>
+  <a href="/nifty"><span class="di">📈</span>Nifty 50</a>
+  <a href="/ipo"><span class="di">🚀</span>IPO 2026</a>
+  <a href="/mutual-funds" class="active"><span class="di">📊</span>Mutual Funds</a>
+  <a href="/calculators"><span class="di">🧮</span>Calculators</a>
+  <a href="/banking"><span class="di">🏦</span>Banking</a>
+  <a href="/fuel"><span class="di">⛽</span>Fuel Prices</a>
 </div>
 
-<section class="hero" style="padding:40px 22px 60px">
-  <div style="max-width:1220px;margin:0 auto;position:relative;z-index:1">
-    <h1 style="font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:8px">📊 Best Mutual Funds <em>2026</em></h1>
-    <p style="color:rgba(255,255,255,.55);font-size:.92rem;margin-bottom:18px">Top-performing funds by category. Updated from our admin panel. Data as of: <span id="mf-ts">loading…</span></p>
+<!-- HERO -->
+<section class="hero-mf">
+  <div class="hero-inner-mf">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);color:#93c5fd;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:14px">
+      <span>📊</span> SEBI Regulated · Updated <span id="mf-ts">--</span>
+    </div>
+    <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif;margin-bottom:10px;letter-spacing:-.01em">
+      Best Mutual Funds <em style="color:#93c5fd;font-style:normal">India 2026</em>
+    </h1>
+    <p style="color:rgba(255,255,255,.55);font-size:.92rem;max-width:560px;margin-bottom:22px;line-height:1.7">
+      Top-performing funds by category. 1Y, 3Y & 5Y returns. Risk ratings, AUM, minimum SIP. Compare Gold vs Equity returns.
+    </p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" style="background:linear-gradient(135deg,#E8C96A,#9A7A30);color:var(--brand);padding:11px 22px;border-radius:10px;font-weight:800;font-size:.9rem">📈 Start SIP via Angel One</a>
+      <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener"
+         style="background:linear-gradient(135deg,#E8C96A,#9A7A30);color:#0a0a0f;padding:12px 24px;border-radius:11px;font-weight:800;font-size:.88rem;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(201,168,76,.35)">
+        📈 Start SIP via Angel One — Free
+      </a>
+      <a href="/calculators" style="background:rgba(255,255,255,.08);color:#fff;padding:12px 22px;border-radius:11px;font-weight:600;font-size:.88rem;border:1px solid rgba(255,255,255,.15)">
+        🧮 SIP Calculator
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-card">
+        <div class="hs-val" id="hs-topret">31.2%</div>
+        <div class="hs-label">Best 1Y Return</div>
+        <div class="hs-sub">Multi Cap</div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-val">₹44 L Cr</div>
+        <div class="hs-label">Industry AUM</div>
+        <div class="hs-sub">May 2026</div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-val">9.5 Cr</div>
+        <div class="hs-label">SIP Accounts</div>
+        <div class="hs-sub">Active investors</div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-val" id="hs-gold-ret">+18.4%</div>
+        <div class="hs-label">Gold 1Y Return</div>
+        <div class="hs-sub">vs Nifty: +15.3%</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="wrap">
-  <div style="margin-top:-24px;position:relative;z-index:2">
+<!-- TRADINGVIEW MARKET OVERVIEW -->
+<div style="margin:0 0 0 0;border-bottom:1px solid var(--border)">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"BSE:SENSEX","title":"Sensex"},{"proName":"NSE:NIFTY","title":"Nifty 50"},{"proName":"NSE:BANKNIFTY","title":"Bank Nifty"},{"proName":"NSE:MIDCPNIFTY","title":"MidCap Nifty"},{"proName":"FOREXCOM:XAUUSD","title":"Gold"},{"proName":"NSE:NIFTYBEES","title":"Nifty Bees ETF"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"in"}
+    </script>
+  </div>
+</div>
 
-    <!-- FILTER -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px" id="cat-filters">
-      <button class="fbtn active" onclick="filterMF('all',this)" style="padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--brand);color:#fff;font-size:.78rem;font-weight:700;cursor:pointer">All Funds</button>
-      <button class="fbtn" onclick="filterMF('Large Cap',this)" style="padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--surface);font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)">Large Cap</button>
-      <button class="fbtn" onclick="filterMF('Mid Cap',this)" style="padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--surface);font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)">Mid Cap</button>
-      <button class="fbtn" onclick="filterMF('Small Cap',this)" style="padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--surface);font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)">Small Cap</button>
-      <button class="fbtn" onclick="filterMF('Flexi Cap',this)" style="padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--surface);font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)">Flexi Cap</button>
-      <button class="fbtn" onclick="filterMF('Liquid',this)" style="padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--surface);font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)">Liquid</button>
+<div class="wrap">
+  <div style="margin-top:8px">
+
+    <!-- GOLD vs EQUITY COMPARISON -->
+    <div class="compare-strip">
+      <div class="sh" style="margin-bottom:0">
+        <h2 style="font-size:1.1rem">⚖️ Gold vs Equity — 1Y Performance Comparison</h2>
+        <div class="sh-line"></div>
+      </div>
+      <div class="compare-grid">
+        <div class="cmp-item" style="border-top:3px solid var(--gold)">
+          <div class="cmp-icon">🥇</div>
+          <div class="cmp-name">Gold (24K)</div>
+          <div class="cmp-ret" id="cmp-gold" style="color:#B8860B">+18.4%</div>
+          <div class="cmp-sub">₹<span id="cmp-gold-price">--</span> / 10g today</div>
+        </div>
+        <div class="cmp-item" style="border-top:3px solid #2563EB">
+          <div class="cmp-icon">📈</div>
+          <div class="cmp-name">Nifty 50 Index</div>
+          <div class="cmp-ret" style="color:#2563EB">+15.3%</div>
+          <div class="cmp-sub">Large cap benchmark</div>
+        </div>
+        <div class="cmp-item" style="border-top:3px solid #059669">
+          <div class="cmp-icon">📊</div>
+          <div class="cmp-name">Best MF (Quant)</div>
+          <div class="cmp-ret" id="cmp-mf" style="color:#059669">+31.2%</div>
+          <div class="cmp-sub">Active fund outperformance</div>
+        </div>
+      </div>
     </div>
 
-    <!-- TABLE -->
-    <div class="card" style="padding:0;overflow:hidden">
+    <!-- FILTERS + VIEW TOGGLE -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:4px">
+      <div class="filter-strip" id="cat-filters">
+        <button class="fbtn active" onclick="filterMF('all',this)">All Funds</button>
+        <button class="fbtn" onclick="filterMF('Large Cap',this)">🔵 Large Cap</button>
+        <button class="fbtn" onclick="filterMF('Mid Cap',this)">🟡 Mid Cap</button>
+        <button class="fbtn" onclick="filterMF('Small Cap',this)">🟠 Small Cap</button>
+        <button class="fbtn" onclick="filterMF('Flexi Cap',this)">🟢 Flexi Cap</button>
+        <button class="fbtn" onclick="filterMF('Index',this)">📏 Index</button>
+        <button class="fbtn" onclick="filterMF('Liquid',this)">💧 Liquid</button>
+      </div>
+      <div class="view-toggle">
+        <button class="vbtn active" onclick="setView('card',this)">⊞ Cards</button>
+        <button class="vbtn" onclick="setView('table',this)">≡ Table</button>
+      </div>
+    </div>
+
+    <!-- SORT BAR -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <span style="font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Sort by:</span>
+      <button class="fbtn active" id="sort-1y" onclick="sortMF('returns1y',this)">1Y Return</button>
+      <button class="fbtn" id="sort-3y" onclick="sortMF('returns3y',this)">3Y Return</button>
+      <button class="fbtn" id="sort-5y" onclick="sortMF('returns5y',this)">5Y Return</button>
+      <button class="fbtn" id="sort-aum" onclick="sortMF('aum',this)">AUM</button>
+      <button class="fbtn" id="sort-rat" onclick="sortMF('rating',this)">Rating</button>
+    </div>
+
+    <!-- CARD VIEW -->
+    <div class="mf-grid" id="mf-cards"></div>
+
+    <!-- TABLE VIEW -->
+    <div class="card" id="mf-table-wrap" style="display:none;padding:0;overflow:hidden">
       <div style="overflow-x:auto">
-        <table class="tbl" style="min-width:750px">
-          <thead><tr><th>Fund Name</th><th>Category</th><th>1Y Return</th><th>3Y Return</th><th>AUM</th><th>Risk</th><th>Rating</th></tr></thead>
+        <table class="tbl" style="min-width:820px">
+          <thead>
+            <tr>
+              <th>Fund Name</th>
+              <th>Category</th>
+              <th>1Y Return</th>
+              <th>3Y Return</th>
+              <th>5Y Return</th>
+              <th>AUM</th>
+              <th>NAV</th>
+              <th>Min SIP</th>
+              <th>Risk</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
           <tbody id="mf-tbody"></tbody>
         </table>
       </div>
     </div>
 
     <!-- SIP CALCULATOR -->
-    <div class="card" style="margin-top:22px">
-      <div class="sh" style="margin-bottom:18px"><h2 style="font-size:1.1rem">🧮 SIP Calculator</h2><div class="sh-line"></div></div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;align-items:end">
-        <div class="cf"><label>Monthly SIP (₹)</label><input type="number" id="sip-amt" value="5000" oninput="calcSIP()"></div>
-        <div class="cf"><label>Expected Return (% p.a.)</label><input type="number" id="sip-ret" value="14" oninput="calcSIP()"></div>
-        <div class="cf"><label>Duration (Years)</label><input type="number" id="sip-yr" value="10" oninput="calcSIP()"></div>
-        <div style="padding:9px 12px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px">
-          <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Maturity Value</div>
-          <div id="sip-result" style="font-size:1.6rem;font-weight:800;color:var(--gold-d)">₹—</div>
-          <div id="sip-gain" style="font-size:.75rem;color:var(--up);font-weight:600"></div>
+    <div class="sip-card">
+      <div style="position:relative;z-index:1;margin-bottom:24px">
+        <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(37,99,235,.8);margin-bottom:8px">🧮 Free Calculator</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#fff;font-weight:700">SIP Returns Calculator</h2>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.45);margin-top:4px">Calculate how much your monthly SIP will grow over time with compounding</p>
+      </div>
+      <div class="sip-grid">
+        <div class="sip-inputs">
+          <div class="sip-field">
+            <label>Monthly SIP Amount (₹)</label>
+            <input type="number" id="sip-amt" value="5000" min="100" step="500" oninput="calcSIP()">
+          </div>
+          <div class="sip-field">
+            <label>Expected Annual Return (%)</label>
+            <input type="range" id="sip-ret" value="14" min="5" max="30" step="0.5" oninput="calcSIP(); document.getElementById('sip-ret-val').textContent=this.value+'%'">
+            <div style="display:flex;justify-content:space-between;margin-top:4px">
+              <span style="font-size:.72rem;color:rgba(255,255,255,.4)">5%</span>
+              <span style="font-size:.82rem;color:#93c5fd;font-weight:700" id="sip-ret-val">14%</span>
+              <span style="font-size:.72rem;color:rgba(255,255,255,.4)">30%</span>
+            </div>
+          </div>
+          <div class="sip-field">
+            <label>Investment Duration (Years)</label>
+            <input type="range" id="sip-yr" value="10" min="1" max="40" step="1" oninput="calcSIP(); document.getElementById('sip-yr-val').textContent=this.value+' yrs'">
+            <div style="display:flex;justify-content:space-between;margin-top:4px">
+              <span style="font-size:.72rem;color:rgba(255,255,255,.4)">1yr</span>
+              <span style="font-size:.82rem;color:#93c5fd;font-weight:700" id="sip-yr-val">10 yrs</span>
+              <span style="font-size:.72rem;color:rgba(255,255,255,.4)">40yrs</span>
+            </div>
+          </div>
+          <div class="sip-field">
+            <label>Step-up SIP Annually (% increase)</label>
+            <input type="number" id="sip-step" value="0" min="0" max="20" step="5" oninput="calcSIP()" placeholder="0 = no step-up">
+          </div>
+        </div>
+        <div class="sip-result-panel">
+          <div class="donut-wrap" id="donut-wrap">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+              <circle cx="70" cy="70" r="55" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="18"/>
+              <circle id="donut-invested" cx="70" cy="70" r="55" fill="none" stroke="#4F8EF7" stroke-width="18" stroke-dasharray="345.6" stroke-dashoffset="0"/>
+              <circle id="donut-gains" cx="70" cy="70" r="55" fill="none" stroke="#4ade80" stroke-width="18" stroke-dasharray="345.6" stroke-dashoffset="345.6"/>
+            </svg>
+            <div class="donut-label">
+              <div class="dl-val" id="donut-pct">0%</div>
+              <div class="dl-sub">Est. gains</div>
+            </div>
+          </div>
+          <div>
+            <div class="sip-res-row">
+              <span class="sip-res-label">💰 Total Invested</span>
+              <span class="sip-res-val" id="sip-invested">₹0</span>
+            </div>
+            <div class="sip-res-row">
+              <span class="sip-res-label">📈 Estimated Returns</span>
+              <span class="sip-res-val" style="color:#4ade80" id="sip-gain">₹0</span>
+            </div>
+            <div class="sip-res-row">
+              <span class="sip-res-label">🏁 Maturity Value</span>
+              <span class="sip-res-val big" id="sip-result">₹0</span>
+            </div>
+            <div style="font-size:.68rem;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5">
+              * Assumes returns compound monthly. Past performance does not guarantee future results.
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="igrid" style="margin-top:22px">
-      <div class="icard"><h3>📋 What is SIP?</h3><p>Systematic Investment Plan (SIP) lets you invest a fixed amount in mutual funds every month. It averages your cost over time (rupee cost averaging) and benefits from compounding. Start with as low as ₹500/month.</p></div>
-      <div class="icard"><h3>🔒 SEBI-registered & safe?</h3><p>All mutual funds in India are regulated by SEBI (Securities and Exchange Board of India). Your investment is held by a custodian, not the AMC — so even if the AMC shuts down, your money is safe.</p></div>
+    <!-- INFO GRID -->
+    <div class="igrid">
+      <div class="icard"><h3>📋 What is SIP?</h3><p>Systematic Investment Plan (SIP) invests a fixed amount monthly in mutual funds. It benefits from rupee cost averaging and compounding. Start with as low as ₹500/month on any SEBI-regulated fund.</p></div>
+      <div class="icard"><h3>🔒 Are Mutual Funds Safe?</h3><p>All funds are regulated by SEBI. Your units are held by a custodian independent of the AMC — even if an AMC closes, your investment is safe. Equity funds carry market risk; liquid funds are near-risk-free.</p></div>
+      <div class="icard"><h3>🥇 Gold vs Equity SIP</h3><p>Gold has returned ~18% in 2026, outperforming many large-cap funds. Experts recommend 10–15% allocation to gold (via Gold ETF or Sovereign Gold Bonds) as a hedge alongside equity SIPs.</p></div>
+      <div class="icard"><h3>💡 ELSS for Tax Saving</h3><p>ELSS (Equity Linked Savings Schemes) offer Section 80C deductions up to ₹1.5L per year with only a 3-year lock-in — the shortest among 80C options. Returns are generally 12–18% historically.</p></div>
     </div>
+
   </div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:18px">
-      <div style="font-size:1.1rem;font-weight:800;color:#fff">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>India</div>
-      <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:.8rem"><a href="/" style="color:rgba(255,255,255,.5)">Home</a><a href="/ipo" style="color:rgba(255,255,255,.5)">IPO</a><a href="/policies" style="color:rgba(255,255,255,.5)">Legal</a></div>
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>India</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:.8rem">
+        <a href="/" style="color:rgba(255,255,255,.5)">Gold Rate</a>
+        <a href="/ipo" style="color:rgba(255,255,255,.5)">IPO</a>
+        <a href="/calculators" style="color:rgba(255,255,255,.5)">Calculators</a>
+        <a href="/policies" style="color:rgba(255,255,255,.5)">Legal</a>
+      </div>
     </div>
-    <div class="footer-btm">&copy; 2026 GoldRateIndia.com · Mutual fund returns shown are historical and do not guarantee future performance. Invest based on your risk profile and consult a SEBI-registered financial advisor.</div>
+    <div class="footer-btm">© 2026 GoldRateIndia.com · Mutual fund returns shown are historical and do not guarantee future performance. Invest according to your risk profile. Consult a SEBI-registered financial advisor before investing.</div>
   </div>
 </footer>
 
 <script src="/nav.js"></script>
 <script>
-let allMF=[];
-const riskClass=(r)=>({
-  'Very Low':'risk-vlow','Low':'risk-low','Moderate':'risk-mod',
-  'Moderately High':'risk-mod','High':'risk-high','Very High':'risk-high'
-}[r]||'risk-mod');
-const stars=(n)=>'<span class="star">'+'★'.repeat(n)+'☆'.repeat(5-n)+'</span>';
+'use strict';
+let allMF = [], currentView = 'card', currentSort = 'returns1y';
 
-async function loadMF(){
-  try{
-    const d=await fetch('/api/data').then(r=>r.json());
-    allMF=d.mutualFunds||[];
-    document.getElementById('mf-ts').textContent=d.lastUpdated||'Today';
-    renderMF(allMF);
-  }catch{renderMF([])}
+const riskClass = r => ({'Very Low':'risk-vlow','Low':'risk-low','Moderate':'risk-mod','Moderately High':'risk-modh','High':'risk-high','Very High':'risk-high'}[r]||'risk-mod');
+const stars = n => Array.from({length:5},(_,i)=>`<span class="${i<n?'star':'star-e'}">★</span>`).join('');
+const parseRet = s => parseFloat(s)||0;
+const parseAUM = s => parseFloat(s.replace(/[^0-9.]/g,''))||0;
+
+// Fetch gold + MF data in parallel
+async function init() {
+  const [pricesRes, dataRes] = await Promise.allSettled([
+    fetch('/api/prices').then(r=>r.json()),
+    fetch('/api/data').then(r=>r.json())
+  ]);
+
+  // Gold data
+  if (pricesRes.status === 'fulfilled') {
+    const p = pricesRes.value;
+    const g = p.gold24k;
+    setText('tk-gold', '₹' + g.toLocaleString('en-IN'));
+    setText('tk-gold2', '₹' + g.toLocaleString('en-IN'));
+    setText('cmp-gold-price', g.toLocaleString('en-IN'));
+    // Estimate 1Y return from history
+    const hist = p.history || [];
+    if (hist.length >= 2) {
+      const oldest = hist[hist.length-1]?.gold24k || g;
+      const ret = ((g - oldest) / oldest * 100).toFixed(1);
+      setText('cmp-gold', (ret > 0 ? '+' : '') + ret + '%');
+      setText('hs-gold-ret', (ret > 0 ? '+' : '') + ret + '%');
+    }
+  }
+
+  // Forex
+  try {
+    const fx = await fetch('/api/forex').then(r=>r.json());
+    const usdInr = fx.USD ? (1/fx.USD).toFixed(2) : '83.42';
+    setText('tk-usd', '₹' + usdInr);
+    setText('tk-usd2', '₹' + usdInr);
+  } catch {}
+
+  // MF data
+  if (dataRes.status === 'fulfilled') {
+    allMF = dataRes.value.mutualFunds || [];
+    setText('mf-ts', dataRes.value.lastUpdated || 'Today');
+    const best = allMF.reduce((a,b)=>parseRet(a.returns1y)>parseRet(b.returns1y)?a:b,allMF[0]||{});
+    if (best.returns1y) setText('hs-topret', best.returns1y);
+    if (best.returns1y) setText('cmp-mf', '+'+best.returns1y);
+    renderAll(allMF);
+  }
+  calcSIP();
 }
-function renderMF(data){
-  document.getElementById('mf-tbody').innerHTML=data.length?data.map(f=>`
+
+function renderAll(data) {
+  renderCards(data);
+  renderTable(data);
+}
+
+function renderCards(data) {
+  const el = document.getElementById('mf-cards');
+  if (!data.length) { el.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No funds found for this category.</div>'; return; }
+  el.innerHTML = data.map(f => `
+    <div class="mf-card">
+      <div class="mf-card-head">
+        <div class="mf-name">${f.name}</div>
+        <span class="mf-cat">${f.category}</span>
+      </div>
+      <div class="mf-returns">
+        <div class="mf-ret"><div class="rv" style="color:${parseRet(f.returns1y)>20?'var(--mf-green)':'#2563EB'}">${f.returns1y}</div><div class="rl">1 Year</div></div>
+        <div class="mf-ret"><div class="rv">${f.returns3y}</div><div class="rl">3 Years</div></div>
+        <div class="mf-ret"><div class="rv">${f.returns5y||'—'}</div><div class="rl">5 Years</div></div>
+      </div>
+      <div class="mf-meta">
+        <div><div class="mf-aum">AUM: <strong>${f.aum}</strong></div><div class="mf-sip">Min SIP: <strong>${f.minSIP||'₹500'}</strong> · NAV: ${f.nav||'—'}</div></div>
+        <div style="text-align:right"><span class="${riskClass(f.risk)}">${f.risk}</span><div class="star-row" style="margin-top:5px;justify-content:flex-end">${stars(f.rating||4)}</div></div>
+      </div>
+      <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" rel="noopener" class="apply-btn-mf">Start SIP via Angel One →</a>
+    </div>`).join('');
+}
+
+function renderTable(data) {
+  document.getElementById('mf-tbody').innerHTML = data.map(f => `
     <tr>
-      <td style="font-weight:700;color:var(--brand);max-width:200px">${f.name}</td>
-      <td><span style="background:rgba(37,99,235,.08);color:#1D4ED8;border:1px solid rgba(37,99,235,.18);padding:2px 8px;border-radius:20px;font-size:.66rem;font-weight:700">${f.category}</span></td>
-      <td style="font-weight:800;color:var(--up);font-size:1rem">${f.returns1y}</td>
+      <td style="font-weight:700;color:var(--ink);max-width:220px;font-size:.88rem">${f.name}</td>
+      <td><span style="background:var(--mf-blue-bg);color:var(--mf-blue);border:1px solid rgba(37,99,235,.18);padding:2px 8px;border-radius:20px;font-size:.64rem;font-weight:700">${f.category}</span></td>
+      <td style="font-weight:800;color:var(--mf-green);font-size:1rem">${f.returns1y}</td>
       <td style="font-weight:700;color:#2563EB">${f.returns3y}</td>
-      <td style="color:var(--muted);font-size:.85rem">${f.aum}</td>
+      <td style="font-weight:600;color:var(--muted)">${f.returns5y||'—'}</td>
+      <td style="font-size:.82rem;color:var(--muted)">${f.aum}</td>
+      <td style="font-size:.82rem">${f.nav||'—'}</td>
+      <td style="font-size:.82rem;color:var(--mf-green);font-weight:600">${f.minSIP||'₹500'}</td>
       <td><span class="${riskClass(f.risk)}">${f.risk}</span></td>
       <td>${stars(f.rating||4)}</td>
-    </tr>`).join(''):'<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted)">No funds found</td></tr>';
+    </tr>`).join('');
 }
-function filterMF(cat,btn){
-  document.querySelectorAll('#cat-filters button').forEach(b=>{b.style.background='var(--surface)';b.style.color='var(--muted)'});
-  btn.style.background='var(--brand)';btn.style.color='#fff';
-  renderMF(cat==='all'?allMF:allMF.filter(f=>f.category===cat));
+
+function setText(id, v) { const e=document.getElementById(id); if(e) e.textContent=v; }
+
+function filterMF(cat, btn) {
+  document.querySelectorAll('#cat-filters .fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = cat==='all' ? allMF : allMF.filter(f=>f.category===cat);
+  renderAll(filtered);
 }
-function calcSIP(){
-  const amt=parseFloat(document.getElementById('sip-amt').value)||0;
-  const ret=parseFloat(document.getElementById('sip-ret').value)||0;
-  const yrs=parseFloat(document.getElementById('sip-yr').value)||0;
-  const n=yrs*12,r=ret/(12*100);
-  const maturity=r?amt*((Math.pow(1+r,n)-1)/r)*(1+r):amt*n;
-  const invested=amt*n;
-  document.getElementById('sip-result').textContent='₹'+Math.round(maturity).toLocaleString('en-IN');
-  document.getElementById('sip-gain').textContent=`Gain: ₹${Math.round(maturity-invested).toLocaleString('en-IN')} on ₹${Math.round(invested).toLocaleString('en-IN')} invested`;
+
+function sortMF(key, btn) {
+  document.querySelectorAll('.view-toggle~div .fbtn, #sort-1y, #sort-3y, #sort-5y, #sort-aum, #sort-rat').forEach(b=>{if(b) b.classList.remove('active')});
+  if(btn) btn.classList.add('active');
+  currentSort = key;
+  const sorted = [...allMF].sort((a,b) => {
+    if (key==='aum') return parseAUM(b.aum)-parseAUM(a.aum);
+    if (key==='rating') return (b.rating||0)-(a.rating||0);
+    return parseRet(b[key])-parseRet(a[key]);
+  });
+  renderAll(sorted);
 }
-loadMF();calcSIP();
+
+function setView(view, btn) {
+  document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentView = view;
+  document.getElementById('mf-cards').style.display = view==='card'?'grid':'none';
+  document.getElementById('mf-table-wrap').style.display = view==='table'?'block':'none';
+}
+
+function calcSIP() {
+  const amt  = parseFloat(document.getElementById('sip-amt').value)||0;
+  const ret  = parseFloat(document.getElementById('sip-ret').value)||0;
+  const yrs  = parseFloat(document.getElementById('sip-yr').value)||0;
+  const step = parseFloat(document.getElementById('sip-step').value)||0;
+  const n    = yrs * 12;
+  const r    = ret / (12 * 100);
+
+  let maturity = 0, invested = 0;
+  if (step > 0) {
+    let monthly = amt;
+    for (let y=0;y<yrs;y++) {
+      const yr_n = 12;
+      const yr_months_done = y * 12;
+      maturity = maturity * Math.pow(1+r, 12);
+      for (let m=0;m<12;m++) {
+        maturity += monthly * Math.pow(1+r, 11-m);
+        invested += monthly;
+      }
+      monthly *= (1 + step/100);
+    }
+  } else {
+    maturity = r ? amt * ((Math.pow(1+r,n)-1)/r) * (1+r) : amt*n;
+    invested = amt * n;
+  }
+
+  const gain = maturity - invested;
+  const gainPct = invested > 0 ? Math.round(gain/invested*100) : 0;
+
+  setText('sip-result', '₹' + Math.round(maturity).toLocaleString('en-IN'));
+  setText('sip-invested', '₹' + Math.round(invested).toLocaleString('en-IN'));
+  setText('sip-gain', '₹' + Math.round(gain).toLocaleString('en-IN'));
+  setText('donut-pct', gainPct + '%');
+
+  // Update donut
+  const circ = 2 * Math.PI * 55;
+  const investedFrac = invested / maturity;
+  const investedDash = circ * investedFrac;
+  const gainDash = circ * (1 - investedFrac);
+  const gainOffset = circ * investedFrac;
+  const di = document.getElementById('donut-invested');
+  const dg = document.getElementById('donut-gains');
+  if (di) { di.style.strokeDasharray=`${investedDash} ${circ}`; di.style.strokeDashoffset='0'; }
+  if (dg) { dg.style.strokeDasharray=`${gainDash} ${circ}`; dg.style.strokeDashoffset=`-${investedDash}`; }
+}
+
+init();
 </script>
 </body>
-.html done
+</html>
