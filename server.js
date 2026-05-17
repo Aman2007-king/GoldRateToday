@@ -65,5 +65,3 @@ app.post('/api/update-prices', (req,res) => {
 });
 
 app.listen(PORT, () => console.log(`🚀 GoldRateIndia running at http://localhost:${PORT}`));
-SERVEREOF
-echo "server.js done"
