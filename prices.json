@@ -1,13 +1,16 @@
 {
-  "gold24k": "1,70,170",
-  "gold22k": "1,56,400",
-  "gold18k": "1,27,970",
-  "silver": "4,01,760",
-  "lastUpdated": "30 Jan 2026, 09:30 AM",
-  "cityPremium": { "mumbai": 0, "delhi": 150, "chennai": 500, "kolkata": -220, "bangalore": 140 },
-  "history": {
-    "labels": ["24 Jan", "25 Jan", "26 Jan", "27 Jan", "28 Jan", "29 Jan", "30 Jan"],
-    "gold": [147180, 147170, 148730, 148720, 164230, 164240, 170170],
-    "silver": [310000, 312000, 315000, 318000, 340000, 377000, 401760]
-  }
+  "gold24k": 169200,
+  "silver": 95000,
+  "lastUpdated": "17 May 2026, 10:00 AM",
+  "source": "admin",
+  "history": [
+    {"date":"17 May","gold24k":169200,"silver":95000},
+    {"date":"16 May","gold24k":169000,"silver":94800},
+    {"date":"15 May","gold24k":168500,"silver":94200},
+    {"date":"14 May","gold24k":168800,"silver":94500},
+    {"date":"13 May","gold24k":167900,"silver":93800},
+    {"date":"12 May","gold24k":167400,"silver":93200},
+    {"date":"09 May","gold24k":166800,"silver":92500}
+  ]
 }
+
