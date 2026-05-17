@@ -238,5 +238,3 @@ function getDefaultData() {
     fuelLastUpdated: "17 May 2026"
   };
 }
-
-server.js written
