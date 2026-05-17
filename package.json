@@ -1,17 +1,12 @@
 {
   "name": "gold-rate-india",
   "version": "2.0.0",
-  "description": "India's #1 live gold & silver rate website with auto-refresh and world-class UI",
+  "description": "Live gold & silver rates with smart auto-update",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
-  },
+  "scripts": { "start": "node server.js" },
   "dependencies": {
-    "express": "^4.18.2"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": ["gold rate", "india", "silver price", "MCX", "live prices"]
+    "express": "^4.18.2",
+    "node-cron": "^3.0.3"
+  }
 }
+
