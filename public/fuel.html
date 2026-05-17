@@ -2,53 +2,246 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fuel Prices India 2026 | Petrol & Diesel Rate Today | GoldRateIndia</title>
-<meta name="description" content="Today's petrol and diesel prices across all major Indian cities. Updated daily from IOCL official rates.">
+<title>Petrol Diesel Price Today India 2026 | Fuel Rates All Cities | GoldRateIndia</title>
+<meta name="description" content="Today's petrol and diesel prices across all major Indian cities. Updated daily from IOCL official rates. CNG prices, crude oil impact explained.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/shared.css">
+<style>
+/* ── Fuel page ── */
+.hero-fuel {
+  background: linear-gradient(145deg,#0a0500 0%,#1a0c00 55%,#2d1500 100%);
+  padding: 48px 24px 72px;
+  position: relative; overflow: hidden;
+}
+.hero-fuel::before {
+  content:'';position:absolute;
+  width:600px;height:500px;
+  background:radial-gradient(ellipse,rgba(234,88,12,.14) 0%,transparent 70%);
+  top:-100px;right:-50px;pointer-events:none;
+}
+
+/* ── Summary row ── */
+.fuel-summary { display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px; }
+@media(max-width:800px){ .fuel-summary{grid-template-columns:repeat(2,1fr)} }
+.fs-card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;padding:18px 16px;
+  backdrop-filter:blur(8px);
+}
+.fs-city { font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.4);margin-bottom:6px; }
+.fs-petrol { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#fb923c; }
+.fs-label { font-size:.66rem;color:rgba(255,255,255,.35);margin-top:2px; }
+.fs-diesel { font-size:.9rem;font-weight:600;color:rgba(96,165,250,.9);margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.07); }
+
+/* ── Search bar ── */
+.fuel-search {
+  display:flex;gap:10px;align-items:center;margin-bottom:20px;
+}
+.fuel-search input {
+  flex:1;max-width:420px;padding:11px 16px;border-radius:10px;
+  border:1.5px solid var(--border);font-size:.9rem;
+  background:var(--surface);color:var(--ink);outline:none;
+  transition:.2s;font-family:inherit;
+}
+.fuel-search input:focus { border-color:var(--gold); }
+
+/* ── City cards ── */
+.fuel-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:24px; }
+.fuel-city-card {
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:20px;
+  box-shadow:var(--shadow);transition:all .3s;
+}
+.fuel-city-card:hover { transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:rgba(234,88,12,.3); }
+.fc-name { font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px; }
+.fc-name .fi-dot { width:8px;height:8px;border-radius:50%;background:var(--gold); }
+.fc-prices { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
+.fc-price { background:var(--surface2);border-radius:10px;padding:12px 10px;text-align:center; }
+.fc-price .fp-val {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:700;
+}
+.fc-price.petrol .fp-val { color:#EA580C; }
+.fc-price.diesel .fp-val { color:#2563EB; }
+.fc-price .fp-label { font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-top:2px; }
+.fc-cng { margin-top:10px;padding:8px 10px;background:rgba(5,150,105,.05);border:1px solid rgba(5,150,105,.15);border-radius:8px;font-size:.78rem;color:#059669;font-weight:600;text-align:center; }
+
+/* ── Table view ── */
+.fuel-table-card { display:none; }
+.fuel-table-card.show { display:block; }
+
+/* ── Crude oil widget ── */
+.crude-section { background:linear-gradient(135deg,#060c1a,#0f1e3d);border-radius:16px;overflow:hidden;margin-bottom:24px; }
+
+/* ── View toggle ── */
+.view-toggle { display:flex;gap:6px;margin-bottom:14px; }
+.vbtn { padding:6px 14px;border-radius:8px;font-size:.76rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:.2s; }
+.vbtn.active { background:var(--ink);color:#fff;border-color:var(--ink); }
+
+/* ── Price trend indicator ── */
+.trend-up   { color:#EA580C; }
+.trend-down { color:#059669; }
+.trend-flat { color:var(--muted); }
+
+/* ── Info bar ── */
+.info-bar {
+  background:var(--gold-pale);
+  border:1px solid var(--gold);
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+  font-size:.82rem;color:var(--gold-deep);
+  font-weight:600;
+}
+</style>
 </head>
 <body>
-<div class="ticker" aria-hidden="true"><div class="ticker-inner"><span class="ti"><span class="lbl">Petrol Mumbai</span><span class="val">₹106.31/L</span></span><span class="ti"><span class="lbl">Diesel Mumbai</span><span class="val">₹94.27/L</span></span><span class="ti"><span class="lbl">Petrol Delhi</span><span class="val">₹96.72/L</span></span><span class="ti"><span class="lbl">Crude Oil</span><span class="val">$82.4</span><span class="chg dn">▼ 0.5%</span></span><span class="ti"><span class="lbl">Petrol Mumbai</span><span class="val">₹106.31/L</span></span><span class="ti"><span class="lbl">Diesel Mumbai</span><span class="val">₹94.27/L</span></span><span class="ti"><span class="lbl">Crude Oil</span><span class="val">$82.4</span><span class="chg dn">▼ 0.5%</span></span></div></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ti"><span class="lbl">Petrol Mumbai</span><span class="val" id="tk-petrol-mum">₹106.31/L</span></span>
+    <span class="ti"><span class="lbl">Diesel Mumbai</span><span class="val" id="tk-diesel-mum">₹94.27/L</span></span>
+    <span class="ti"><span class="lbl">Petrol Delhi</span><span class="val" id="tk-petrol-del">₹96.72/L</span></span>
+    <span class="ti"><span class="lbl">Gold 24K</span><span class="val" id="tk-gold">₹--</span></span>
+    <span class="ti"><span class="lbl">Crude Oil</span><span class="val">~$82/bbl</span><span class="chg dn">▼ crude</span></span>
+    <span class="ti"><span class="lbl">USD/INR</span><span class="val" id="tk-usd">₹--</span></span>
+    <span class="ti"><span class="lbl">Petrol Mumbai</span><span class="val">₹106.31/L</span></span>
+    <span class="ti"><span class="lbl">Diesel Mumbai</span><span class="val">₹94.27/L</span></span>
+    <span class="ti"><span class="lbl">Petrol Delhi</span><span class="val">₹96.72/L</span></span>
+    <span class="ti"><span class="lbl">Gold 24K</span><span class="val" id="tk-gold2">₹--</span></span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
 <nav class="navbar">
   <a href="/" class="nav-logo"><span class="gem">🥇</span>Gold<em>Rate</em>India</a>
   <div class="nav-links">
-    <a href="/">Gold</a><a href="/silver">Silver</a><a href="/nifty">Nifty</a><a href="/sensex">Sensex</a>
-    <a href="/crude-oil">Crude Oil</a><a href="/fuel" class="active">Fuel</a><a href="/ipo">IPO 2026</a>
-    <a href="/mutual-funds">Mutual Funds</a><a href="/calculators">Calculators</a>
+    <a href="/">Gold</a><a href="/silver">Silver</a><a href="/nifty">Nifty</a>
+    <a href="/crude-oil">Crude Oil</a><a href="/fuel" class="active">Fuel Prices</a>
+    <a href="/ipo">IPO 2026</a><a href="/mutual-funds">Mutual Funds</a>
   </div>
   <div class="hamburger" onclick="openDrawer()"><span></span><span></span><span></span></div>
 </nav>
 <div class="drawer-bg" id="dbg" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-hd"><span>🥇 GoldRateIndia</span><span class="drawer-close" onclick="closeDrawer()">✕</span></div>
-  <a href="/"><span class="di">🥇</span>Gold Rate Today</a><a href="/silver"><span class="di">🥈</span>Silver Rate</a>
-  <a href="/nifty"><span class="di">📈</span>Nifty 50</a><a href="/sensex"><span class="di">📉</span>Sensex</a>
-  <a href="/crude-oil"><span class="di">🛢️</span>Crude Oil</a><a href="/fuel" class="active"><span class="di">⛽</span>Fuel Prices</a>
-  <a href="/ipo"><span class="di">🚀</span>IPO 2026</a><a href="/mutual-funds"><span class="di">📊</span>Mutual Funds</a>
-  <a href="/calculators"><span class="di">🧮</span>Calculators</a><a href="/banking"><span class="di">🏦</span>Banking</a>
+  <a href="/"><span class="di">🥇</span>Gold Rate</a>
+  <a href="/silver"><span class="di">🥈</span>Silver</a>
+  <a href="/crude-oil"><span class="di">🛢️</span>Crude Oil</a>
+  <a href="/fuel" class="active"><span class="di">⛽</span>Fuel Prices</a>
+  <a href="/ipo"><span class="di">🚀</span>IPO 2026</a>
+  <a href="/mutual-funds"><span class="di">📊</span>Mutual Funds</a>
+  <a href="/calculators"><span class="di">🧮</span>Calculators</a>
+  <a href="/banking"><span class="di">🏦</span>Banking</a>
 </div>
 
-<section class="hero" style="padding:40px 22px 60px">
+<!-- HERO -->
+<section class="hero-fuel">
   <div style="max-width:1220px;margin:0 auto;position:relative;z-index:1">
-    <h1 style="font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:8px">⛽ Fuel Prices <em>Today in India</em></h1>
-    <p style="color:rgba(255,255,255,.55);font-size:.92rem;margin-bottom:18px">Petrol & diesel rates across all major cities. Updated daily from IOCL. Last updated: <span id="fuel-ts">loading…</span></p>
-    <input id="search" placeholder="🔍 Search your city…" oninput="filterFuel()" style="padding:11px 16px;border-radius:10px;border:none;font-size:.92rem;font-family:inherit;width:100%;max-width:400px;background:rgba(255,255,255,.12);color:#fff;outline:none;border:1px solid rgba(255,255,255,.2)">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(234,88,12,.15);border:1px solid rgba(234,88,12,.3);color:#fb923c;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:14px">
+      ⛽ Daily Updated · As of <span id="fuel-ts">--</span>
+    </div>
+    <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif;margin-bottom:10px;letter-spacing:-.01em">
+      Fuel Prices <em style="color:#fb923c;font-style:normal">Today in India</em>
+    </h1>
+    <p style="color:rgba(255,255,255,.5);font-size:.92rem;max-width:560px;margin-bottom:8px;line-height:1.7">
+      Petrol, diesel & CNG rates across 20+ major cities. Revised daily at 6 AM by IOCL, BPCL & HPCL based on international crude oil and USD/INR rate.
+    </p>
+    <div class="fuel-summary" id="fuel-summary">
+      <div class="fs-card"><div class="fs-city">🌆 Mumbai</div><div class="fs-petrol" id="sum-mum-p">₹106.31</div><div class="fs-label">Petrol / litre</div><div class="fs-diesel" id="sum-mum-d">Diesel: ₹94.27/L</div></div>
+      <div class="fs-card"><div class="fs-city">🏛️ Delhi</div><div class="fs-petrol" id="sum-del-p">₹96.72</div><div class="fs-label">Petrol / litre</div><div class="fs-diesel" id="sum-del-d">Diesel: ₹89.62/L</div></div>
+      <div class="fs-card"><div class="fs-city">🌿 Bangalore</div><div class="fs-petrol" id="sum-ban-p">₹101.94</div><div class="fs-label">Petrol / litre</div><div class="fs-diesel" id="sum-ban-d">Diesel: ₹87.89/L</div></div>
+      <div class="fs-card"><div class="fs-city">💊 Hyderabad</div><div class="fs-petrol" id="sum-hyd-p">₹109.66</div><div class="fs-label">Petrol / litre</div><div class="fs-diesel" id="sum-hyd-d">Diesel: ₹97.82/L</div></div>
+    </div>
   </div>
 </section>
 
+<!-- CRUDE OIL WIDGET -->
+<div class="crude-section">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"MCX:CRUDEOIL1!","title":"Crude Oil MCX"},{"proName":"NYMEX:CL1!","title":"WTI Crude"},{"proName":"ICEEUR:B1!","title":"Brent Crude"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"BSE:SENSEX","title":"Sensex"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"in"}
+    </script>
+  </div>
+</div>
+
 <div class="wrap">
-  <div style="margin-top:-24px;position:relative;z-index:2">
+  <div style="margin-top:20px">
 
-    <!-- SUMMARY CARDS -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px" id="fuel-cards"></div>
+    <!-- INFO BAR -->
+    <div class="info-bar">
+      ℹ️ Fuel prices are revised at 6:00 AM daily by IOCL, BPCL & HPCL. Prices vary by state VAT, transport cost and local levies.
+    </div>
 
-    <!-- FULL TABLE -->
-    <div class="card">
-      <div class="sh" style="margin-bottom:14px"><h2 style="font-size:1.1rem">City-Wise Fuel Prices</h2><div class="sh-line"></div><span class="badge">Daily Updated</span></div>
+    <!-- FUEL CALCULATOR -->
+    <div class="card" style="margin-bottom:24px">
+      <div class="sh" style="margin-bottom:18px"><h2 style="font-size:1.1rem">🧮 Fuel Cost Calculator</h2><div class="sh-line"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;align-items:end">
+        <div class="cf">
+          <label>Distance (km)</label>
+          <input type="number" id="fc-dist" value="100" min="1" oninput="calcFuel()">
+        </div>
+        <div class="cf">
+          <label>Mileage (km/L)</label>
+          <input type="number" id="fc-mileage" value="15" min="1" step="0.5" oninput="calcFuel()">
+        </div>
+        <div class="cf">
+          <label>City</label>
+          <select id="fc-city" onchange="calcFuel()">
+            <option value="106.31">Mumbai (₹106.31)</option>
+            <option value="96.72">Delhi (₹96.72)</option>
+            <option value="101.94">Bangalore (₹101.94)</option>
+            <option value="102.63">Chennai (₹102.63)</option>
+            <option value="109.66">Hyderabad (₹109.66)</option>
+            <option value="106.03">Kolkata (₹106.03)</option>
+          </select>
+        </div>
+        <div class="cf">
+          <label>Fuel Type</label>
+          <select id="fc-type" onchange="calcFuel()">
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+          </select>
+        </div>
+        <div style="background:var(--gold-pale);border:1px solid var(--gold);border-radius:10px;padding:12px 14px">
+          <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Estimated Cost</div>
+          <div id="fc-result" style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--gold-deep)">₹0</div>
+          <div id="fc-litres" style="font-size:.75rem;color:var(--muted);margin-top:2px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH + VIEW TOGGLE -->
+    <div class="fuel-search">
+      <input type="text" id="fuel-search" placeholder="🔍 Search your city..." oninput="filterFuel()">
+      <div class="view-toggle" style="margin:0">
+        <button class="vbtn active" onclick="setView('card',this)">⊞ Cards</button>
+        <button class="vbtn" onclick="setView('table',this)">≡ Table</button>
+      </div>
+    </div>
+
+    <!-- CARD VIEW -->
+    <div class="fuel-grid" id="fuel-card-grid"></div>
+
+    <!-- TABLE VIEW -->
+    <div class="card fuel-table-card" id="fuel-table-card" style="padding:0;overflow:hidden">
       <div style="overflow-x:auto">
-        <table class="tbl" id="fuel-tbl">
-          <thead><tr><th>City</th><th>Petrol (1L)</th><th>Diesel (1L)</th><th>CNG (1 kg)</th></tr></thead>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>City</th>
+              <th>Petrol (₹/L)</th>
+              <th>Diesel (₹/L)</th>
+              <th>CNG (₹/kg)</th>
+              <th>Petrol vs Delhi</th>
+            </tr>
+          </thead>
           <tbody id="fuel-tbody"></tbody>
         </table>
       </div>
@@ -56,8 +249,10 @@
 
     <!-- INFO -->
     <div class="igrid">
-      <div class="icard"><h3>🛢️ How are fuel prices fixed?</h3><p>Fuel prices in India are revised daily at 6 AM by oil marketing companies (IOCL, BPCL, HPCL) based on international crude oil prices, USD/INR exchange rate, and central/state taxes & duties.</p></div>
-      <div class="icard"><h3>📊 Why do prices differ by city?</h3><p>State VAT on petrol and diesel varies significantly — from ~16% in Goa to ~35%+ in Maharashtra and Rajasthan. This is the primary reason for the large city-to-city variation in fuel prices.</p></div>
+      <div class="icard"><h3>🛢️ How Are Fuel Prices Fixed?</h3><p>Indian OMCs (IOCL, BPCL, HPCL) revise prices daily at 6 AM based on international crude oil, USD/INR exchange rate, refinery throughput costs, and central+state taxes & duties. Since June 2017, prices change daily via Dynamic Fuel Pricing.</p></div>
+      <div class="icard"><h3>📊 Why Prices Differ by City?</h3><p>State VAT is the primary differentiator — from ~16% in Goa to ~38% in Maharashtra and Rajasthan. Additional local levies and transport distance also play a role. Central excise duty is uniform across India at ₹19.90/L for petrol.</p></div>
+      <div class="icard"><h3>🌿 What About CNG?</h3><p>CNG prices are set by City Gas Distribution (CGD) companies and regulated by PNGRB. CNG is typically 40–50% cheaper than petrol on a per-km cost basis for vehicles that run on it. Available primarily in metro and Tier-1 cities.</p></div>
+      <div class="icard"><h3>🥇 Crude Oil & Gold Correlation</h3><p>When crude oil rises, transport and production costs increase — often pushing gold and food prices higher. A weaker rupee (USD/INR rising) increases both crude import cost and gold import cost simultaneously for India.</p></div>
     </div>
 
   </div>
@@ -65,58 +260,154 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:20px">
-      <div style="font-size:1.1rem;font-weight:800;color:#fff">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>India</div>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:.8rem">
-        <a href="/" style="color:rgba(255,255,255,.5)">Gold</a><a href="/silver" style="color:rgba(255,255,255,.5)">Silver</a>
-        <a href="/ipo" style="color:rgba(255,255,255,.5)">IPO</a><a href="/policies" style="color:rgba(255,255,255,.5)">Legal</a>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:18px">
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>India</div>
+      <div style="display:flex;gap:20px;font-size:.8rem;flex-wrap:wrap">
+        <a href="/" style="color:rgba(255,255,255,.5)">Gold Rate</a>
+        <a href="/crude-oil" style="color:rgba(255,255,255,.5)">Crude Oil</a>
+        <a href="/currency" style="color:rgba(255,255,255,.5)">Currency</a>
+        <a href="/policies" style="color:rgba(255,255,255,.5)">Legal</a>
       </div>
     </div>
-    <div class="footer-btm">&copy; 2026 GoldRateIndia.com · Fuel prices are indicative. Always check official IOCL/BPCL/HPCL websites for exact rates.</div>
+    <div class="footer-btm">© 2026 GoldRateIndia.com · Fuel prices are indicative. Always verify with official IOCL, BPCL, or HPCL websites or SMS services for exact rates in your area.</div>
   </div>
 </footer>
 
 <script src="/nav.js"></script>
 <script>
-let fuelData=[];
-async function loadFuel(){
-  try{
-    const d=await fetch('/api/data').then(r=>r.json());
-    fuelData=d.fuel||[];
-    document.getElementById('fuel-ts').textContent=d.fuelLastUpdated||'Today';
-    renderFuel(fuelData);
-  }catch{renderFuel(defaultFuel())}
+'use strict';
+let fuelData = [], currentView = 'card';
+
+const CITY_ICONS = {
+  'Mumbai':'🌆','Delhi':'🏛️','Bangalore':'🌿','Chennai':'🌊','Hyderabad':'💊',
+  'Kolkata':'🎨','Ahmedabad':'🏺','Pune':'🎓','Jaipur':'🏰','Lucknow':'🌸',
+  'Bhopal':'🌳','Patna':'🕌','Chandigarh':'🌐','Kochi':'⛵','Nagpur':'🍊',
+  'Indore':'🏙️','Surat':'💍','Visakhapatnam':'⚓','Vadodara':'🎭','Coimbatore':'🏭'
+};
+
+async function init() {
+  // Gold ticker
+  try {
+    const p = await fetch('/api/prices').then(r=>r.json());
+    const g = p.gold24k;
+    setText('tk-gold', '₹' + g.toLocaleString('en-IN'));
+    setText('tk-gold2','₹' + g.toLocaleString('en-IN'));
+  } catch {}
+  try {
+    const fx = await fetch('/api/forex').then(r=>r.json());
+    const usdInr = fx.USD ? (1/fx.USD).toFixed(2) : '83.42';
+    setText('tk-usd', '₹' + usdInr);
+  } catch {}
+
+  // Fuel data
+  try {
+    const d = await fetch('/api/data').then(r=>r.json());
+    fuelData = d.fuel || [];
+    setText('fuel-ts', d.fuelLastUpdated || 'Today');
+
+    // Update hero summary
+    const cityMap = {};
+    fuelData.forEach(c => cityMap[c.city.toLowerCase()] = c);
+    updateHeroCard('mum', cityMap['mumbai']);
+    updateHeroCard('del', cityMap['delhi']);
+    updateHeroCard('ban', cityMap['bangalore']);
+    updateHeroCard('hyd', cityMap['hyderabad']);
+
+    // Update ticker
+    if (cityMap['mumbai']) {
+      setText('tk-petrol-mum', '₹' + cityMap['mumbai'].petrol.toFixed(2) + '/L');
+      setText('tk-diesel-mum', '₹' + cityMap['mumbai'].diesel.toFixed(2) + '/L');
+    }
+    if (cityMap['delhi']) setText('tk-petrol-del', '₹' + cityMap['delhi'].petrol.toFixed(2) + '/L');
+
+    renderAll(fuelData);
+  } catch(e) { console.error(e); }
+  calcFuel();
 }
-function defaultFuel(){
-  return [{city:"Mumbai",petrol:106.31,diesel:94.27,cng:72.5},{city:"Delhi",petrol:96.72,diesel:89.62,cng:74.1},
-          {city:"Bangalore",petrol:101.94,diesel:87.89,cng:null},{city:"Chennai",petrol:102.63,diesel:94.24,cng:null},
-          {city:"Hyderabad",petrol:109.66,diesel:97.82,cng:null},{city:"Kolkata",petrol:106.03,diesel:92.76,cng:null}];
+
+function updateHeroCard(key, c) {
+  if (!c) return;
+  const p = document.getElementById(`sum-${key}-p`);
+  const d = document.getElementById(`sum-${key}-d`);
+  if (p) p.textContent = '₹' + c.petrol.toFixed(2);
+  if (d) d.textContent = 'Diesel: ₹' + c.diesel.toFixed(2) + '/L';
 }
-function renderFuel(data){
-  // Summary cards — top 4 cities
-  const top=data.slice(0,4);
-  document.getElementById('fuel-cards').innerHTML=top.map(c=>`
-    <div style="background:var(--surface);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);border-top:3px solid #F97316">
-      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px">${c.city}</div>
-      <div style="font-size:1.5rem;font-weight:800;color:var(--brand)">₹${c.petrol.toFixed(2)}</div>
-      <div style="font-size:.78rem;color:var(--muted);margin-top:3px">Petrol per litre</div>
-      <div style="font-size:.88rem;font-weight:700;color:#6B7280;margin-top:8px;padding-top:8px;border-top:1px solid var(--surface2)">Diesel: ₹${c.diesel.toFixed(2)}/L</div>
-    </div>`).join('');
-  // Full table
-  document.getElementById('fuel-tbody').innerHTML=data.map(c=>`
-    <tr>
-      <td style="font-weight:600">${c.city}</td>
-      <td style="color:#EA580C;font-weight:800">₹${c.petrol.toFixed(2)}</td>
-      <td style="color:#1D4ED8;font-weight:800">₹${c.diesel.toFixed(2)}</td>
-      <td>${c.cng?'₹'+c.cng.toFixed(1)+'/kg':'—'}</td>
-    </tr>`).join('');
+
+function renderAll(data) {
+  renderCards(data);
+  renderTable(data);
 }
-function filterFuel(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const filtered=fuelData.filter(c=>c.city.toLowerCase().includes(q));
-  renderFuel(filtered.length?filtered:fuelData);
+
+function renderCards(data) {
+  const grid = document.getElementById('fuel-card-grid');
+  const delhiPetrol = (data.find(c=>c.city==='Delhi')||{}).petrol || 96.72;
+  grid.innerHTML = data.map(c => {
+    const icon = CITY_ICONS[c.city] || '🏙️';
+    const diff = (c.petrol - delhiPetrol).toFixed(2);
+    return `
+    <div class="fuel-city-card">
+      <div class="fc-name"><span class="fi-dot"></span>${icon} ${c.city}</div>
+      <div class="fc-prices">
+        <div class="fc-price petrol">
+          <div class="fp-val">₹${c.petrol.toFixed(2)}</div>
+          <div class="fp-label">Petrol / L</div>
+        </div>
+        <div class="fc-price diesel">
+          <div class="fp-val">₹${c.diesel.toFixed(2)}</div>
+          <div class="fp-label">Diesel / L</div>
+        </div>
+      </div>
+      ${c.cng ? `<div class="fc-cng">🌿 CNG: ₹${c.cng.toFixed(1)}/kg</div>` : ''}
+    </div>`;
+  }).join('');
 }
-loadFuel();
+
+function renderTable(data) {
+  const delhiPetrol = (data.find(c=>c.city==='Delhi')||{}).petrol || 96.72;
+  document.getElementById('fuel-tbody').innerHTML = data.map(c => {
+    const diff = c.petrol - delhiPetrol;
+    const diffStr = diff===0 ? '<span style="color:var(--muted)">—</span>'
+      : diff > 0 ? `<span style="color:#EA580C;font-weight:700">+₹${diff.toFixed(2)}</span>`
+                 : `<span style="color:#059669;font-weight:700">-₹${Math.abs(diff).toFixed(2)}</span>`;
+    const icon = CITY_ICONS[c.city] || '🏙️';
+    return `<tr>
+      <td style="font-weight:600">${icon} ${c.city}</td>
+      <td style="color:#EA580C;font-weight:800;font-size:1rem">₹${c.petrol.toFixed(2)}</td>
+      <td style="color:#2563EB;font-weight:800;font-size:1rem">₹${c.diesel.toFixed(2)}</td>
+      <td style="color:#059669;font-weight:700">${c.cng ? '₹'+c.cng.toFixed(1)+'/kg' : '—'}</td>
+      <td>${diffStr}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterFuel() {
+  const q = document.getElementById('fuel-search').value.toLowerCase();
+  const filtered = q ? fuelData.filter(c=>c.city.toLowerCase().includes(q)) : fuelData;
+  renderAll(filtered.length ? filtered : fuelData);
+}
+
+function setView(view, btn) {
+  document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentView = view;
+  document.getElementById('fuel-card-grid').style.display = view==='card' ? 'grid' : 'none';
+  const tbl = document.getElementById('fuel-table-card');
+  if (view==='table') tbl.classList.add('show'); else tbl.classList.remove('show');
+}
+
+function calcFuel() {
+  const dist    = parseFloat(document.getElementById('fc-dist').value) || 0;
+  const mileage = parseFloat(document.getElementById('fc-mileage').value) || 1;
+  const pricePerL = parseFloat(document.getElementById('fc-city').value) || 0;
+  const litres  = dist / mileage;
+  const cost    = litres * pricePerL;
+  setText('fc-result', '₹' + Math.round(cost).toLocaleString('en-IN'));
+  setText('fc-litres', litres.toFixed(1) + ' litres needed for ' + dist + ' km');
+}
+
+function setText(id, v) { const e=document.getElementById(id); if(e) e.textContent=v; }
+
+init();
 </script>
 </body>
 </html>
