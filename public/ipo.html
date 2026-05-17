@@ -1,362 +1,148 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>India IPO Hub 2026 | Live Tracking & Application Guide</title>
-    <style>
-        :root { --brand: #1e3799; --accent: #eb2f06; --success: #38ada9; --bg: #f1f2f6; --whatsapp: #25D366; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); margin: 0; color: #2f3542; }
-        
-        /* Hero & Search */
-        .hero { background: linear-gradient(135deg, var(--brand), #0c2461); color: white; padding: 60px 20px; text-align: center; }
-        .search-wrapper { margin-top: 25px; }
-        #ipoSearch { width: 90%; max-width: 700px; padding: 18px 30px; border-radius: 50px; border: none; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); outline: none; }
-
-        .container { max-width: 1200px; margin: -50px auto 50px; padding: 0 20px; }
-        
-        /* Interactive Calculator Card */
-        .calc-card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 40px; border-top: 5px solid var(--accent); display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-around; }
-        .calc-input { display: flex; flex-direction: column; gap: 5px; }
-        .calc-input input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; width: 150px; }
-        .calc-result { font-size: 1.2rem; font-weight: bold; color: var(--brand); }
-
-        /* Tables */
-        .section-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 35px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th { text-align: left; padding: 15px; background: #f8f9fa; color: #747d8c; font-size: 0.85rem; text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid #f1f2f6; font-size: 0.95rem; }
-        
-        /* Status Badges */
-        .badge { padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-        .open { background: #def7ec; color: #03543f; }
-        .upcoming { background: #e1effe; color: #1e429f; }
-        .gain { color: #059669; font-weight: bold; }
-        .loss { color: #dc2626; font-weight: bold; }
-        
-        .action-cell { display: flex; gap: 10px; align-items: center; }
-        .apply-btn { background: var(--brand); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .apply-btn:hover { background: var(--accent); }
-        
-        /* New WhatsApp Button Style */
-        .whatsapp-btn { background: var(--whatsapp); color: white; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: flex; align-items: center; }
-
-        @media (max-width: 768px) { .table-wrapper { overflow-x: auto; } }
-
-        /* Referral Banner Styles */
-        .bottom-referral-banner { background: linear-gradient(135deg, #0072ff, #00c6ff); color: white; padding: 40px 20px; border-radius: 15px; margin: 40px 0; text-align: center; box-shadow: 0 10px 30px rgba(0,114,255,0.3); }
-        .bottom-referral-banner h2 { color: white !important; margin-bottom: 15px; }
-        .btn-white { background: white; color: #0072ff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 1.1rem; margin-top: 10px; }
-        
-        /* Mobile Sticky Bar Styles */
-        .sticky-mobile-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #0072ff; color: white; padding: 12px; text-align: center; z-index: 9999; display: none; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); font-size: 0.9rem; }
-        .sticky-mobile-bar a { color: #f1c40f; font-weight: bold; text-decoration: underline; margin-left: 5px; }
-        @media (max-width: 768px) { .sticky-mobile-bar { display: block; } body { padding-bottom: 60px; } }
-
-        /* --- ADDED SIDEBAR CSS --- */
-        .menu-btn { position: fixed; top: 20px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; backdrop-filter: blur(5px); }
-        .menu-btn span { display: block; width: 25px; height: 3px; background: white; transition: 0.3s; border-radius: 2px; }
-        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #0c2461; overflow-x: hidden; transition: 0.5s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.3); }
-        .sidebar-nav-links a { padding: 15px 30px; text-decoration: none; font-size: 1.1rem; color: #ecf0f1; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; }
-        .sidebar-nav-links a:hover { background: #1e3799; color: #f1c40f; padding-left: 40px; }
-        .sidebar-nav .closebtn { position: absolute; top: 15px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
-
-        /* Global Professional Footer CSS */
-        .main-footer {
-            background: #0a192f;
-            color: #a8b2d1;
-            padding: 60px 20px 30px;
-            margin-top: 50px;
-            font-size: 0.9rem;
-            border-top: 4px solid #f1c40f;
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            text-align: left;
-        }
-        .footer-section h4 {
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        .footer-links a {
-            color: #a8b2d1;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .footer-links a:hover {
-            color: #f1c40f;
-            padding-left: 5px;
-        }
-        .footer-bottom {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            font-size: 0.8rem;
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IPO 2026 India | Live Upcoming & Open IPOs Today | GoldRateIndia</title>
+<meta name="description" content="Track all upcoming, open and recently listed IPOs in India 2026. GMP, subscription status, allotment, listing gain. Apply via Angel One.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<style>
+.status-open{background:rgba(5,150,105,.1);color:var(--up);border:1px solid rgba(5,150,105,.22);padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700}
+.status-upcoming{background:rgba(37,99,235,.1);color:#2563EB;border:1px solid rgba(37,99,235,.22);padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700}
+.status-closed{background:rgba(107,114,128,.1);color:var(--muted);border:1px solid rgba(107,114,128,.22);padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700}
+.status-listed{background:rgba(124,58,237,.1);color:#7C3AED;border:1px solid rgba(124,58,237,.22);padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700}
+.apply-btn{background:linear-gradient(135deg,#E8C96A,#9A7A30);color:var(--brand);padding:6px 14px;border-radius:7px;font-size:.75rem;font-weight:800;text-decoration:none;white-space:nowrap;display:inline-block;transition:.2s}
+.apply-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,168,76,.35)}
+.filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.fbtn{padding:7px 15px;border-radius:20px;border:1px solid var(--surface2);background:var(--surface);font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;color:var(--muted)}
+.fbtn.active,.fbtn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+</style>
 </head>
 <body>
-
-<div class="menu-btn" onclick="toggleSidebar()">
-    <span></span>
-    <span></span>
-    <span></span>
+<div class="ticker" aria-hidden="true"><div class="ticker-inner"><span class="ti"><span class="lbl">IPO Season</span><span class="val">Active</span></span><span class="ti"><span class="lbl">Nifty 50</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span><span class="ti"><span class="lbl">Sensex</span><span class="val">76,140</span><span class="chg up">▲ 0.4%</span></span><span class="ti"><span class="lbl">USD/INR</span><span class="val">₹83.42</span></span><span class="ti"><span class="lbl">IPO Season</span><span class="val">Active</span></span><span class="ti"><span class="lbl">Nifty 50</span><span class="val">23,108</span><span class="chg up">▲ 0.3%</span></span><span class="ti"><span class="lbl">Sensex</span><span class="val">76,140</span><span class="chg up">▲ 0.4%</span></span></div></div>
+<nav class="navbar">
+  <a href="/" class="nav-logo"><span class="gem">🥇</span>Gold<em>Rate</em>India</a>
+  <div class="nav-links">
+    <a href="/">Gold</a><a href="/silver">Silver</a><a href="/nifty">Nifty</a><a href="/sensex">Sensex</a>
+    <a href="/ipo" class="active">IPO 2026</a><a href="/mutual-funds">Mutual Funds</a>
+    <a href="/calculators">Calculators</a><a href="/banking">Banking</a>
+  </div>
+  <div class="hamburger" onclick="openDrawer()"><span></span><span></span><span></span></div>
+</nav>
+<div class="drawer-bg" id="dbg" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-hd"><span>🥇 GoldRateIndia</span><span class="drawer-close" onclick="closeDrawer()">✕</span></div>
+  <a href="/"><span class="di">🥇</span>Gold Rate</a><a href="/silver"><span class="di">🥈</span>Silver</a>
+  <a href="/nifty"><span class="di">📈</span>Nifty 50</a><a href="/ipo" class="active"><span class="di">🚀</span>IPO 2026</a>
+  <a href="/mutual-funds"><span class="di">📊</span>Mutual Funds</a><a href="/fuel"><span class="di">⛽</span>Fuel</a>
+  <a href="/calculators"><span class="di">🧮</span>Calculators</a><a href="/policies"><span class="di">⚖️</span>Legal</a>
 </div>
 
-<div id="sidebar-nav" class="sidebar-nav">
-    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
-    <div class="sidebar-nav-links">
-        <a href="/">📈 IPO Home</a>
-        <a href="/mutual-funds">📊 Mutual Funds</a>
-        <a href="/calculators">🧮 Calculators</a>
-        <a href="/bullion">🟡 Gold & Silver</a>
-        <a href="/banking">🏦 Banking Hub</a>
-        <a href="/nifty">📈 Nifty 50</a>
-        <a href="/sensex">📉 Sensex</a>
-        <a href="/crude-oil">🛢️ Crude Oil</a>
-        <a href="/currency">💵 Currency</a>
-        <a href="/fuel">⛽ Fuel Prices</a>
-        <a href="/jewellers">💎 Top Jewellers</a>
-        <a href="policies.html">⚖️ Legal & About Us</a>
+<section class="hero" style="padding:40px 22px 60px">
+  <div style="max-width:1220px;margin:0 auto;position:relative;z-index:1">
+    <h1 style="font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:8px">🚀 IPO Tracker <em>2026</em></h1>
+    <p style="color:rgba(255,255,255,.55);font-size:.92rem;margin-bottom:18px">Upcoming, open & recently listed IPOs. Updated from our admin panel. Last refreshed: <span id="ipo-ts">loading…</span></p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" style="background:linear-gradient(135deg,#E8C96A,#9A7A30);color:var(--brand);padding:11px 22px;border-radius:10px;font-weight:800;font-size:.9rem">🏦 Open Angel One — Apply for Free</a>
     </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div style="margin-top:-24px;position:relative;z-index:2">
+
+    <!-- STATS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:22px" id="ipo-stats"></div>
+
+    <!-- FILTERS -->
+    <div class="filter-btns">
+      <button class="fbtn active" onclick="filterIPO('all',this)">All IPOs</button>
+      <button class="fbtn" onclick="filterIPO('open',this)">🟢 Open Now</button>
+      <button class="fbtn" onclick="filterIPO('upcoming',this)">🔵 Upcoming</button>
+      <button class="fbtn" onclick="filterIPO('listed',this)">🟣 Listed</button>
+    </div>
+
+    <!-- IPO TABLE -->
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="overflow-x:auto">
+        <table class="tbl" style="min-width:700px">
+          <thead><tr><th>Company</th><th>Price Band</th><th>Open</th><th>Close</th><th>Type</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="ipo-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="igrid" style="margin-top:22px">
+      <div class="icard"><h3>📋 How to apply for an IPO?</h3><p>Apply via your demat account through ASBA (Application Supported by Blocked Amount). Funds are blocked in your bank, not debited until allotment. Use Angel One, Zerodha, or Groww — all support UPI-based IPO applications.</p></div>
+      <div class="icard"><h3>💡 What is IPO GMP?</h3><p>Grey Market Premium (GMP) is the unofficial premium at which IPO shares trade before listing. A high GMP suggests strong demand but is speculative and not guaranteed. Always assess fundamentals before investing.</p></div>
+      <div class="icard"><h3>📅 IPO allotment & listing timeline</h3><p>Typically: Day 1-3: Subscription open → Day 4: Allotment → Day 6: Listing on NSE/BSE. Refunds for non-allotted applications are credited within 2 working days of allotment.</p></div>
+      <div class="icard"><h3>⚠️ IPO investing risks</h3><p>IPOs can list below issue price. Check company fundamentals, P/E ratio versus peers, promoter background, and use of proceeds before applying. Do not apply based on GMP alone.</p></div>
+    </div>
+
+  </div>
 </div>
 
-<header class="hero">
-    <h1>India IPO Intelligence Tracker 2026</h1>
-    <p>Real-time data for Mainboard and SME listings across NSE & BSE</p>
-    <div class="search-wrapper">
-        <input type="text" id="ipoSearch" placeholder="Quick Search (e.g. 'Jio', 'SME', 'Open')..." onkeyup="filterData()">
+<footer class="footer">
+  <div class="footer-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:18px">
+      <div style="font-size:1.1rem;font-weight:800;color:#fff">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>India</div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:.8rem"><a href="/" style="color:rgba(255,255,255,.5)">Home</a><a href="/ipo" style="color:rgba(255,255,255,.5)">IPO</a><a href="/policies" style="color:rgba(255,255,255,.5)">Legal</a></div>
     </div>
-</header>
-
-<div class="container">
-    
-    <div class="calc-card">
-        <div class="calc-input">
-            <label>Price Per Share (₹)</label>
-            <input type="number" id="calcPrice" placeholder="e.g. 129" oninput="calculateTotal()">
-        </div>
-        <div class="calc-input">
-            <label>Lot Size (Shares)</label>
-            <input type="number" id="calcLot" placeholder="e.g. 1000" oninput="calculateTotal()">
-        </div>
-        <div class="calc-input">
-            <label>No. of Lots</label>
-            <input type="number" id="calcQty" value="1" oninput="calculateTotal()">
-        </div>
-        <div class="calc-result">
-            Total Investment: <span id="totalAmount">₹0</span>
-        </div>
-    </div>
-
-    <div class="section-card">
-        <h2>🟢 Open for Subscription</h2>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr><th>Company</th><th>Type</th><th>Close Date</th><th>Price Band</th><th>Lot Size</th><th>Action</th></tr>
-                </thead>
-                <tbody id="openTable"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="section-card">
-        <h2>📅 Upcoming IPO Pipeline 2026</h2>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr><th>Company Name</th><th>Expected Date</th><th>Issue Size</th><th>Valuation</th><th>Status</th></tr>
-                </thead>
-                <tbody id="upcomingTable"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="section-card">
-        <h2>🔒 Recently Closed</h2>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr><th>Company Name</th><th>Date</th><th>Issue Price</th><th>Subscribed</th><th>Listing Date</th></tr>
-                </thead>
-                <tbody id="closedTable"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="section-card">
-        <h2>📈 Listed IPOs (Jan 2026 Performance)</h2>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr><th>Company</th><th>Listing Price</th><th>Issue Price</th><th>Current Gain/Loss</th></tr>
-                </thead>
-                <tbody id="listedTable"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="bottom-referral-banner">
-        <h2>Don't have a Demat Account?</h2>
-        <p>Open a <b>FREE</b> Angel One account in 5 minutes to apply for 2026 IPOs.</p>
-        <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank" class="btn-white">🚀 Open FREE Account Now</a>
-    </div>
-</div>
-
-<div class="sticky-mobile-bar">
-    Apply for 2026 IPOs! <a href="https://angel-one.onelink.me/Wjgr/oc2kvsya" target="_blank">Open Free Angel One Account</a>
-</div>
-
-<footer class="main-footer">
-    <div class="footer-container">
-        <div class="footer-section">
-            <h4>India Wealth Hub</h4>
-            <p>Your trusted source for real-time gold rates, IPO analysis, and mutual fund insights in 2026.</p>
-        </div>
-        <div class="footer-section">
-            <h4>Market Tools</h4>
-            <ul class="footer-links">
-                <li><a href="/">IPO Tracker</a></li>
-                <li><a href="/mutual-funds">Mutual Fund Explorer</a></li>
-                <li><a href="/silver">Live Silver Rates</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Legal & Corporate</h4>
-            <ul class="footer-links">
-                <li><a href="policies.html">About Us</a></li>
-                <li><a href="policies.html">Privacy Policy</a></li>
-                <li><a href="policies.html">Financial Disclaimer</a></li>
-                <li><a href="policies.html">Terms of Service</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 India Wealth Hub | Designed for Indian Investors</p>
-        <p style="opacity: 0.6; font-size: 0.7rem;">Data provided is for informational purposes only. Investment in securities is subject to market risks.</p>
-    </div>
+    <div class="footer-btm">&copy; 2026 GoldRateIndia.com · IPO data is for informational purposes only. Investment in IPOs is subject to market risks. Please read the Red Herring Prospectus carefully before investing.</div>
+  </div>
 </footer>
 
+<script src="/nav.js"></script>
 <script>
-    /* --- ADDED SIDEBAR JS --- */
-    function toggleSidebar() {
-        const sb = document.getElementById("sidebar-nav");
-        sb.style.width = sb.style.width === "280px" ? "0" : "280px";
-    }
+let allIPOs=[];
+const statusCls={open:'status-open',upcoming:'status-upcoming',closed:'status-closed',listed:'status-listed'};
+const statusLabel={open:'🟢 Open',upcoming:'🔵 Upcoming',closed:'⚫ Closed',listed:'🟣 Listed'};
 
-    // --- IPO DATA MASTER LIST ---
-    const ipoData = {
-        open: [
-            { name: "Accretion Nutraveda", type: "SME", close: "Jan 30, 2026", price: "₹122 - ₹129", lot: "1000" },
-            { name: "Kanishk Aluminium", type: "SME", close: "Jan 30, 2026", price: "₹73 (Fixed)", lot: "1600" },
-            { name: "Msafe Equipments", type: "SME", close: "Jan 30, 2026", price: "₹116 - ₹123", lot: "1000" },
-            { name: "Kasturi Metal Composite", type: "SME", close: "Jan 29, 2026", price: "₹61 - ₹64", lot: "2000" },
-            { name: "CKK Retail Mart", type: "SME", close: "Feb 03, 2026", price: "₹155 - ₹163", lot: "800" },
-            { name: "NFP Sampoorna Foods", type: "SME", close: "Feb 06, 2026", price: "₹52 - ₹55", lot: "2000" },
-            { name: "Biopol Chemicals", type: "SME", close: "Feb 10, 2026", price: "₹102 - ₹108", lot: "1200" },
-            { name: "Power Finance Corp (NCD)", type: "Debt", close: "Jan 30, 2026", price: "₹1000", lot: "10" },
-            { name: "Modern Diagnostic", type: "SME", close: "Feb 02, 2026", price: "₹85 - ₹90", lot: "1600" },
-            { name: "Veegaland Developers", type: "Main", close: "Feb 12, 2026", price: "TBA", lot: "TBA" }
-        ],
-        upcoming: [
-            { name: "Reliance Jio Platforms", date: "Q2 2026", size: "₹55,000 Cr", val: "₹9.3 Trillion", status: "Awaiting SEBI" },
-            { name: "Zepto (Quick Commerce)", date: "March 2026", size: "₹4,500 Cr", val: "₹35,000 Cr", status: "DRHP Preparation" },
-            { name: "Ather Energy", date: "Feb 2026", size: "₹3,100 Cr", val: "₹18,000 Cr", status: "Approved" },
-            { name: "NSE (National Stock Exchange)", date: "H2 2026", size: "₹10,000 Cr", val: "₹4.7 Trillion", status: "DRHP Filed" },
-            { name: "PhonePe", date: "Q3 2026", size: "₹12,000 Cr", val: "₹1.2 Trillion", status: "Confidential Filing" },
-            { name: "Flipkart India", date: "Late 2026", size: "₹40,000 Cr", val: "₹2.8 Trillion", status: "Planned" },
-            { name: "boAt (Imagine Marketing)", date: "April 2026", size: "₹2,000 Cr", val: "₹12,000 Cr", status: "DRHP Update" },
-            { name: "Tata EV (TPEML)", date: "H2 2026", size: "₹15,000 Cr", val: "₹80,000 Cr", status: "Planning" },
-            { name: "Hero FinCorp", date: "May 2026", size: "₹3,668 Cr", val: "₹25,000 Cr", status: "DRHP Filed" },
-            { name: "Fractal Analytics", date: "March 2026", size: "₹4,900 Cr", val: "₹15,000 Cr", status: "DRHP Filed" }
-        ],
-        closed: [
-            { name: "Hannah Joseph Hospital", date: "Jan 28", price: "₹70", sub: "1.61x", list: "Jan 30" },
-            { name: "Shayona Engineering", date: "Jan 27", price: "₹144", sub: "5.44x", list: "Jan 30" },
-            { name: "KRM Ayurveda", date: "Jan 23", price: "₹135", sub: "64.3x", list: "Jan 29" },
-            { name: "Digilogic Systems", date: "Jan 22", price: "₹104", sub: "1.12x", list: "Jan 28" },
-            { name: "Shadowfax Technologies", date: "Jan 22", price: "₹124", sub: "2.70x", list: "Jan 28" }
-        ],
-        listed: [
-            { name: "Bharat Coking Coal", lPrice: "₹45.00", iPrice: "₹23.00", gain: "+76.0%" },
-            { name: "Avana Electrosystems", lPrice: "₹77.50", iPrice: "₹59.00", gain: "+31.4%" },
-            { name: "Defrail Technologies", lPrice: "₹95.00", iPrice: "₹74.00", gain: "+28.4%" },
-            { name: "Gabion Tech", lPrice: "₹89.00", iPrice: "₹81.00", gain: "+9.8%" },
-            { name: "Amagi Media Labs", lPrice: "₹318.00", iPrice: "₹361.00", gain: "-11.9%" }
-        ]
-    };
+async function loadIPOs(){
+  try{
+    const d=await fetch('/api/data').then(r=>r.json());
+    allIPOs=d.ipos||[];
+    document.getElementById('ipo-ts').textContent=d.lastUpdated||'Today';
+    buildStats(allIPOs);
+    renderIPOs(allIPOs);
+  }catch(e){console.error(e)}
+}
 
-    const referralLink = "https://angel-one.onelink.me/Wjgr/oc2kvsya";
+function buildStats(data){
+  const open=data.filter(i=>i.status==='open').length;
+  const upcoming=data.filter(i=>i.status==='upcoming').length;
+  const listed=data.filter(i=>i.status==='listed').length;
+  document.getElementById('ipo-stats').innerHTML=[
+    {label:'Open Now',val:open,col:'#059669'},{label:'Upcoming',val:upcoming,col:'#2563EB'},
+    {label:'Recently Listed',val:listed,col:'#7C3AED'},{label:'Total Tracked',val:data.length,col:'#C9A84C'}
+  ].map(s=>`<div style="background:var(--surface);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);text-align:center;border-top:3px solid ${s.col}">
+    <div style="font-size:2rem;font-weight:800;color:${s.col}">${s.val}</div>
+    <div style="font-size:.75rem;color:var(--muted);font-weight:600;margin-top:4px">${s.label}</div>
+  </div>`).join('');
+}
 
-    function refreshAllTables() {
-        const openBody = document.getElementById('openTable');
-        const upcomingBody = document.getElementById('upcomingTable');
-        const closedBody = document.getElementById('closedTable');
-        const listedBody = document.getElementById('listedTable');
+function renderIPOs(data){
+  document.getElementById('ipo-tbody').innerHTML=data.map(ipo=>`
+    <tr>
+      <td style="font-weight:700;color:var(--brand)">${ipo.name}<br><span style="font-size:.72rem;font-weight:500;color:var(--muted)">${ipo.type||'Mainboard'} · Lot: ${ipo.lot}</span></td>
+      <td style="font-weight:700">${ipo.price}</td>
+      <td style="color:var(--muted);font-size:.85rem">${ipo.open}</td>
+      <td style="color:var(--muted);font-size:.85rem">${ipo.close}</td>
+      <td><span style="background:rgba(107,114,128,.1);color:var(--muted);border:1px solid rgba(107,114,128,.2);padding:2px 8px;border-radius:20px;font-size:.65rem;font-weight:700">${ipo.type||'Mainboard'}</span></td>
+      <td><span class="${statusCls[ipo.status]||'status-closed'}">${statusLabel[ipo.status]||ipo.status}</span>${ipo.gmp?`<br><span style="font-size:.7rem;color:var(--up);font-weight:700">GMP: ${ipo.gmp}</span>`:''}</td>
+      <td><a href="${ipo.link||'#'}" target="_blank" class="apply-btn">${ipo.status==='open'?'Apply Now →':'Track'}</a></td>
+    </tr>`).join('');
+}
 
-        openBody.innerHTML = ''; upcomingBody.innerHTML = ''; closedBody.innerHTML = ''; listedBody.innerHTML = '';
-
-        ipoData.open.forEach(item => {
-            const shareText = encodeURIComponent(`🔥 IPO Alert: ${item.name}\n💰 Price: ${item.price}\n📅 Closes: ${item.close}\n🚀 Apply here via Angel One: `);
-            const row = `<tr class="ipo-row">
-                <td>${item.name}</td><td>${item.type}</td><td>${item.close}</td><td>${item.price}</td><td>${item.lot}</td>
-                <td class="action-cell">
-                    <a href="${referralLink}" target="_blank" class="apply-btn">Apply</a>
-                    <a href="https://wa.me/?text=${shareText}${referralLink}" target="_blank" class="whatsapp-btn">Share 📲</a>
-                </td>
-            </tr>`;
-            openBody.innerHTML += row;
-        });
-
-        ipoData.upcoming.forEach(item => {
-            upcomingBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.date}</td><td>${item.size}</td><td>${item.val}</td><td><span class="badge upcoming">${item.status}</span></td></tr>`;
-        });
-
-        ipoData.closed.forEach(item => {
-            closedBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.date}</td><td>${item.price}</td><td>${item.sub}</td><td>${item.list}</td></tr>`;
-        });
-
-        ipoData.listed.forEach(item => {
-            const gainClass = item.gain.includes('+') ? 'gain' : 'loss';
-            listedBody.innerHTML += `<tr class="ipo-row"><td>${item.name}</td><td>${item.lPrice}</td><td>${item.iPrice}</td><td><span class="${gainClass}">${item.gain}</span></td></tr>`;
-        });
-    }
-
-    function filterData() {
-        const input = document.getElementById("ipoSearch").value.toLowerCase();
-        const rows = document.querySelectorAll(".ipo-row");
-        rows.forEach(row => {
-            const text = row.innerText.toLowerCase();
-            row.style.display = text.includes(input) ? "" : "none";
-        });
-    }
-
-    function calculateTotal() {
-        const price = document.getElementById("calcPrice").value || 0;
-        const lot = document.getElementById("calcLot").value || 0;
-        const qty = document.getElementById("calcQty").value || 0;
-        const total = price * lot * qty;
-        document.getElementById("totalAmount").innerText = "₹" + total.toLocaleString('en-IN');
-    }
-
-    window.onload = refreshAllTables;
+function filterIPO(status,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderIPOs(status==='all'?allIPOs:allIPOs.filter(i=>i.status===status));
+}
+loadIPOs();
 </script>
-
 </body>
 </html>
