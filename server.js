@@ -18,8 +18,12 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASS  = process.env.ADMIN_PASSWORD || 'admin123';
 const GOLDAPI_KEY = process.env.GOLDAPI_KEY || 'goldapi-il23i19ml12s486-io';
-const PRICES_FILE = path.join(__dirname, 'prices.json');
-const DATA_FILE   = path.join(__dirname, 'data.json');
+// DATA_DIR lets prices.json/data.json live on a persistent disk (e.g. Render disk
+// mounted at /var/data) so admin-panel edits survive redeploys. Defaults to the
+// repo folder itself, so local dev and any host without DATA_DIR set is unaffected.
+const DATA_DIR    = process.env.DATA_DIR || __dirname;
+const PRICES_FILE = path.join(DATA_DIR, 'prices.json');
+const DATA_FILE   = path.join(DATA_DIR, 'data.json');
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(express.json());
@@ -43,7 +47,10 @@ function load(file, fallback) {
   catch { return fallback; }
 }
 function save(file, data) {
-  try { fs.writeFileSync(file, JSON.stringify(data, null, 2)); }
+  try {
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+  }
   catch(e) { console.error('Save error:', e.message); }
 }
 
