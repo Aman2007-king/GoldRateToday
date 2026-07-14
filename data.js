@@ -2,7 +2,7 @@
 // Fetches gold/silver from GoldAPI.io + reads IPO/Fuel/MF from Google Sheets CSV
 // Deploy on Vercel: this file goes in /api/data.js
 
-const GOLDAPI_KEY = 'goldapi-il23i19ml12s486-io';
+const GOLDAPI_KEY = process.env.GOLDAPI_KEY || '';
 
 // ── Google Sheet Published CSV URLs ──────────────────────────────────────────
 // 1. Go to sheets.google.com and open your sheet
