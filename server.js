@@ -13,17 +13,86 @@ const express  = require('express');
 const path     = require('path');
 const fs       = require('fs');
 const https    = require('https');
+const crypto   = require('crypto');
 
 const app  = express();
+app.set('trust proxy', 1); // needed on Render/Vercel so req.ip is the real client IP, not the proxy's
+
 const PORT = process.env.PORT || 3000;
-const ADMIN_PASS  = process.env.ADMIN_PASSWORD || 'admin123';
-const GOLDAPI_KEY = process.env.GOLDAPI_KEY || 'goldapi-il23i19ml12s486-io';
+
+// ── Secrets ───────────────────────────────────────────────────────────────────
+// Never hardcode real keys/passwords here — this file is committed to a public
+// GitHub repo. Both values MUST come from environment variables set in your
+// Render/Vercel dashboard.
+const GOLDAPI_KEY = process.env.GOLDAPI_KEY || '';
+if (!GOLDAPI_KEY) {
+  console.warn('⚠️  GOLDAPI_KEY is not set. Live gold/silver fetch from goldapi.io will fail;');
+  console.warn('   the app will fall back to its secondary source, then saved prices. Set');
+  console.warn('   GOLDAPI_KEY in your environment to restore live updates.');
+}
+
+let ADMIN_PASS = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASS) {
+  // No predictable default (the old 'admin123' fallback was a real security hole) and
+  // no hard crash either (that would crash-loop the whole site over a missing admin
+  // password). Instead: generate a random one-time password and print it to the
+  // server logs, so you can still get into /admin-panel while you go set the real
+  // env var. This password changes every restart until ADMIN_PASSWORD is set.
+  ADMIN_PASS = crypto.randomBytes(9).toString('base64url');
+  console.warn('⚠️  ADMIN_PASSWORD is not set. Generated a temporary one-time password for');
+  console.warn(`   this run — check your Render/Vercel logs for it:`);
+  console.warn(`   ${ADMIN_PASS}`);
+  console.warn('   This will change on every restart. Set ADMIN_PASSWORD in your environment');
+  console.warn('   to fix this permanently.');
+}
+
 // DATA_DIR lets prices.json/data.json live on a persistent disk (e.g. Render disk
 // mounted at /var/data) so admin-panel edits survive redeploys. Defaults to the
 // repo folder itself, so local dev and any host without DATA_DIR set is unaffected.
 const DATA_DIR    = process.env.DATA_DIR || __dirname;
 const PRICES_FILE = path.join(DATA_DIR, 'prices.json');
 const DATA_FILE   = path.join(DATA_DIR, 'data.json');
+
+// ── Brute-force protection for admin routes ──────────────────────────────────
+// In-memory is fine for a single-instance deploy like this. Tracks failed
+// password attempts per IP; locks that IP out after too many in a short window.
+const loginAttempts   = new Map(); // ip -> { count, windowStart, lockedUntil }
+const ATTEMPT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const MAX_ATTEMPTS      = 5;
+const LOCKOUT_MS        = 30 * 60 * 1000; // 30 minutes
+
+function msLockedOut(ip) {
+  const e = loginAttempts.get(ip);
+  if (!e || !e.lockedUntil) return 0;
+  const remaining = e.lockedUntil - Date.now();
+  return remaining > 0 ? remaining : 0;
+}
+function recordFailedAttempt(ip) {
+  const now = Date.now();
+  let e = loginAttempts.get(ip);
+  if (!e || now - e.windowStart > ATTEMPT_WINDOW_MS) e = { count: 0, windowStart: now, lockedUntil: 0 };
+  e.count++;
+  if (e.count >= MAX_ATTEMPTS) e.lockedUntil = now + LOCKOUT_MS;
+  loginAttempts.set(ip, e);
+}
+function recordSuccess(ip) {
+  loginAttempts.delete(ip);
+}
+function checkAdminAuth(req, res, password) {
+  const ip = req.ip || 'unknown';
+  const locked = msLockedOut(ip);
+  if (locked > 0) {
+    res.status(429).json({ success: false, error: `Too many failed attempts. Try again in ${Math.ceil(locked / 60000)} minute(s).` });
+    return false;
+  }
+  if (password !== ADMIN_PASS) {
+    recordFailedAttempt(ip);
+    res.status(401).json({ success: false, error: 'Wrong password' });
+    return false;
+  }
+  recordSuccess(ip);
+  return true;
+}
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(express.json());
@@ -267,7 +336,7 @@ app.get('/api/status', (req, res) => {
 // ── API: Admin — update gold/silver ──────────────────────────────────────────
 app.post('/api/update-prices', (req, res) => {
   const { password, gold, silver, gold22k } = req.body;
-  if (password !== ADMIN_PASS) return res.status(401).json({ success: false, error: 'Wrong password' });
+  if (!checkAdminAuth(req, res, password)) return;
   if (!gold || !silver || isNaN(gold) || isNaN(silver))
     return res.status(400).json({ success: false, error: 'Invalid values' });
   const has22 = gold22k !== undefined && gold22k !== '' && gold22k !== null;
@@ -299,7 +368,7 @@ app.post('/api/update-prices', (req, res) => {
 // ── API: Admin — force live refresh ──────────────────────────────────────────
 app.post('/api/refresh', async (req, res) => {
   const { password } = req.body;
-  if (password !== ADMIN_PASS) return res.status(401).json({ success: false, error: 'Wrong password' });
+  if (!checkAdminAuth(req, res, password)) return;
   await fetchGoldSilver();
   await fetchForex();
   res.json({ success: true, prices: CACHE.prices, forex: CACHE.forex });
@@ -308,7 +377,7 @@ app.post('/api/refresh', async (req, res) => {
 // ── API: Admin — update data.json (IPO/MF/Fuel) ──────────────────────────────
 app.post('/api/update-data', (req, res) => {
   const { password, ...updates } = req.body;
-  if (password !== ADMIN_PASS) return res.status(401).json({ success: false, error: 'Wrong password' });
+  if (!checkAdminAuth(req, res, password)) return;
   const existing = load(DATA_FILE, getDefaultData());
   save(DATA_FILE, { ...existing, ...updates, lastUpdated: getIST() });
   res.json({ success: true, message: 'Data updated!' });
