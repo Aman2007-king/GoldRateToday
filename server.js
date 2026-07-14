@@ -226,6 +226,7 @@ app.get('/api/prices', (req, res) => {
     lastUpdated: p.lastUpdated,
     source:      p.source || 'saved',
     cityRates,
+    cityPremium: PREMIUMS,
     history:    (p.history || []).slice(0, 30),
     mcxGold:    Math.round(g * 0.9965)
   });
