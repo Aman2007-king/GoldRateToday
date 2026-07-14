@@ -156,7 +156,7 @@
     let cityOffsets = {};
 
     function updateMorningRates() {
-        fetch('/api/bullion-prices')
+        fetch('/api/prices')
             .then(res => res.json())
             .then(data => {
                 console.log("Data Received:", data);
