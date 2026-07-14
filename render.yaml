@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: goldrateindia
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: GOLDAPI_KEY
+        sync: false
+
+# ── Want admin-panel edits (gold/silver rates, IPO/MF/fuel data) to survive
+#    redeploys? ──────────────────────────────────────────────────────────
+# Render's free web services can't attach a persistent disk — only paid
+# plans (Starter, $7/mo+) support it. On free, prices.json/data.json reset
+# to whatever's committed in the repo every time you redeploy (same as
+# today, no change from before).
+#
+# To make edits durable, upgrade this service's plan to `starter` (or
+# higher) and add:
+#
+#     disk:
+#       name: goldrateindia-data
+#       mountPath: /var/data
+#       sizeGB: 1
+#
+# then set an env var DATA_DIR=/var/data (also add it under envVars above).
+# The app already reads DATA_DIR (defaults to the repo folder if unset),
+# so no code changes are needed when you're ready to upgrade — just add
+# the disk block, the env var, and change `plan: free` to `plan: starter`.
