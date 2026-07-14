@@ -595,7 +595,19 @@ img { max-width: 100%; display: block; }
   </div>
 </footer>
 
-<script src="/nav.js"></script>
+<script>
+/* nav.js — inlined (was a 404 in production: this file lived at repo root, outside /public) */
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('dbg').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('dbg').classList.remove('show');
+  document.body.style.overflow = '';
+}
+</script>
 <script>
 'use strict';
 let fuelData = [], currentView = 'card';
