@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us & Legal Compliance | India Wealth Hub</title>
+    <title>About Us & Legal Compliance | GoldRateToday</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #0c2461; --accent: #f1c40f; --text: #2c3e50; --bg: #f4f7f6; }
@@ -37,12 +37,72 @@
         .cookie-btn { background: var(--accent); color: var(--primary); border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
         @media (max-width: 900px) { .master-container { grid-template-columns: 1fr; } .legal-nav { display: none; } .mission-vision { grid-template-columns: 1fr; } }
-    </style>
+    
+/* ===== Unified GoldRateToday navigation (self-contained; hardcoded palette so it
+   renders correctly regardless of this page's own :root tokens) ===== */
+.topnav{background:#0A1628;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.topnav .logo{font-family:'Playfair Display',Georgia,serif;color:#fff;font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.topnav .logo span{color:#C9A84C}
+.topnav .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#9A7A30);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.topnav .nav-links{display:flex;gap:2px;align-items:center}
+.topnav .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;padding:8px 14px;border-radius:8px;font-size:.85rem;font-weight:500;transition:.2s;white-space:nowrap}
+.topnav .nav-links a:hover,.topnav .nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
+.topnav .nav-links a.cta{background:#C9A84C;color:#0A1628;font-weight:700}
+.topnav .nav-links a.cta:hover{background:#E8C96A}
+.topnav .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:rgba(255,255,255,.1);border-radius:8px}
+.topnav .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+@media(max-width:900px){.topnav .nav-links{display:none}.topnav .hamburger{display:flex}}
+.mobile-menu{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#132040;z-index:2000;transition:.4s cubic-bezier(.4,0,.2,1);padding:20px;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.5)}
+.mobile-menu.open{right:0}
+.mobile-menu-close{color:#fff;font-size:1.5rem;cursor:pointer;float:right;padding:5px;margin-bottom:20px}
+.mobile-menu a{display:block;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 15px;border-radius:10px;margin-bottom:4px;font-weight:500;transition:.2s}
+.mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1999}
+.overlay.show{display:block}
+
+</style>
 </head>
 <body>
+<nav class="topnav">
+  <a href="/" class="logo"><span class="logo-icon">🥇</span>Gold<span>Rate</span>Today</a>
+  <div class="nav-links">
+    <a href="/">Gold</a>
+    <a href="/silver">Silver</a>
+    <a href="/bullion">Bullion</a>
+    <a href="/nifty">Nifty</a>
+    <a href="/sensex">Sensex</a>
+    <a href="/crude-oil">Crude Oil</a>
+    <a href="/currency">Currency</a>
+    <a href="/ipo">IPO 2026</a>
+    <a href="/calculators">Calculators</a>
+    <a href="/jewellers" class="cta">💎 Jewellers</a>
+  </div>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" onclick="closeMenu()">✕</span>
+  <a href="/">🥇 Gold Rate Today</a>
+  <a href="/silver">🥈 Silver Rate</a>
+  <a href="/bullion">🟡 Bullion Market</a>
+  <a href="/nifty">📈 Nifty 50</a>
+  <a href="/sensex">📉 Sensex</a>
+  <a href="/crude-oil">🛢️ Crude Oil</a>
+  <a href="/currency">💱 Currency</a>
+  <a href="/fuel">⛽ Fuel Prices</a>
+  <a href="/ipo">🚀 IPO 2026</a>
+  <a href="/mutual-funds">📊 Mutual Funds</a>
+  <a href="/calculators">🧮 Calculators</a>
+  <a href="/banking">🏦 Banking</a>
+  <a href="/jewellers">💎 Top Jewellers</a>
+  <a href="/policies">⚖️ About & Legal</a>
+</div>
+
 
 <div id="cookie-box">
-    <span>We use cookies to ensure the best experience on India Wealth Hub. <a href="#privacy" style="color:var(--accent)">Learn more</a></span>
+    <span>We use cookies to ensure the best experience on GoldRateToday. <a href="#privacy" style="color:var(--accent)">Learn more</a></span>
     <button class="cookie-btn" onclick="hideCookie()">Accept All</button>
 </div>
 
@@ -50,7 +110,7 @@
     <aside class="legal-nav">
         <h4>Navigation</h4>
         <ul>
-            <li><a href="#about"><i class="fas fa-info-circle"></i> About India Wealth Hub</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About GoldRateToday</a></li>
             <li><a href="#mission"><i class="fas fa-bullseye"></i> Our Mission & Vision</a></li>
             <li><a href="#privacy"><i class="fas fa-user-shield"></i> Privacy Policy</a></li>
             <li><a href="#terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
@@ -63,8 +123,8 @@
     <main class="main-content">
         
         <section id="about">
-            <h1>About India Wealth Hub</h1>
-            <p>Founded in 2024, **India Wealth Hub** has emerged as a premier digital destination for real-time bullion tracking and financial education. In an era of market volatility, we serve as a beacon of transparency for Indian investors, providing hyper-local silver rates, gold purity analysis, and a comprehensive A-Z encyclopedia of financial terms.</p>
+            <h1>About GoldRateToday</h1>
+            <p>Founded in 2024, <strong>GoldRateToday</strong> has emerged as a premier digital destination for real-time bullion tracking and financial education. In an era of market volatility, we serve as a beacon of transparency for Indian investors, providing hyper-local silver rates, gold purity analysis, and a comprehensive A-Z encyclopedia of financial terms.</p>
             
             <div class="author-section">
                 <div class="author-avatar"><i class="fas fa-university"></i></div>
@@ -91,19 +151,19 @@
 
         <section id="privacy">
             <h2>Privacy Policy & Data Security</h2>
-            <p>This policy is built on the foundation of the **Digital Personal Data Protection (DPDP) Act, 2023**. We recognize that your financial data is sensitive. We utilize 256-bit encryption for all internal data handling and never share user inquiries with third-party marketers.</p>
+            <p>This policy is built on the foundation of the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong>. We recognize that your financial data is sensitive. We utilize 256-bit encryption for all internal data handling and never share user inquiries with third-party marketers.</p>
             <h3>Data Collection Transparency</h3>
-            <p>We collect minimal data: (1) IP addresses for security (DDoS protection), (2) Cookie data for city-based rate preferences, and (3) Email correspondence via **ry650506@gmail.com** for grievance redressal.</p>
+            <p>We collect minimal data: (1) IP addresses for security (DDoS protection), (2) Cookie data for city-based rate preferences, and (3) Email correspondence via <strong>ry650506@gmail.com</strong> for grievance redressal.</p>
         </section>
 
         <section id="terms">
             <h2>Terms of Service</h2>
-            <p>By using the "India Wealth Hub" calculators and trackers, you agree that these are indicative tools. Digital calculations are based on manual inputs and current market averages. We are not liable for differences in final billing at local retail jewelers.</p>
+            <p>By using the "GoldRateToday" calculators and trackers, you agree that these are indicative tools. Digital calculations are based on manual inputs and current market averages. We are not liable for differences in final billing at local retail jewelers.</p>
         </section>
 
         <section id="disclaimer">
             <h2>Regulatory & Financial Disclaimer</h2>
-            <p><strong>NOT SEBI REGISTERED:</strong> India Wealth Hub is an educational news portal. We do not provide personalized investment advice. All bullion prices and tax analyses are for informational purposes. Please cross-verify with official IBJA rates before making significant financial commitments.</p>
+            <p><strong>NOT SEBI REGISTERED:</strong> GoldRateToday is an educational news portal. We do not provide personalized investment advice. All bullion prices and tax analyses are for informational purposes. Please cross-verify with official IBJA rates before making significant financial commitments.</p>
         </section>
 
         <section id="affiliate">
@@ -123,10 +183,19 @@
 </div>
 
 <footer style="text-align: center; padding: 50px; background: #eee; color: #666;">
-    <p>&copy; 2026 India Wealth Hub | Professional Financial Framework | Contact: ry650506@gmail.com</p>
+    <p>&copy; 2026 GoldRateToday | Professional Financial Framework | Contact: ry650506@gmail.com</p>
 </footer>
 
 <script>
+function openMenu() {
+  document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
     function hideCookie() {
         document.getElementById('cookie-box').style.display = 'none';
         localStorage.setItem('legal_consent', 'true');
