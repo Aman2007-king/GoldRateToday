@@ -31,7 +31,7 @@ if (!GOLDAPI_KEY) {
   console.warn('   GOLDAPI_KEY in your environment to restore live updates.');
 }
 
-let ADMIN_PASS = process.env.ADMIN_PASSWORD;
+let ADMIN_PASS = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim() : '';
 if (!ADMIN_PASS) {
   // No predictable default (the old 'admin123' fallback was a real security hole) and
   // no hard crash either (that would crash-loop the whole site over a missing admin
@@ -85,7 +85,7 @@ function checkAdminAuth(req, res, password) {
     res.status(429).json({ success: false, error: `Too many failed attempts. Try again in ${Math.ceil(locked / 60000)} minute(s).` });
     return false;
   }
-  if (password !== ADMIN_PASS) {
+  if ((password || '').trim() !== ADMIN_PASS) {
     recordFailedAttempt(ip);
     res.status(401).json({ success: false, error: 'Wrong password' });
     return false;
@@ -329,7 +329,9 @@ app.get('/api/status', (req, res) => {
     ok: true,
     prices: CACHE.prices?.lastUpdated,
     source: CACHE.prices?.source,
-    forex:  !!CACHE.forex
+    forex:  !!CACHE.forex,
+    adminPasswordSet: !!process.env.ADMIN_PASSWORD,
+    goldApiKeySet:    !!process.env.GOLDAPI_KEY
   });
 });
 
