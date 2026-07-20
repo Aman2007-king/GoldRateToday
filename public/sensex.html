@@ -5,12 +5,10 @@ bash
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSE Sensex Live Chart & Price Today | India Wealth Hub</title>
+    <title>BSE Sensex Live Chart & Price Today | GoldRateToday</title>
     <style>
         :root { --brand: #0c2461; --gold: #f1c40f; --bg: #f4f7f6; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: #333; }
-        .nav-bar { background: var(--brand); padding: 12px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        .nav-bar a { color: white; margin: 0 12px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
         .nav-bar a:hover { color: var(--gold); }
         header { background: white; border-bottom: 4px solid var(--gold); padding: 20px; text-align: center; }
         header h1 { margin: 0; font-size: 1.8rem; color: var(--brand); }
@@ -21,31 +19,68 @@ bash
         .chart-wrapper { height: 550px; }
         .main-footer { background: #0a192f; color: #a8b2d1; padding: 40px 20px 20px; margin-top: 50px; font-size: 0.85rem; border-top: 4px solid var(--gold); text-align: center; }
         .footer-bottom { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; opacity: 0.7; }
-        .menu-btn { position: fixed; top: 60px; right: 20px; cursor: pointer; z-index: 1100; display: flex; flex-direction: column; gap: 5px; background: var(--brand); padding: 10px; border-radius: 5px; border: 1px solid var(--gold); }
-        .menu-btn span { display: block; width: 25px; height: 3px; background: var(--gold); border-radius: 2px; }
-        .sidebar-nav { height: 100%; width: 0; position: fixed; z-index: 1050; top: 0; right: 0; background-color: var(--brand); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
-        .sidebar-nav-links a { padding: 15px 25px; text-decoration: none; font-size: 1rem; color: #ddd; display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sidebar-nav-links a:hover { color: var(--brand); background: var(--gold); }
-        .sidebar-nav .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; color: white; text-decoration: none; }
-    </style>
+    
+/* ===== Unified GoldRateToday navigation (self-contained; hardcoded palette so it
+   renders correctly regardless of this page's own :root tokens) ===== */
+.topnav{background:#0A1628;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.topnav .logo{font-family:'Playfair Display',Georgia,serif;color:#fff;font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.topnav .logo span{color:#C9A84C}
+.topnav .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#9A7A30);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.topnav .nav-links{display:flex;gap:2px;align-items:center}
+.topnav .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;padding:8px 14px;border-radius:8px;font-size:.85rem;font-weight:500;transition:.2s;white-space:nowrap}
+.topnav .nav-links a:hover,.topnav .nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
+.topnav .nav-links a.cta{background:#C9A84C;color:#0A1628;font-weight:700}
+.topnav .nav-links a.cta:hover{background:#E8C96A}
+.topnav .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:rgba(255,255,255,.1);border-radius:8px}
+.topnav .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+@media(max-width:900px){.topnav .nav-links{display:none}.topnav .hamburger{display:flex}}
+.mobile-menu{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#132040;z-index:2000;transition:.4s cubic-bezier(.4,0,.2,1);padding:20px;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.5)}
+.mobile-menu.open{right:0}
+.mobile-menu-close{color:#fff;font-size:1.5rem;cursor:pointer;float:right;padding:5px;margin-bottom:20px}
+.mobile-menu a{display:block;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 15px;border-radius:10px;margin-bottom:4px;font-weight:500;transition:.2s}
+.mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1999}
+.overlay.show{display:block}
+
+</style>
 </head>
 <body>
-<div class="menu-btn" onclick="toggleSidebar()"><span></span><span></span><span></span></div>
-<div id="sidebar-nav" class="sidebar-nav">
-    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
-    <div class="sidebar-nav-links">
-        <a href="/">🏠 Home (Gold)</a><a href="/silver">🥈 Silver</a><a href="/bullion">🟡 Gold & Silver</a>
-        <a href="/nifty">📈 Nifty 50</a><a href="/sensex">📉 Sensex</a><a href="/crude-oil">🛢️ Crude Oil</a>
-        <a href="/currency">💵 Currency</a><a href="/fuel">⛽ Fuel Prices</a><a href="/ipo">📋 IPO 2026</a>
-        <a href="/mutual-funds">📊 Mutual Funds</a><a href="/calculators">🧮 Calculators</a>
-        <a href="/banking">🏦 Banking Hub</a><a href="/jewellers">💎 Top Jewellers</a><a href="/policies">⚖️ Legal & About Us</a>
-    </div>
-</div>
-<nav class="nav-bar">
-    <a href="/">Gold</a><a href="/silver">Silver</a><a href="/nifty">Nifty 50</a>
-    <a href="/sensex" style="color:#f1c40f;">Sensex</a><a href="/crude-oil">Crude Oil</a><a href="/currency">Currency</a>
-    <a href="/ipo">IPO 2026</a><a href="/mutual-funds">Mutual Funds</a><a href="/calculators">Calculators</a><a href="/banking">Banking</a>
+<nav class="topnav">
+  <a href="/" class="logo"><span class="logo-icon">🥇</span>Gold<span>Rate</span>Today</a>
+  <div class="nav-links">
+    <a href="/">Gold</a>
+    <a href="/silver">Silver</a>
+    <a href="/bullion">Bullion</a>
+    <a href="/nifty">Nifty</a>
+    <a href="/sensex" class="active">Sensex</a>
+    <a href="/crude-oil">Crude Oil</a>
+    <a href="/currency">Currency</a>
+    <a href="/ipo">IPO 2026</a>
+    <a href="/calculators">Calculators</a>
+    <a href="/jewellers" class="cta">💎 Jewellers</a>
+  </div>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" onclick="closeMenu()">✕</span>
+  <a href="/">🥇 Gold Rate Today</a>
+  <a href="/silver">🥈 Silver Rate</a>
+  <a href="/bullion">🟡 Bullion Market</a>
+  <a href="/nifty">📈 Nifty 50</a>
+  <a href="/sensex">📉 Sensex</a>
+  <a href="/crude-oil">🛢️ Crude Oil</a>
+  <a href="/currency">💱 Currency</a>
+  <a href="/fuel">⛽ Fuel Prices</a>
+  <a href="/ipo">🚀 IPO 2026</a>
+  <a href="/mutual-funds">📊 Mutual Funds</a>
+  <a href="/calculators">🧮 Calculators</a>
+  <a href="/banking">🏦 Banking</a>
+  <a href="/jewellers">💎 Top Jewellers</a>
+  <a href="/policies">⚖️ About & Legal</a>
+</div>
 <header><h1>📉 BSE Sensex — Live Chart</h1><p>Real-time BSE Sensex index price and movement</p></header>
 <div class="container">
     <div class="card">
@@ -71,9 +106,18 @@ bash
     </div>
 </div>
 <footer class="main-footer">
-    <p><strong>India Wealth Hub</strong> — Your trusted source for live financial data.</p>
-    <div class="footer-bottom"><p>&copy; 2026 India Wealth Hub | Data is for informational purposes only.</p></div>
+    <p><strong>GoldRateToday</strong> — Your trusted source for live financial data.</p>
+    <div class="footer-bottom"><p>&copy; 2026 GoldRateToday | Data is for informational purposes only.</p></div>
 </footer>
-<script>function toggleSidebar() { const sb = document.getElementById("sidebar-nav"); sb.style.width = sb.style.width === "280px" ? "0" : "280px"; }</script>
+<script>
+function openMenu() {
+  document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+</script>
 </body>
 </html>
