@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Best Mutual Funds India 2026 | Top SIP Returns | GoldRateIndia</title>
+<title>Best Mutual Funds India 2026 | Top SIP Returns | GoldRateToday</title>
 <meta name="description" content="Best performing mutual funds in India 2026. Compare 1Y, 3Y, 5Y returns, risk, AUM for large cap, mid cap, small cap, flexi cap and liquid funds. Free SIP calculator.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 /* ============ shared.css (inlined — see /shared.css in repo for the source of truth) ============ */
 /* ═══════════════════════════════════════════════
-   GoldRateIndia — Shared Design System
+   GoldRateToday — Shared Design System
    ═══════════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
@@ -85,7 +85,6 @@ img { max-width: 100%; display: block; }
 @keyframes tick { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
 /* ── Navbar ── */
-.navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -100,7 +99,6 @@ img { max-width: 100%; display: block; }
   border-bottom: 1px solid rgba(201,168,76,.15);
   box-shadow: 0 2px 20px rgba(0,0,0,.3);
 }
-.nav-logo {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -159,7 +157,6 @@ img { max-width: 100%; display: block; }
 @media(max-width:900px) { .nav-links { display: none; } .hamburger { display: flex; } }
 
 /* ── Mobile Drawer ── */
-.drawer {
   position: fixed;
   top: 0; right: -100%;
   width: min(300px, 88vw);
@@ -171,8 +168,6 @@ img { max-width: 100%; display: block; }
   padding: 0 0 24px;
   border-left: 1px solid rgba(201,168,76,.15);
 }
-.drawer.open { right: 0; }
-.drawer-hd {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -182,7 +177,6 @@ img { max-width: 100%; display: block; }
   color: #fff;
   margin-bottom: 8px;
 }
-.drawer-close {
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -194,7 +188,6 @@ img { max-width: 100%; display: block; }
   font-size: 1rem;
   color: rgba(255,255,255,.7);
 }
-.drawer a {
   display: flex;
   align-items: center;
   gap: 11px;
@@ -205,8 +198,6 @@ img { max-width: 100%; display: block; }
   transition: .2s;
   border-radius: 0;
 }
-.drawer a:hover, .drawer a.active { color: #fff; background: rgba(255,255,255,.06); }
-.drawer a .di {
   width: 28px;
   height: 28px;
   background: rgba(201,168,76,.12);
@@ -217,7 +208,6 @@ img { max-width: 100%; display: block; }
   font-size: .9rem;
   flex-shrink: 0;
 }
-.drawer-bg {
   display: none;
   position: fixed;
   inset: 0;
@@ -225,7 +215,6 @@ img { max-width: 100%; display: block; }
   z-index: 1999;
   backdrop-filter: blur(3px);
 }
-.drawer-bg.show { display: block; }
 
 /* ── Hero ── */
 .hero {
@@ -537,6 +526,29 @@ img { max-width: 100%; display: block; }
   border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:.2s;
 }
 .vbtn.active { background:var(--ink);color:#fff;border-color:var(--ink); }
+
+/* ===== Unified GoldRateToday navigation (self-contained; hardcoded palette so it
+   renders correctly regardless of this page's own :root tokens) ===== */
+.topnav{background:#0A1628;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.topnav .logo{font-family:'Playfair Display',Georgia,serif;color:#fff;font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.topnav .logo span{color:#C9A84C}
+.topnav .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#9A7A30);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.topnav .nav-links{display:flex;gap:2px;align-items:center}
+.topnav .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;padding:8px 14px;border-radius:8px;font-size:.85rem;font-weight:500;transition:.2s;white-space:nowrap}
+.topnav .nav-links a:hover,.topnav .nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
+.topnav .nav-links a.cta{background:#C9A84C;color:#0A1628;font-weight:700}
+.topnav .nav-links a.cta:hover{background:#E8C96A}
+.topnav .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:rgba(255,255,255,.1);border-radius:8px}
+.topnav .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+@media(max-width:900px){.topnav .nav-links{display:none}.topnav .hamburger{display:flex}}
+.mobile-menu{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#132040;z-index:2000;transition:.4s cubic-bezier(.4,0,.2,1);padding:20px;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.5)}
+.mobile-menu.open{right:0}
+.mobile-menu-close{color:#fff;font-size:1.5rem;cursor:pointer;float:right;padding:5px;margin-bottom:20px}
+.mobile-menu a{display:block;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 15px;border-radius:10px;margin-bottom:4px;font-weight:500;transition:.2s}
+.mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1999}
+.overlay.show{display:block}
+
 </style>
 </head>
 <body>
@@ -557,25 +569,41 @@ img { max-width: 100%; display: block; }
 </div>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-  <a href="/" class="nav-logo"><span class="gem">🥇</span>Gold<em>Rate</em>India</a>
+<nav class="topnav">
+  <a href="/" class="logo"><span class="logo-icon">🥇</span>Gold<span>Rate</span>Today</a>
   <div class="nav-links">
-    <a href="/">Gold</a><a href="/silver">Silver</a><a href="/nifty">Nifty</a><a href="/ipo">IPO 2026</a>
-    <a href="/mutual-funds" class="active">Mutual Funds</a><a href="/calculators">Calculators</a><a href="/banking">Banking</a>
+    <a href="/">Gold</a>
+    <a href="/silver">Silver</a>
+    <a href="/bullion">Bullion</a>
+    <a href="/nifty">Nifty</a>
+    <a href="/sensex">Sensex</a>
+    <a href="/crude-oil">Crude Oil</a>
+    <a href="/currency">Currency</a>
+    <a href="/ipo">IPO 2026</a>
+    <a href="/calculators">Calculators</a>
+    <a href="/jewellers" class="cta">💎 Jewellers</a>
   </div>
-  <div class="hamburger" onclick="openDrawer()"><span></span><span></span><span></span></div>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
 </nav>
-<div class="drawer-bg" id="dbg" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-hd"><span>🥇 GoldRateIndia</span><span class="drawer-close" onclick="closeDrawer()">✕</span></div>
-  <a href="/"><span class="di">🥇</span>Gold Rate</a>
-  <a href="/silver"><span class="di">🥈</span>Silver</a>
-  <a href="/nifty"><span class="di">📈</span>Nifty 50</a>
-  <a href="/ipo"><span class="di">🚀</span>IPO 2026</a>
-  <a href="/mutual-funds" class="active"><span class="di">📊</span>Mutual Funds</a>
-  <a href="/calculators"><span class="di">🧮</span>Calculators</a>
-  <a href="/banking"><span class="di">🏦</span>Banking</a>
-  <a href="/fuel"><span class="di">⛽</span>Fuel Prices</a>
+
+<!-- MOBILE MENU -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" onclick="closeMenu()">✕</span>
+  <a href="/">🥇 Gold Rate Today</a>
+  <a href="/silver">🥈 Silver Rate</a>
+  <a href="/bullion">🟡 Bullion Market</a>
+  <a href="/nifty">📈 Nifty 50</a>
+  <a href="/sensex">📉 Sensex</a>
+  <a href="/crude-oil">🛢️ Crude Oil</a>
+  <a href="/currency">💱 Currency</a>
+  <a href="/fuel">⛽ Fuel Prices</a>
+  <a href="/ipo">🚀 IPO 2026</a>
+  <a href="/mutual-funds">📊 Mutual Funds</a>
+  <a href="/calculators">🧮 Calculators</a>
+  <a href="/banking">🏦 Banking</a>
+  <a href="/jewellers">💎 Top Jewellers</a>
+  <a href="/policies">⚖️ About & Legal</a>
 </div>
 
 <!-- HERO -->
@@ -774,7 +802,7 @@ img { max-width: 100%; display: block; }
 <footer class="footer">
   <div class="footer-inner">
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:18px">
-      <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>India</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif">🥇 Gold<em style="font-style:normal;color:#E8C96A">Rate</em>Today</div>
       <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:.8rem">
         <a href="/" style="color:rgba(255,255,255,.5)">Gold Rate</a>
         <a href="/ipo" style="color:rgba(255,255,255,.5)">IPO</a>
@@ -782,22 +810,21 @@ img { max-width: 100%; display: block; }
         <a href="/policies" style="color:rgba(255,255,255,.5)">Legal</a>
       </div>
     </div>
-    <div class="footer-btm">© 2026 GoldRateIndia.com · Mutual fund returns shown are historical and do not guarantee future performance. Invest according to your risk profile. Consult a SEBI-registered financial advisor before investing.</div>
+    <div class="footer-btm">© 2026 GoldRateToday.com · Mutual fund returns shown are historical and do not guarantee future performance. Invest according to your risk profile. Consult a SEBI-registered financial advisor before investing.</div>
   </div>
 </footer>
 
 <script>
+function openMenu() {
+  document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
 /* nav.js — inlined (was a 404 in production: this file lived at repo root, outside /public) */
-function openDrawer() {
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('dbg').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeDrawer() {
-  document.getElementById('drawer').classList.remove('open');
-  document.getElementById('dbg').classList.remove('show');
-  document.body.style.overflow = '';
-}
 </script>
 <script>
 'use strict';
