@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Price Admin Panel</title>
+<meta name="robots" content="noindex, nofollow">
     <style>
         body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f4f4; }
         .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 340px; }
@@ -35,6 +36,10 @@
             <input type="number" name="gold22k" id="f-gold22k" placeholder="e.g. 154987">
             <div class="hint">Optional. Leave blank to auto-calculate as 91.6% of 24K.</div>
 
+            <label>Gold Rate — 18K (per 10g)</label>
+            <input type="number" name="gold18k" id="f-gold18k" placeholder="e.g. 126900">
+            <div class="hint">Optional. Leave blank to auto-calculate as 75% of 24K.</div>
+
             <label>Silver Rate (per 1kg)</label>
             <input type="number" name="silver" id="f-silver" placeholder="95000" required>
 
@@ -59,9 +64,10 @@
         const res = await fetch('/api/prices');
         const d = await res.json();
         document.getElementById('current').textContent =
-          `Current: 24K ₹${d.gold24k} · 22K ₹${d.gold22k}${d.gold22kIsCustom ? ' (manual)' : ' (auto 91.6%)'} · Silver ₹${d.silver} (as of ${d.lastUpdated || 'unknown'})`;
+          `Current: 24K ₹${d.gold24k} · 22K ₹${d.gold22k}${d.gold22kIsCustom ? ' (manual)' : ' (auto 91.6%)'} · 18K ₹${d.gold18k}${d.gold18kIsCustom ? ' (manual)' : ' (auto 75%)'} · Silver ₹${d.silver} (as of ${d.lastUpdated || 'unknown'})`;
         document.getElementById('f-gold').value = d.gold24k || '';
         document.getElementById('f-gold22k').value = d.gold22kIsCustom ? d.gold22k : '';
+        document.getElementById('f-gold18k').value = d.gold18kIsCustom ? d.gold18k : '';
         document.getElementById('f-silver').value = d.silver || '';
       } catch (e) {
         document.getElementById('current').textContent = 'Current: unable to load (see console)';
@@ -81,7 +87,8 @@
         password: form.password.value,
         gold: form.gold.value,
         silver: form.silver.value,
-        gold22k: form.gold22k.value // may be empty string — server treats that as "auto-calculate"
+        gold22k: form.gold22k.value, // may be empty string — server treats that as "auto-calculate"
+        gold18k: form.gold18k.value
       });
 
       try {
