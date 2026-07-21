@@ -272,10 +272,14 @@ const PREMIUMS = {
 app.get('/api/prices', (req, res) => {
   const p = CACHE.prices || load(PRICES_FILE, { gold24k: 169200, silver: 95000 });
   const g = Number(p.gold24k), s = Number(p.silver);
-  // Prefer an admin-set 22K value; otherwise fall back to the standard 91.6% purity ratio.
+  // Prefer an admin-set 22K/18K value; otherwise fall back to the standard purity ratios.
   const g22   = (p.gold22k != null && !isNaN(p.gold22k)) ? Number(p.gold22k) : Math.round(g * 0.916);
   const g22IsCustom = p.gold22k != null && !isNaN(p.gold22k);
   const r22   = g22 / g; // effective ratio, used so city-level 22K rates stay consistent with any custom value
+
+  const g18   = (p.gold18k != null && !isNaN(p.gold18k)) ? Number(p.gold18k) : Math.round(g * 0.75);
+  const g18IsCustom = p.gold18k != null && !isNaN(p.gold18k);
+  const r18   = g18 / g; // effective ratio, used so city-level 18K rates stay consistent with any custom value
 
   const cityRates = {};
   Object.entries(PREMIUMS).forEach(([city, adj]) => {
@@ -283,7 +287,7 @@ app.get('/api/prices', (req, res) => {
     cityRates[city] = {
       gold24k:    cg,
       gold22k:    Math.round(cg * r22),
-      gold18k:    Math.round(cg * 0.75),
+      gold18k:    Math.round(cg * r18),
       gold14k:    Math.round(cg * 0.583),
       perGram24k: Math.round(cg / 10),
       perGram22k: Math.round(cg * r22 / 10)
@@ -295,7 +299,8 @@ app.get('/api/prices', (req, res) => {
     gold24k:     g,
     gold22k:     g22,
     gold22kIsCustom: g22IsCustom,
-    gold18k:     Math.round(g * 0.75),
+    gold18k:     g18,
+    gold18kIsCustom: g18IsCustom,
     gold14k:     Math.round(g * 0.583),
     silver:      s,
     lastUpdated: p.lastUpdated,
@@ -337,19 +342,23 @@ app.get('/api/status', (req, res) => {
 
 // ── API: Admin — update gold/silver ──────────────────────────────────────────
 app.post('/api/update-prices', (req, res) => {
-  const { password, gold, silver, gold22k } = req.body;
+  const { password, gold, silver, gold22k, gold18k } = req.body;
   if (!checkAdminAuth(req, res, password)) return;
   if (!gold || !silver || isNaN(gold) || isNaN(silver))
     return res.status(400).json({ success: false, error: 'Invalid values' });
   const has22 = gold22k !== undefined && gold22k !== '' && gold22k !== null;
   if (has22 && isNaN(gold22k))
     return res.status(400).json({ success: false, error: 'Invalid 22K value' });
+  const has18 = gold18k !== undefined && gold18k !== '' && gold18k !== null;
+  if (has18 && isNaN(gold18k))
+    return res.status(400).json({ success: false, error: 'Invalid 18K value' });
 
   const stored  = load(PRICES_FILE, {});
   const today   = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
   const history = stored.history || [];
   const g22ForHistory = has22 ? Number(gold22k) : Math.round(Number(gold) * 0.916);
-  history.unshift({ date: today, gold24k: Number(gold), gold22k: g22ForHistory, silver: Number(silver) });
+  const g18ForHistory = has18 ? Number(gold18k) : Math.round(Number(gold) * 0.75);
+  history.unshift({ date: today, gold24k: Number(gold), gold22k: g22ForHistory, gold18k: g18ForHistory, silver: Number(silver) });
 
   const data = {
     gold24k: Number(gold),
@@ -358,9 +367,10 @@ app.post('/api/update-prices', (req, res) => {
     source: 'admin',
     history: history.slice(0, 30)
   };
-  // Only store gold22k when explicitly provided — leaving the field blank means
-  // "go back to auto-calculating 22K as 91.6% of 24K" rather than keeping a stale override.
+  // Only store gold22k/gold18k when explicitly provided — leaving a field blank means
+  // "go back to auto-calculating from 24K" rather than keeping a stale override.
   if (has22) data.gold22k = Number(gold22k);
+  if (has18) data.gold18k = Number(gold18k);
 
   save(PRICES_FILE, data);
   CACHE.prices = data;
