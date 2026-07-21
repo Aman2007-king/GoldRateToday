@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-panel
+Disallow: /api/
+
+Sitemap: https://goldratetoday.onrender.com/sitemap.xml
