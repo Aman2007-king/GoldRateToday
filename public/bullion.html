@@ -149,7 +149,6 @@
         </div>
     </div>
 
-    <div class="ad-space">-- Bottom Ad --</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -197,11 +196,48 @@ function closeMenu() {
 
                 // 4. Force calculation
                 calculate();
+
+                // 5. Render the 7-day trend chart (canvas + Chart.js were already
+                //    in the page, but nothing ever actually drew into them)
+                renderTrendChart(data.history);
             })
             .catch(err => {
                 console.error("Fetch Error:", err);
                 document.getElementById('totalPrice').innerText = "Connection Error";
             });
+    }
+
+    let trendChartInstance = null;
+    function renderTrendChart(history) {
+        const canvas = document.getElementById('trendChart');
+        if (!canvas || !window.Chart || !history || !history.length) return;
+        // history is newest-first; take the last 7 entries and reverse to chronological order
+        const recent = history.slice(0, 7).reverse();
+        const labels = recent.map(h => h.date);
+        const data = recent.map(h => h.gold24k);
+
+        if (trendChartInstance) trendChartInstance.destroy();
+        trendChartInstance = new Chart(canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: '24K Gold (₹ per 10g)',
+                    data,
+                    borderColor: '#d4af37',
+                    backgroundColor: 'rgba(212,175,55,0.15)',
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: '#d4af37'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: false } }
+            }
+        });
     }
 
     function calculate() {
