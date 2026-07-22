@@ -1,38 +1,151 @@
-/* ============================================================
-   GoldRateToday — shared.css
-   The ONE real external stylesheet, actually served from /public
-   (the old root-level shared.css never resolved in production —
-   express.static only serves /public, so /shared.css 404'd).
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Gold Guide 2026: Top 15 Jewellers & Expert Buying Tips</title>
+<meta name="description" content="Discover India's top 15 trusted jewellers with expert gold-buying tips, purity certification guidance, and making-charge comparisons.">
+<link rel="canonical" href="https://goldratetoday.onrender.com/jewellers">
+<meta property="og:type" content="website">
+<meta property="og:title" content="India Gold Guide 2026: Top 15 Jewellers & Buying Tips">
+<meta property="og:description" content="Discover India's top 15 trusted jewellers with expert gold-buying tips, purity certification guidance, and making-charge comparisons.">
+<meta property="og:url" content="https://goldratetoday.onrender.com/jewellers">
+<meta property="og:site_name" content="GoldRateToday">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="India Gold Guide 2026: Top 15 Jewellers & Buying Tips">
+<meta name="twitter:description" content="Discover India's top 15 trusted jewellers with expert gold-buying tips, purity certification guidance, and making-charge comparisons.">
+    <link rel="stylesheet" href="/shared.css">
+<style>
+        :root { --gold: #f1c40f; --dark: #1e222d; --text: #333; --light-bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; color: var(--text); margin: 0; background: var(--light-bg); }
+        
+        /* Navigation */
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 14px; text-transform: uppercase; }
 
-   Scope: the site-wide navigation system only (topnav, mobile menu,
-   overlay, hamburger). This is the one block of CSS that is
-   genuinely identical across every page on the site. Each page's
-   OTHER styles (hero sections, cards, page-specific components)
-   remain in that page's own inline <style> block, since they
-   differ by design intent from page to page and were built at
-   different times with different visual approaches -- merging
-   those without the ability to visually verify every page's
-   render risks silent breakage.
-   ============================================================ */
+        /* Layout */
+        .page-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .sidebar-left { flex: 1; display: none; } /* Optional: for categories */
+        .main-article { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-/* ===== Unified GoldRateToday navigation (self-contained; hardcoded palette so it
-   renders correctly regardless of this page's own :root tokens) ===== */
-.topnav{background:#0A1628;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.topnav .logo{font-family:'Playfair Display',Georgia,serif;color:#fff;font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:10px}
-.topnav .logo span{color:#C9A84C}
-.topnav .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#9A7A30);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.topnav .nav-links{display:flex;gap:2px;align-items:center}
-.topnav .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;padding:8px 14px;border-radius:8px;font-size:.85rem;font-weight:500;transition:.2s;white-space:nowrap}
-.topnav .nav-links a:hover,.topnav .nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
-.topnav .nav-links a.cta{background:#C9A84C;color:#0A1628;font-weight:700}
-.topnav .nav-links a.cta:hover{background:#E8C96A}
-.topnav .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:rgba(255,255,255,.1);border-radius:8px}
-.topnav .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
-@media(max-width:900px){.topnav .nav-links{display:none}.topnav .hamburger{display:flex}}
-.mobile-menu{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#132040;z-index:2000;transition:.4s cubic-bezier(.4,0,.2,1);padding:20px;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.5)}
-.mobile-menu.open{right:0}
-.mobile-menu-close{color:#fff;font-size:1.5rem;cursor:pointer;float:right;padding:5px;margin-bottom:20px}
-.mobile-menu a{display:block;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 15px;border-radius:10px;margin-bottom:4px;font-weight:500;transition:.2s}
-.mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1999}
-.overlay.show{display:block}
+        /* Jeweller Directory */
+        .jeweller-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin: 30px 0; }
+        .jeweller-card { border: 1px solid #eee; padding: 15px; text-align: center; border-radius: 8px; background: #fff; transition: 0.2s; }
+        .jeweller-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .logo-placeholder { width: 60px; height: 60px; background: #eee; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: #888; border: 2px solid var(--gold); }
+        .visit-btn { display: inline-block; background: var(--gold); color: #000; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold; margin-top: 5px; }
+
+        /* Typography */
+        h1 { color: var(--dark); font-size: 2.5rem; border-bottom: 4px solid var(--gold); display: inline-block; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 40px; border-left: 5px solid var(--gold); padding-left: 15px; }
+        .meta-info { font-style: italic; color: #666; margin-bottom: 30px; }
+    
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/" class="logo"><span class="logo-icon">🥇</span>Gold<span>Rate</span>Today</a>
+  <div class="nav-links">
+    <a href="/">Gold</a>
+    <a href="/silver">Silver</a>
+    <a href="/bullion">Bullion</a>
+    <a href="/nifty">Nifty</a>
+    <a href="/sensex">Sensex</a>
+    <a href="/crude-oil">Crude Oil</a>
+    <a href="/currency">Currency</a>
+    <a href="/ipo">IPO 2026</a>
+    <a href="/calculators">Calculators</a>
+    <a href="/jewellers" class="cta">💎 Jewellers</a>
+  </div>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" onclick="closeMenu()">✕</span>
+  <a href="/">🥇 Gold Rate Today</a>
+  <a href="/silver">🥈 Silver Rate</a>
+  <a href="/bullion">🟡 Bullion Market</a>
+  <a href="/nifty">📈 Nifty 50</a>
+  <a href="/sensex">📉 Sensex</a>
+  <a href="/crude-oil">🛢️ Crude Oil</a>
+  <a href="/currency">💱 Currency</a>
+  <a href="/fuel">⛽ Fuel Prices</a>
+  <a href="/ipo">🚀 IPO 2026</a>
+  <a href="/mutual-funds">📊 Mutual Funds</a>
+  <a href="/calculators">🧮 Calculators</a>
+  <a href="/banking">🏦 Banking</a>
+  <a href="/jewellers">💎 Top Jewellers</a>
+  <a href="/policies">⚖️ About & Legal</a>
+</div>
+
+<div class="page-container">
+    
+    <article class="main-article">
+                
+        <h1>Top 15 Jewellers in India & Gold Buying Guide</h1>
+        <p class="meta-info">Updated: January 2026 | Reading Time: 8 Minutes</p>
+
+        <section>
+            <h2>Top 15 Trusted Jewellery Brands</h2>
+            <div class="jeweller-list">
+                <div class="jeweller-card"><div class="logo-placeholder">TANISHQ</div><strong>Tanishq</strong><br><a href="https://www.tanishq.co.in" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">MALABAR</div><strong>Malabar Gold</strong><br><a href="https://www.malabargoldanddiamonds.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">KALYAN</div><strong>Kalyan Jewellers</strong><br><a href="https://www.kalyanjewellers.net" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">JOYALUKKAS</div><strong>Joyalukkas</strong><br><a href="https://www.joyalukkas.in" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">SENCO</div><strong>Senco Gold</strong><br><a href="https://sencogoldanddiamonds.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">PCJ</div><strong>PC Jeweller</strong><br><a href="https://www.pcjeweller.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">CARATLANE</div><strong>CaratLane</strong><br><a href="https://www.caratlane.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">BLUESTONE</div><strong>BlueStone</strong><br><a href="https://www.bluestone.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">TBZ</div><strong>TBZ - Nirmal Zaveri</strong><br><a href="https://www.tbztheoriginal.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">PNG</div><strong>P.N. Gadgil</strong><br><a href="https://www.pngjewellers.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">RELIANCE</div><strong>Reliance Jewels</strong><br><a href="https://www.reliancejewels.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">BHIMA</div><strong>Bhima Jewellers</strong><br><a href="https://www.bhimajewellers.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">GRT</div><strong>GRT Jewellers</strong><br><a href="https://www.grtjewels.com" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">ORRA</div><strong>ORRA Diamonds</strong><br><a href="https://www.orra.co.in" class="visit-btn">Official Site</a></div>
+                <div class="jeweller-card"><div class="logo-placeholder">KHAZANA</div><strong>Khazana Jewellery</strong><br><a href="https://www.khazanajewellery.com" class="visit-btn">Official Site</a></div>
+            </div>
+        </section>
+
+        <section class="educational-content">
+            <h2>Understanding Making Charges and Wastage</h2>
+            <p>Buying gold in India involves more than just the market rate. When a piece of jewellery is crafted, two additional costs are added: <strong>Making Charges</strong> and <strong>Wastage</strong>. Making charges represent the artisan's labor cost. These vary by complexity—simple chains might have a 5-8% charge, while intricate bridal sets can go up to 25%. "Wastage" refers to the gold lost during melting and soldering. While modern tech reduces loss, jewellers often charge a percentage for this. Always ask for a transparent "Price Breakup" before paying.</p>
+
+            
+
+            <h2>How India Buys Gold Jewellery</h2>
+            <p>India remains the global heart of gold consumption. Cultural buying is driven by the <strong>Hindu Calendar</strong>, specifically festivals like <em>Dhanteras</em> and <em>Akshaya Tritiya</em>. Historically, gold was bought for security (Streedhan), but today it is an asset class. Southern India accounts for nearly 40% of the country's demand, followed by the West. Interestingly, rural India buys more gold than urban centers, using it as a "private bank" to hedge against inflation.</p>
+
+            <h2>What is BIS Hallmark & HUID?</h2>
+            <p>To prevent purity fraud, the <strong>Bureau of Indian Standards (BIS)</strong> provides hallmarking. Since 2021, the <strong>HUID (Hallmark Unique Identification)</strong> has become mandatory. This is a 6-digit alphanumeric code laser-etched on your gold. It allows you to track the gold's purity through the <em>BIS Care App</em>. Never buy gold without the three vital marks: the BIS logo, the purity grade (e.g., 22K916), and the unique HUID code.</p>
+
+            <h2>Popular Gold Schemes by Jewellers</h2>
+            <p>Most top-tier jewellers offer monthly saving schemes. You pay a fixed amount for 10 or 11 months, and the jeweller pays the last installment as a "bonus." These schemes, like Tanishq's <em>Golden Harvest</em>, help lock in prices and offer discounts on making charges. They are ideal for planned purchases like weddings but remember: these are not cash investments, they must be redeemed for jewellery.</p>
+
+            <h2>How Gold Prices Move in India</h2>
+            <p>Gold prices in India are influenced by three major factors:
+                <ul>
+                    <li><strong>International Rates:</strong> The London Bullion Market (LBMA) sets the global standard in USD.</li>
+                    <li><strong>Currency Exchange:</strong> If the Indian Rupee (INR) falls against the US Dollar, gold becomes more expensive locally.</li>
+                    <li><strong>Import Duty:</strong> Changes in government taxes directly impact the daily rate you see at showrooms.</li>
+                </ul>
+            </p>
+        </section>
+
+    </article>
+
+</div>
+
+<script>
+function openMenu() {
+  document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+</script>
+</body>
+</html>
